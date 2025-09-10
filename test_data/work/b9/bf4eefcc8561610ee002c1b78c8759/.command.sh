@@ -1,0 +1,2 @@
+#!/bin/bash -ue
+cat FBD98145_fail_barcode01_29b433b4_b355cf1d_31.fastq.gz FBD98145_fail_barcode01_29b433b4_b355cf1d_59.fastq.gz FBD98145_pass_barcode01_29b433b4_b355cf1d_4.fastq.gz FBD98145_pass_barcode01_29b433b4_b355cf1d_116.fastq.gz FBD98145_pass_barcode01_29b433b4_b355cf1d_33.fastq.gz > barcode01.fastq.gz

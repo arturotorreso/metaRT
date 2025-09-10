@@ -1,0 +1,18 @@
+ >> Checking for Valid Options...
+ >> Running Bracken 
+      >> python src/est_abundance.py -i barcode01.report.tsv -o barcode01.bracken_sp.tsv -k /dev/shm/database150mers.kmer_distrib -l S -t 10
+PROGRAM START TIME: 09-10-2025 21:19:08
+BRACKEN SUMMARY (Kraken report: barcode01.report.tsv)
+    >>> Threshold: 10 
+    >>> Number of species in sample: 5 
+	  >> Number of species with reads > threshold: 5 
+	  >> Number of species with reads < threshold: 0 
+    >>> Total reads in sample: 1895
+	  >> Total reads kept at species level (reads > threshold): 804
+	  >> Total reads discarded (species reads < threshold): 0
+	  >> Reads distributed: 295
+	  >> Reads not distributed (eg. no species above threshold): 0
+	  >> Unclassified reads: 796
+BRACKEN OUTPUT PRODUCED: barcode01.bracken_sp.tsv
+PROGRAM END TIME: 09-10-2025 21:19:08
+  Bracken complete.

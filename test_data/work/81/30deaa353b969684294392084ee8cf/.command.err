@@ -1,0 +1,5 @@
+Loading database information... done.
+1942 sequences (8.32 Mbp) processed in 1.448s (80.5 Kseq/m, 344.77 Mbp/m).
+  1083 sequences classified (55.77%)
+  859 sequences unclassified (44.23%)
+>> Checking report file: barcode02.report.tsv

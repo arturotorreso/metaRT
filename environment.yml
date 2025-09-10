@@ -1,0 +1,15 @@
+name: nanort-nf
+channels:
+  - conda-forge
+  - bioconda
+  - defaults
+dependencies:
+  - fastp
+  - fastplong
+  - bbmap # Contains bbduk.sh for complexity filtering
+  - minimap2
+  - samtools
+  - kraken2
+  - bracken
+  - python=3.9
+

@@ -1,0 +1,23 @@
+Loading database information... done.
+1942 sequences (8.32 Mbp) processed in 1.448s (80.5 Kseq/m, 344.77 Mbp/m).
+  1083 sequences classified (55.77%)
+  859 sequences unclassified (44.23%)
+ >> Checking for Valid Options...
+ >> Running Bracken 
+      >> python src/est_abundance.py -i barcode02.report.tsv -o barcode02.bracken_sp.tsv -k /dev/shm/database150mers.kmer_distrib -l S -t 10
+>> Checking report file: barcode02.report.tsv
+PROGRAM START TIME: 09-10-2025 21:19:12
+BRACKEN SUMMARY (Kraken report: barcode02.report.tsv)
+    >>> Threshold: 10 
+    >>> Number of species in sample: 6 
+	  >> Number of species with reads > threshold: 5 
+	  >> Number of species with reads < threshold: 1 
+    >>> Total reads in sample: 1942
+	  >> Total reads kept at species level (reads > threshold): 766
+	  >> Total reads discarded (species reads < threshold): 1
+	  >> Reads distributed: 313
+	  >> Reads not distributed (eg. no species above threshold): 3
+	  >> Unclassified reads: 859
+BRACKEN OUTPUT PRODUCED: barcode02.bracken_sp.tsv
+PROGRAM END TIME: 09-10-2025 21:19:12
+  Bracken complete.

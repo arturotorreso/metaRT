@@ -1,0 +1,70 @@
+ 44.23	859	859	0	0	U	0	unclassified
+ 55.77	1083	9	890900	658651	R	1	root
+ 55.30	1074	164	874871	647917	R1	131567	  cellular organisms
+ 30.28	588	45	572860	514485	D	2759	    Eukaryota
+ 27.29	530	0	543083	509285	D1	33154	      Opisthokonta
+ 27.29	530	0	542846	509285	K	33208	        Metazoa
+ 27.29	530	0	542846	509285	K1	6072	          Eumetazoa
+ 27.29	530	0	542846	509285	K2	33213	            Bilateria
+ 27.29	530	0	542846	509285	K3	33511	              Deuterostomia
+ 27.29	530	0	542846	509285	P	7711	                Chordata
+ 27.29	530	0	542846	509285	P1	89593	                  Craniata
+ 27.29	530	0	542846	509285	P2	7742	                    Vertebrata
+ 27.29	530	0	542846	509285	P3	7776	                      Gnathostomata
+ 27.29	530	0	542846	509285	P4	117570	                        Teleostomi
+ 27.29	530	0	542846	509285	P5	117571	                          Euteleostomi
+ 27.29	530	0	542846	509285	P6	8287	                            Sarcopterygii
+ 27.29	530	0	542846	509285	P7	1338369	                              Dipnotetrapodomorpha
+ 27.29	530	0	542846	509285	P8	32523	                                Tetrapoda
+ 27.29	530	0	542846	509285	P9	32524	                                  Amniota
+ 27.29	530	0	542846	509285	C	40674	                                    Mammalia
+ 27.29	530	0	542846	509285	C1	32525	                                      Theria
+ 27.29	530	0	542846	509285	C2	9347	                                        Eutheria
+ 27.29	530	0	542846	509285	C3	1437010	                                          Boreoeutheria
+ 27.29	530	0	542846	509285	C4	314146	                                            Euarchontoglires
+ 27.29	530	0	542846	509285	O	9443	                                              Primates
+ 27.29	530	0	542846	509285	O1	376913	                                                Haplorrhini
+ 27.29	530	0	542846	509285	O2	314293	                                                  Simiiformes
+ 27.29	530	0	542846	509285	O3	9526	                                                    Catarrhini
+ 27.29	530	0	542846	509285	O4	314295	                                                      Hominoidea
+ 27.29	530	0	542846	509285	F	9604	                                                        Hominidae
+ 27.29	530	0	542846	509285	F1	207598	                                                          Homininae
+ 27.29	530	0	542846	509285	G	9605	                                                            Homo
+ 27.29	530	530	542846	509285	S	9606	                                                              Homo sapiens
+  0.67	13	0	9456	733	D1	2698737	      Sar
+  0.67	13	0	9455	732	D2	33630	        Alveolata
+  0.67	13	0	9455	732	P	5794	          Apicomplexa
+  0.67	13	0	9444	721	C	422676	            Aconoidasida
+  0.67	13	0	9191	705	O	5863	              Piroplasmida
+  0.67	13	0	9190	704	F	32594	                Babesiidae
+  0.67	13	0	9190	704	G	5864	                  Babesia
+  0.67	13	13	9190	704	S	5866	                    Babesia bigemina
+ 16.58	322	44	222194	132505	D	2	    Bacteria
+  8.86	172	2	111489	53554	D1	1783272	      Terrabacteria group
+  8.70	169	0	105447	52568	P	1239	        Bacillota
+  5.51	107	0	43068	1831	C	186801	          Clostridia
+  5.51	107	0	43038	1803	O	186802	            Eubacteriales
+  5.51	107	0	43025	1792	F	31979	              Clostridiaceae
+  5.51	107	0	43021	1786	G	1485	                Clostridium
+  5.51	107	107	42997	1759	S	1491	                  Clostridium botulinum
+  3.19	62	0	62280	50707	C	91061	          Bacilli
+  3.19	62	0	61859	50487	O	1385	            Bacillales
+  3.19	62	0	61175	49965	F	90964	              Staphylococcaceae
+  3.19	62	11	60051	49088	G	1279	                Staphylococcus
+  2.63	51	51	45335	40489	S	1282	                  Staphylococcus epidermidis
+  0.05	1	0	534	534	P	544448	        Mycoplasmatota
+  0.05	1	0	507	507	O	2790996	          Mycoplasmoidales
+  0.05	1	0	507	507	F	2895623	            Metamycoplasmataceae
+  0.05	1	0	494	494	G	2923352	              Mesomycoplasma
+  0.05	1	0	479	479	S	45362	                Mesomycoplasma bovoculi
+  0.05	1	1	479	479	S1	743966	                  Mesomycoplasma bovoculi M165/69
+  5.46	106	4	102149	79146	P	1224	      Pseudomonadota
+  5.25	102	0	94139	70774	C	1236	        Gammaproteobacteria
+  5.10	99	0	88926	65835	O	72274	          Pseudomonadales
+  5.10	99	0	88842	65802	F	135621	            Pseudomonadaceae
+  5.10	99	34	85179	62325	G	286	              Pseudomonas
+  3.35	65	0	41284	19509	G1	136841	                Pseudomonas aeruginosa group
+  3.35	65	65	38715	17604	S	287	                  Pseudomonas aeruginosa
+  0.15	3	0	1575	1570	O	91347	          Enterobacterales
+  0.15	3	0	818	818	F	1903409	            Erwiniaceae
+  0.15	3	3	780	780	G	53335	              Pantoea

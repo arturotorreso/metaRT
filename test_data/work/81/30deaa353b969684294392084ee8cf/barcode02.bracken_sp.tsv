@@ -1,0 +1,6 @@
+name	taxonomy_id	taxonomy_lvl	kraken_assigned_reads	added_reads	new_est_reads	fraction_total_reads
+Homo sapiens	9606	S	530	199	729	0.67563
+Babesia bigemina	5866	S	13	4	17	0.01576
+Clostridium botulinum	1491	S	107	4	111	0.10287
+Staphylococcus epidermidis	1282	S	51	37	88	0.08156
+Pseudomonas aeruginosa	287	S	65	67	132	0.12234

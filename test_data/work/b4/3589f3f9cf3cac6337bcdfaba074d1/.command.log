@@ -1,0 +1,31 @@
+Trying to detect adapter sequence at read start
+Detected: CCGTGACAAGAAAGTTGTCGGTGTCTTTGTGCGTTTTTCGTGCGCCGCTTCA
+Trying to detect adapter sequence at read end
+Detected: TGAAGCGGCGCACGAAAAACGCACAAAGACACCGACAACTTTCTTGT
+
+Before filtering:
+total reads: 9846
+total bases: 12431142
+Q20 bases: 10005139(80.4845%)
+Q30 bases: 7985965(64.2416%)
+
+After filtering:
+total reads: 1895
+total bases: 8281836
+Q20 bases: 7158072(86.431%)
+Q30 bases: 5904825(71.2985%)
+
+Filtering result:
+reads passed filter: 1895
+reads failed due to low quality: 74
+reads failed due to too many N: 0
+reads failed due to too short: 7891
+reads failed due to low complexity: 0
+reads with adapter trimmed: 9636
+bases trimmed due to adapters: 1167761
+
+JSON report: barcode01.filtered.json
+HTML report: barcode01.filtered.html
+
+fastplong --stdout -i barcode01.fastq.gz -m 8 -q 10 -u 40 -l 1000 -j barcode01.filtered.json -h barcode01.filtered.html --low_complexity_filter 
+fastplong v0.4.1, time used: 3 seconds
