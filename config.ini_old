@@ -1,0 +1,72 @@
+# config.ini
+
+[Paths]
+# Set this to the top-level directory where your sequencer writes data.
+# Example: /var/lib/minknow/data/your_run_name/
+fastq_directory = /var/lib/minknow/data/3kDa_vs_100kDa_synthetic_VH_09_24_25
+# Set this to where you want the pipeline results to be saved.
+output_directory = /mnt/Drive20T/20250924_3kDa_vs_100kDa_synthetic_VH
+# Set the full path to your working main.nf script.
+nextflow_script = /mnt/Drive20T/scripts/metaRT/nextflow_pipeline/main.nf
+nextflow_executable = /mnt/Drive20T/scripts/metaRT/nextflow
+
+[Settings]
+# Time in seconds to wait and collect new FASTQ files before starting a new analysis.
+batch_interval_seconds = 60
+# Filename for the log that tracks processed files. It will be created in the output_directory.
+processed_files_log = processed_files.log
+
+barcodes = barcode13,barcode14,barcode15,barcode16,barcode17,barcode18,barcode19,barcode20,barcode21,barcode22,barcode23
+
+# ====================================================================
+# ==                  NEXTFLOW PIPELINE PARAMETERS                  ==
+# ====================================================================
+
+[WorkflowSteps]
+# Corresponds to the `run_*` parameters in your Nextflow script.
+run_host_depletion = false
+run_read_qc = true
+run_classification = true
+run_kraken = true
+run_mapping = false
+run_smart = false
+
+[DatabasePaths]
+# Paths to your reference files and databases.
+# These will override the defaults in nextflow.config if specified.
+host_reference = /mnt/Drive20T/db/human_genome/GCF_000001405.40_GRCh38.p14_genomic.fna
+kraken_db = /mnt/Drive20T/db/kraken2_standard_pluspf
+taxonomy_dir = /mnt/Drive20T/scripts/metaRT/scripts/kraken2/data
+refseq_db = /mnt/Drive20T/db/refseq/target.fna.gz.mm2idx
+smart_db = /mnt/Drive20T/smart/database/test/python_wrapped/
+
+[HostDepletionParams]
+# Corresponds to `params.host_opts`
+keep_bam = false
+
+[QcParams]
+# Corresponds to `params.qc_opts`
+min_mean_q = 10
+min_length = 1000
+trim5 = true
+trim3 = true
+window_size = 10
+cut_quality = 10
+perc_low_qual = 40
+min_base_q = 10
+low_complexity = true
+entropy = 0.6
+entropy_window = 50
+entropy_kmer = 5
+disable_adapters = false
+
+[KrakenParams]
+# Corresponds to `params.kraken_opts`
+confidence = 0
+memory_mapping = true
+min_base_q = 0
+min_hit_groups = 2
+
+[MappingParams]
+# Corresponds to `params.mapping_opts`
+secondary_aligns = 5

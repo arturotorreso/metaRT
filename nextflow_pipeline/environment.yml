@@ -1,0 +1,28 @@
+name: nanort-nf-env
+channels:
+  - conda-forge
+  - bioconda
+  - defaults
+dependencies:
+  # --- Bioinformatics Tools ---
+  - fastp=1.0
+  - fastplong=0.4
+  - bbmap=39.33
+  - minimap2=2.30
+  - samtools=1.22
+  - bracken=1.0
+
+  # --- Core & Scientific Python ---
+  - python=3.9
+  - openjdk=24.0
+  - numpy
+  - pandas
+  - scipy
+  - matplotlib
+  - seaborn
+
+  # --- GUI & Utility Libraries ---
+  - pyqt
+  - pyqtgraph
+  - watchdog
+  - pip

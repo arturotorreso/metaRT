@@ -1,0 +1,2 @@
+(python:150803): Gtk-WARNING **: 15:24:48.842: Failed to measure available space: Error getting filesystem info for /media/jonsibala/7ab68428-8c14-4dc3-b9ca-e6b0e15cf211: Permission denied
+/home/atorres/miniforge3/envs/nanort-nf/bin/python: can't open file '/mnt/Drive20T/scripts/metaRT/nano_gui/nanort_backend.py': [Errno 2] No such file or directory

@@ -1,0 +1,14 @@
+cat: '/mnt/Drive20T/scripts/metaRT/test_data/time_exp/*/*/fastq_fail/barcode01/*fastq.gz': No such file or directory
+cat: '/mnt/Drive20T/scripts/metaRT/test_data/time_exp/*/*/fastq_fail/barcode02/*fastq.gz': No such file or directory
+cat: '/mnt/Drive20T/scripts/metaRT/test_data/time_exp/*/*/fastq_fail/barcode03/*fastq.gz': No such file or directory
+cat: '/mnt/Drive20T/scripts/metaRT/test_data/time_exp/*/*/fastq_fail/barcode04/*fastq.gz': No such file or directory
+cat: '/mnt/Drive20T/scripts/metaRT/test_data/time_exp/*/*/fastq_fail/barcode05/*fastq.gz': No such file or directory
+cat: '/mnt/Drive20T/scripts/metaRT/test_data/time_exp/*/*/fastq_fail/barcode06/*fastq.gz': No such file or directory
+cat: '/mnt/Drive20T/scripts/metaRT/test_data/time_exp/*/*/fastq_fail/barcode07/*fastq.gz': No such file or directory
+cat: '/mnt/Drive20T/scripts/metaRT/test_data/time_exp/*/*/fastq_fail/barcode08/*fastq.gz': No such file or directory
+cat: '/mnt/Drive20T/scripts/metaRT/test_data/time_exp/*/*/fastq_fail/barcode09/*fastq.gz': No such file or directory
+cat: '/mnt/Drive20T/scripts/metaRT/test_data/time_exp/*/*/fastq_fail/barcode10/*fastq.gz': No such file or directory
+
+real	24m17.654s
+user	28m11.201s
+sys	10m4.429s

@@ -1,5 +1,0 @@
-Memory mapping is enabled. Checking /dev/shm...
-Original DB path: /mnt/Drive20T/db/kraken2_standard_pluspf
-Shared memory path: /dev/shm
-Database already in memory and appears correct.
-/dev/shm
