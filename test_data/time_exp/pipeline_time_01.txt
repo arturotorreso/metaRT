@@ -1,5 +1,0 @@
-cat: '/mnt/Drive20T/scripts/metaRT/test_data/time_exp/*/*/fastq_fail/barcode01/*fastq.gz': No such file or directory
-
-real	9m34.099s
-user	4m13.796s
-sys	6m6.508s
