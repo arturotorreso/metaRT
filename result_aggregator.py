@@ -79,40 +79,64 @@ def _rerun_bracken(master_report_path: str, kraken_db_path: str, output_dir: str
         logger.error(f"Bracken failed for {barcode}: {e}")
         return None
 
-# --- NEW functions for updating historical data ---
+# --- NEW function for safe, atomic file writing ---
+def _safe_write_csv(df: pd.DataFrame, path: str):
+    """Atomically writes a dataframe to a CSV file to prevent race conditions."""
+    temp_path = path + ".tmp"
+    try:
+        df.to_csv(temp_path, index=False)
+        os.rename(temp_path, path)
+        logger.info(f"Safely wrote updated data to {os.path.basename(path)}")
+    except Exception as e:
+        logger.error(f"Failed to safe-write to {path}: {e}")
+        if os.path.exists(temp_path):
+            os.remove(temp_path)
+
+# --- MODIFIED functions for updating historical data ---
 
 def _update_cumulative_data(bracken_file: str, barcode: str, data_log_path: str):
-    """Reads a bracken file and updates the cumulative species data log."""
+    """Reads a bracken file and updates the cumulative species data log safely."""
     now = datetime.now().isoformat()
     try:
-        df = pd.read_csv(bracken_file, sep='\t')
-        df = df[['name', 'new_est_reads']]
-        df['timestamp'] = now
-        df['barcode'] = barcode
-        df = df.rename(columns={'new_est_reads': 'cumulative_reads'})
+        # Prepare new data
+        new_df = pd.read_csv(bracken_file, sep='\t')
+        new_df = new_df[['name', 'new_est_reads']]
+        new_df['timestamp'] = now
+        new_df['barcode'] = barcode
+        new_df = new_df.rename(columns={'new_est_reads': 'cumulative_reads'})
         
-        # Append to the main data log
-        df.to_csv(data_log_path, mode='a', header=not os.path.exists(data_log_path), index=False)
-        logger.info(f"Updated cumulative data log for {barcode}")
+        # Read existing data, append new, and safe-write
+        existing_df = pd.DataFrame()
+        if os.path.exists(data_log_path):
+            existing_df = pd.read_csv(data_log_path)
+        
+        combined_df = pd.concat([existing_df, new_df], ignore_index=True)
+        _safe_write_csv(combined_df, data_log_path)
+
     except Exception as e:
         logger.error(f"Failed to update cumulative data: {e}")
 
 def _update_rarefaction_data(bracken_file: str, barcode: str, data_log_path: str):
-    """Calculates unique species and updates the rarefaction data log."""
+    """Calculates unique species and updates the rarefaction data log safely."""
     now = datetime.now().isoformat()
     try:
+        # Prepare new data point
         df = pd.read_csv(bracken_file, sep='\t')
-        # Count species with at least one estimated read
         unique_species_count = df[df['new_est_reads'] > 0]['name'].nunique()
-        
         new_data = pd.DataFrame([{'timestamp': now, 'barcode': barcode, 'unique_species_count': unique_species_count}])
-        new_data.to_csv(data_log_path, mode='a', header=not os.path.exists(data_log_path), index=False)
+        
+        # Read existing data, append new, and safe-write
+        existing_df = pd.DataFrame()
+        if os.path.exists(data_log_path):
+            existing_df = pd.read_csv(data_log_path)
+            
+        combined_df = pd.concat([existing_df, new_data], ignore_index=True)
+        _safe_write_csv(combined_df, data_log_path)
+        
         logger.info(f"Updated rarefaction data log for {barcode}: {unique_species_count} species.")
     except Exception as e:
         logger.error(f"Failed to update rarefaction data: {e}")
 
-
-# --- CHANGE: RENAMED FUNCTION AND MODIFIED RETURN VALUE ---
 def _calculate_trend(species_history: pd.DataFrame) -> Tuple[float, float]:
     """
     Performs linear regression on the historical data of a single species
@@ -121,28 +145,20 @@ def _calculate_trend(species_history: pd.DataFrame) -> Tuple[float, float]:
     Returns:
         A tuple containing the (slope, p_value).
     """
-    # We need at least 3 data points to fit a line and get a meaningful result.
     if len(species_history) < 3:
-        return 0.0, 1.0  # Default to no slope and non-significant p-value
+        return 0.0, 1.0
 
-    # Drop any rows that might have missing data, just in case
     species_history = species_history.dropna(
         subset=['cumulative_bracken_reads', 'cumulative_distinct_minimizers']
     )
     if len(species_history) < 3:
         return 0.0, 1.0
 
-    # Perform the linear regression: X = reads, Y = distinct minimizers
     lin_regress = stats.linregress(
         x=species_history['cumulative_bracken_reads'],
         y=species_history['cumulative_distinct_minimizers']
     )
-
-    # The slope represents the rate of new distinct minimizer discovery
-    # The p-value of the slope indicates the significance of the trend.
     return lin_regress.slope, lin_regress.pvalue
-
-
 
 # --- Main aggregation function ---
 
@@ -168,14 +184,11 @@ def aggregate_and_plot(batch_result_dir: str, config: configparser.ConfigParser)
         
     logger.info(f"Found batch results for barcodes: {', '.join(barcodes)}")
 
-    # Paths to our historical data logs
     cumulative_data_log = os.path.join(aggregated_output_dir, "cumulative_species_data.csv")
     rarefaction_data_log = os.path.join(aggregated_output_dir, "rarefaction_data.csv")
     
-    # Get a single timestamp for the entire batch
     now_timestamp = datetime.now().isoformat()
 
-    # Process each barcode independently
     for barcode in barcodes:
         logger.info(f"--- Processing barcode: {barcode} ---")
         
@@ -183,21 +196,17 @@ def aggregate_and_plot(batch_result_dir: str, config: configparser.ConfigParser)
         barcode_agg_dir = os.path.join(aggregated_output_dir, barcode)
         os.makedirs(barcode_agg_dir, exist_ok=True)
 
-        # 1. Aggregate per-read classifications (master *.kraken2.tsv)
         new_kraken_tsv = os.path.join(barcode_batch_dir, f"{barcode}.kraken2.tsv")
         master_kraken_tsv = os.path.join(barcode_agg_dir, f"master_{barcode}.kraken2.tsv")
         _concatenate_files(new_kraken_tsv, master_kraken_tsv)
 
-        # 2. Combine kraken reports (master *.report.tsv)
         new_report_tsv = os.path.join(barcode_batch_dir, f"{barcode}.report.tsv")
         master_report_tsv = os.path.join(barcode_agg_dir, f"master_{barcode}.report.tsv")
         
         if _combine_kraken_reports_executable(new_report_tsv, master_report_tsv):
-            # 3. If report combination successful, re-run Bracken
             kraken_db_path = config.get('DatabasePaths', 'kraken_db')
             final_bracken_output = _rerun_bracken(master_report_tsv, kraken_db_path, barcode_agg_dir, barcode, config)
 
-            # 4. If Bracken successful, run analysis
             if final_bracken_output:
                 try:
                     logger.info(f"--- Generating combined analysis for {barcode} ---")
@@ -210,7 +219,6 @@ def aggregate_and_plot(batch_result_dir: str, config: configparser.ConfigParser)
                     tracker = MinimizerTracker(taxonomy_path=taxonomy_path, state_path=state_file_path)
                     tracker.update_with_batch(raw_minimizer_file=raw_minimizer_file)
                     
-                    # Generate the confidence report for the CURRENT batch
                     current_report_df = tracker.generate_confidence_report(
                         bracken_report_file=final_bracken_output,
                         timestamp=now_timestamp 
@@ -220,34 +228,28 @@ def aggregate_and_plot(batch_result_dir: str, config: configparser.ConfigParser)
                         logger.warning(f"No species-level data for {barcode} in this batch. Analysis not updated.")
                         continue
 
-                    # Load historical data for p-value calculation
                     combined_report_path = os.path.join(barcode_agg_dir, f"master_{barcode}.combined_analysis.tsv")
                     historical_df = pd.DataFrame()
                     if os.path.exists(combined_report_path):
                         historical_df = pd.read_csv(combined_report_path, sep='\t')
 
-                    # --- CHANGE: CALCULATE SLOPE AND P-VALUE ---
                     slopes = []
                     p_values = []
                     for _, current_row in current_report_df.iterrows():
                         taxid = current_row['taxonomy_id']
                         
                         species_history = pd.DataFrame()
-                        # Only search history if the historical DataFrame is not empty
                         if not historical_df.empty:
                             species_history = historical_df[historical_df['taxonomy_id'] == taxid]
                         
-                        # Combine historical data with the current data point for regression
                         full_history = pd.concat([species_history, pd.DataFrame([current_row])], ignore_index=True)
                         slope, p_value = _calculate_trend(full_history)
                         slopes.append(slope)
                         p_values.append(p_value)
 
-                    # Add the new columns to the current report
                     current_report_df['regression_slope'] = slopes
                     current_report_df['p_value'] = p_values
 
-                    # --- CHANGE: DEFINE FINAL COLUMN ORDER ---
                     cols_order = [
                         'timestamp', 'name', 'taxonomy_id', 
                         'cumulative_bracken_reads', 'cumulative_total_minimizers', 'cumulative_distinct_minimizers',
@@ -270,15 +272,14 @@ def aggregate_and_plot(batch_result_dir: str, config: configparser.ConfigParser)
                 except Exception as e:
                     logger.error(f"Analysis failed for {barcode}: {e}", exc_info=True)
                 
-                # Update other historical data files
+                # Update interactive plot data files
                 _update_cumulative_data(final_bracken_output, barcode, cumulative_data_log)
                 _update_rarefaction_data(final_bracken_output, barcode, rarefaction_data_log)
 
-                # Regenerate cumulative plot for this barcode
+                # Regenerate static cumulative plot for this barcode
                 cumulative_script = os.path.join(PROJECT_ROOT, "plotting", "cumulative_plot.py")
-                # subprocess.run(["python", os.path.join("plotting", "cumulative_plot.py"), cumulative_data_log, barcode, barcode_agg_dir])
                 subprocess.run([sys.executable, cumulative_script, cumulative_data_log, barcode, barcode_agg_dir])
-    # After all barcodes are processed, update summary plots
+    
     if barcodes:
         logger.info("--- Updating summary plots for all barcodes ---")
 

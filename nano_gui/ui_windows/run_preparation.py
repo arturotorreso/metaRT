@@ -414,7 +414,7 @@ secondary_aligns = 5
 
         ######## TODO: Hard coded, need to update #######
         config['Settings'] = {
-            'batch_interval_seconds': '60', # Changed from self.batch_interval_spin.value()
+            'batch_interval_seconds': '10', # Changed from self.batch_interval_spin.value()
             'processed_files_log': 'processed_files.log',
             'barcodes': ", ".join(parsed_barcodes)
         }        # Section [WorkflowSteps]

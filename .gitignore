@@ -1,1 +1,3 @@
-/mnt/Drive20T/scripts/metaRT/test_data
+test_data/
+work/
+nextflow_pipeline/bin/
