@@ -39,62 +39,62 @@ This phase replaces the direct execution model with a persistent backend service
 
 Task 2.1: Develop the Backend Runner
 
-Create a new Python script, nanort_backend.py.
+Create a new Python script, nanort_backend.py DONE
 
-This script will be the main entry point for the service. It will be responsible for parsing the configuration, initializing the file watcher, and launching Nextflow runs.
+This script will be the main entry point for the service. It will be responsible for parsing the configuration, initializing the file watcher, and launching Nextflow runs DONE
 
-Task 2.2: Implement the File Watcher and Batching Logic
+Task 2.2: Implement the File Watcher and Batching Logic DONE
 
-Integrate your ont_monitoring.py logic into the backend script.
+Integrate your ont_monitoring.py logic into the backend script DONE
 
-The file watcher will monitor the input directory. When new FASTQ files are detected, it shouldn't trigger immediately. Instead, it should collect file paths for a short period (e.g., 60 seconds) and then group them into a single "batch."
+The file watcher will monitor the input directory. When new FASTQ files are detected, it shouldn't trigger immediately. Instead, it should collect file paths for a short period (e.g., 60 seconds) and then group them into a single "batch." DONE
 
-This batch of new files will be passed to the Nextflow workflow for processing. This is inspired by the incremental processing logic in your main_rt.sh but will be more robust.
+This batch of new files will be passed to the Nextflow workflow for processing. This is inspired by the incremental processing logic in your main_rt.sh but will be more robust DONE
 
-Task 2.3: Handle Incremental Results and Aggregation
+Task 2.3: Handle Incremental Results and Aggregation DONE
 
-The Nextflow pipeline will now run on small batches of new reads, producing partial results (e.g., a Kraken report for just the new reads).
+The Nextflow pipeline will now run on small batches of new reads, producing partial results (e.g., a Kraken report for just the new reads). DONE
 
-Create a new Python script (or a Nextflow process) that runs after each batch is processed. Its job is to:
+Create a new Python script (or a Nextflow process) that runs after each batch is processed. Its job is to: DONE
 
-Read the new partial result.
+Read the new partial result. DONE
 
-Load the main, aggregated result file.
+Load the main, aggregated result file. DONE
 
-Append the new data to the main file.
+Append the new data to the main file. DONE
 
-Re-run the plotting scripts (bracken_barplot.py, cummulative_plot.py, etc.) on the newly aggregated data to update the figures.
+Re-run the plotting scripts (bracken_barplot.py, cummulative_plot.py, etc.) on the newly aggregated data to update the figures. DONE
 
 Phase 3: Evolving the GUI into a Real-Time Dashboard
-Here, we'll overhaul the nanoRT_gui.py application, changing it from a static settings panel into an interactive dashboard for monitoring the live pipeline.
+Here, we'll overhaul the nanoRT_gui.py application, changing it from a static settings panel into an interactive dashboard for monitoring the live pipeline. DONE
 
 Task 3.1: Decouple the GUI
 
-The "Run Pipeline" button will be changed to "Start Monitoring."
+The "Run Pipeline" button will be changed to "Start Monitoring." DONE
 
 When clicked, the GUI will no longer build a long command. Instead, it will:
 
-Write all the user-selected settings into the nextflow.config file.
+Write all the user-selected settings into the nextflow.config file. DONE
 
-Launch the nanort_backend.py script as a persistent background process using subprocess.Popen.
+Launch the nanort_backend.py script as a persistent background process using subprocess.Popen. DONE
 
 Task 3.2: Implement a Status Communication System
 
-The nanort_backend.py service will periodically write its status (e.g., "Monitoring," "Processing batch for barcode01," "Idle") and key statistics (total reads processed) to a structured file, like status.json.
+The nanort_backend.py service will periodically write its status (e.g., "Monitoring," "Processing batch for barcode01," "Idle") and key statistics (total reads processed) to a structured file, like status.json. DONE
 
 Task 3.3: Build the Dashboard UI
 
-Add a QTimer to the GUI that fires every few seconds.
+Add a QTimer to the GUI that fires every few seconds. DONE
 
-On each tick, the timer will:
+On each tick, the timer will: DONE
 
-Read the status.json file to update status labels and progress bars.
+Read the status.json file to update status labels and progress bars. DONE
 
-Reload the output plot images (e.g., the main taxonomy bar chart) into the UI, so the user sees them update live.
+Reload the output plot images (e.g., the main taxonomy bar chart) into the UI, so the user sees them update live. DONE
 
-Read the latest entries from the main log file and display them in the log window.
+Read the latest entries from the main log file and display them in the log window. DONE
 
-Add a "Stop Monitoring" button that gracefully terminates the backend process.
+Add a "Stop Monitoring" button that gracefully terminates the backend process. DONE
 
 Phase 4: Advanced Features and Packaging
 This final phase focuses on making the tool more professional, portable, and powerful by incorporating advanced features from the example projects.

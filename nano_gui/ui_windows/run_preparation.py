@@ -98,7 +98,7 @@ class RunPreparationWindow(QWidget):
         steps_layout = QHBoxLayout()
         self.host_depletion_cb = QCheckBox("Host Depletion")
         self.read_qc_cb = QCheckBox("Read QC")
-        self.classification_cb = QCheckBox("Classification")
+        self.classification_cb = QCheckBox("Kraken2")
         self.mapping_cb = QCheckBox("Mapping")
         self.smart_cb = QCheckBox("SMART")
         steps_layout.addWidget(self.host_depletion_cb)
