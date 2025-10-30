@@ -21,7 +21,7 @@ class RarefactionPlot(InteractivePlotWidget):
         try:
             self.plot_widget.clear()
 
-            # **FIX 1**: Forcefully remove and recreate the legend on each update
+            # Forcefully remove and recreate the legend on each update
             if self.legend:
                 self.plot_widget.removeItem(self.legend)
             self.legend = self.plot_widget.addLegend()
@@ -38,7 +38,7 @@ class RarefactionPlot(InteractivePlotWidget):
                 sorted_group = group.sort_values('timestamp')
                 pen = pg.mkPen(color=pg.intColor(i, hues=len(unique_barcodes)), width=2)
                 
-                # **FIX 2**: Convert data to NumPy arrays before plotting
+                # Convert data to NumPy arrays before plotting
                 x_data = (sorted_group['timestamp'].astype(int) / 10**9).to_numpy()
                 y_data = sorted_group['unique_species_count'].to_numpy()
                 

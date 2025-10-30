@@ -199,15 +199,20 @@ def main():
     count_samples = 0
     num_samples = len(args.r_files)
     sample_names = args.s_names
-    root_node = -1
-    prev_node = -1
+    
+    # --- MINIMAL CHANGE PART 1: UNCONDITIONAL INITIALIZATION ---
+    # Initialize root_node as a Tree object immediately.
+    # This prevents crashes when a report has no classified reads (taxid 1).
+    root_node = Tree('root', 1, 0, 'R', 0, 0, 0, 0)
+    prev_node = root_node  # Start traversal from the valid root object
     curr_node = -1
+    taxid2node = {1: root_node} # Pre-populate the dictionary with the root
+    
     u_reads = {0:0}
     total_reads = {0:0}
     # Initialize new dictionaries for minimizers
     u_minimizers = {0:0}
     total_minimizers = {0:0}
-    taxid2node = {}
 
     #Check input values
     if len(sample_names) > 0 and len(sample_names) != num_samples:
@@ -247,29 +252,38 @@ def main():
             if level_id in map_lvls:
                 level_id = map_lvls[level_id]
             #Total reads
+            if count_samples not in total_reads:
+                total_reads[count_samples] = 0
             total_reads[0] += level_reads
-            total_reads[count_samples] = level_reads
+            total_reads[count_samples] += level_reads
             #Total minimizers
+            if count_samples not in total_minimizers:
+                total_minimizers[count_samples] = 0
             total_minimizers[0] += lvl_min
-            total_minimizers[count_samples] = lvl_min
+            total_minimizers[count_samples] += lvl_min
             #Unclassified
-            if level_id == 'U' or taxid == '0':
+            if level_id == 'U' or taxid == 0:
+                if count_samples not in u_reads:
+                    u_reads[count_samples] = 0
+                if count_samples not in u_minimizers:
+                    u_minimizers[count_samples] = 0
                 u_reads[0] += level_reads
-                u_reads[count_samples] = level_reads
+                u_reads[count_samples] += level_reads
                 # Add unclassified minimizers
                 u_minimizers[0] += lvl_min
-                u_minimizers[count_samples] = lvl_min
+                u_minimizers[count_samples] += lvl_min
                 continue
+
+            # --- MINIMAL CHANGE PART 2: SIMPLIFIED ROOT HANDLING ---
             #Tree Root
             if taxid == 1:
-                if count_samples == 1:
-                    # Pass new minimizer values to Tree constructor
-                    root_node = Tree(name, taxid, level_num, 'R', 0,0,0,0)
-                    taxid2node[taxid] = root_node
-                # Pass new minimizer values to add_reads
+                # The root_node object is guaranteed to exist.
+                # Just add the read counts from this report line.
                 root_node.add_reads(count_samples, all_reads, level_reads, all_min, lvl_min)
                 prev_node = root_node
                 continue
+            
+            # This is now safe because prev_node is always a valid Tree object.
             #Move to correct parent
             while level_num != (prev_node.level_num + 1):
                 prev_node = prev_node.parent
@@ -323,7 +337,10 @@ def main():
     #STEP 3: PRINT TREE
     sys.stdout.write(">>STEP 3: PRINTING REPORT\n")
     #Print line for unclassified reads
-    o_file.write("%0.4f\t" % (float(u_reads[0])/float(total_reads[0])*100))
+    if total_reads[0] > 0:
+        o_file.write("%0.4f\t" % (float(u_reads[0])/float(total_reads[0])*100))
+    else:
+        o_file.write("0.0000\t")
     # Combined reads and minimizers
     o_file.write("%i\t%i\t%i\t%i\t" % (u_reads[0], u_reads[0], u_minimizers[0], u_minimizers[0]))
     if not args.c_only:
@@ -333,8 +350,8 @@ def main():
             else:
                 o_file.write("%i\t" % u_reads[i+1])
                 o_file.write("%i\t" % u_reads[i+1])
-                o_file.write("%i\t" % u_minimizers[i+1])
-                o_file.write("%i\t" % u_minimizers[i+1])
+                o_file.write("%i\t" % u_minimizers.get(i+1, 0))
+                o_file.write("%i\t" % u_minimizers.get(i+1, 0))
     o_file.write("U\t0\tunclassified\n")
     #Print for all remaining reads
     all_nodes = [root_node]
@@ -349,7 +366,10 @@ def main():
             for node in curr_node.children:
                 all_nodes.append(node)
         #Print information for this node, including minimizer counts
-        o_file.write("%0.4f\t" % (float(curr_node.tot_all)/float(total_reads[0])*100))
+        if total_reads[0] > 0:
+            o_file.write("%0.4f\t" % (float(curr_node.tot_all)/float(total_reads[0])*100))
+        else:
+            o_file.write("0.0000\t")
         o_file.write("%i\t" % curr_node.tot_all)
         o_file.write("%i\t" % curr_node.tot_lvl)
         o_file.write("%i\t" % curr_node.tot_all_min)
@@ -371,3 +391,4 @@ def main():
 ####################################################################
 if __name__ == "__main__":
     main()
+

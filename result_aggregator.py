@@ -70,7 +70,7 @@ def _rerun_bracken(master_report_path: str, kraken_db_path: str, output_dir: str
     logger.info(f"Re-running Bracken for {barcode}...")
     bracken_output = os.path.join(output_dir, f"master_{barcode}.bracken_sp.tsv")
     read_length = config.getint('KrakenParams', 'read_len', fallback=150)
-    command = ["bracken", "-d", kraken_db_path, "-i", master_report_path, "-o", bracken_output, "-r", str(read_length), "-l", "S"]
+    command = ["bracken", "-d", kraken_db_path, "-i", master_report_path, "-o", bracken_output, "-r", str(read_length), "-l", "S", "-t", "0"]
     try:
         subprocess.run(command, check=True, capture_output=True, text=True)
         logger.info(f"Bracken completed successfully for {barcode}.")
