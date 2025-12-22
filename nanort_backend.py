@@ -79,8 +79,6 @@ def main():
 
     os.makedirs(output_dir, exist_ok=True)
 
-
-    # ======================== ADD THIS BLOCK ========================
     # This loop waits for the source FASTQ directory to exist before starting the watcher.
     logger.info(f"Checking for watch directory: {fastq_dir_to_watch}")
     while not os.path.isdir(fastq_dir_to_watch):
@@ -91,8 +89,6 @@ def main():
             logger.info("Shutdown signal received while waiting for directory.")
             sys.exit(0)
     logger.info("Watch directory found!")
-    # ================================================================
-
 
     file_queue = Queue()
     processed_files_set = read_processed_files_log(processed_log_path)
