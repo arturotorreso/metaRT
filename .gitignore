@@ -2,3 +2,5 @@ test_data/
 work/
 nextflow_pipeline/bin/
 bitbucket_ket.txt
+github_token.txt
+nano_gui/work
