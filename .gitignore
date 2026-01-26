@@ -3,4 +3,5 @@ work/
 nextflow_pipeline/bin/
 bitbucket_ket.txt
 github_token.txt
+github_key.txt
 nano_gui/work

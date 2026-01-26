@@ -1,4 +1,4 @@
---- Starting NanoRT GUI at Mon Jan  5 05:03:46 PM PST 2026 ---
+--- Starting NanoRT GUI at Mon Jan 19 02:14:11 PM PST 2026 ---
 ERROR: Bundled Java not found at /mnt/Drive20T/scripts/metaRT/nano_gui/../nextflow_pipeline/bin/java-17
 Using Java version:
 openjdk version "11.0.25" 2024-10-15
@@ -8,7 +8,526 @@ Found bundled Conda environment at: /mnt/Drive20T/scripts/metaRT/nano_gui/../nex
 Updated PATH to include Conda binaries.
 Using Python executable: /mnt/Drive20T/scripts/metaRT/nano_gui/../nextflow_pipeline/bin/conda-env/bin/python
 Executing python script...
---- Starting NanoRT GUI at Mon Jan  5 05:03:47 PM PST 2026 ---
+Traceback (most recent call last):
+  File "/mnt/Drive20T/scripts/metaRT/nano_gui/nanort_gui.py", line 17, in <module>
+    from reporting import ReportGenerator
+  File "/mnt/Drive20T/scripts/metaRT/nano_gui/reporting.py", line 4, in <module>
+    import plotly.graph_objects as go
+ModuleNotFoundError: No module named 'plotly'
+--- Python script finished with exit code: 1 ---
+--- Starting NanoRT GUI at Mon Jan 19 02:22:59 PM PST 2026 ---
+ERROR: Bundled Java not found at /mnt/Drive20T/scripts/metaRT/nano_gui/../nextflow_pipeline/bin/java-17
+Using Java version:
+openjdk version "11.0.25" 2024-10-15
+OpenJDK Runtime Environment (build 11.0.25+9-post-Ubuntu-1ubuntu122.04)
+OpenJDK 64-Bit Server VM (build 11.0.25+9-post-Ubuntu-1ubuntu122.04, mixed mode, sharing)
+Found bundled Conda environment at: /mnt/Drive20T/scripts/metaRT/nano_gui/../nextflow_pipeline/bin/conda-env
+Updated PATH to include Conda binaries.
+Using Python executable: /mnt/Drive20T/scripts/metaRT/nano_gui/../nextflow_pipeline/bin/conda-env/bin/python
+Executing python script...
+Traceback (most recent call last):
+  File "/mnt/Drive20T/scripts/metaRT/nano_gui/nanort_gui.py", line 17, in <module>
+    from reporting import ReportGenerator
+  File "/mnt/Drive20T/scripts/metaRT/nano_gui/reporting.py", line 4, in <module>
+    import plotly.graph_objects as go
+ModuleNotFoundError: No module named 'plotly'
+--- Python script finished with exit code: 1 ---
+--- Starting NanoRT GUI at Mon Jan 19 02:24:12 PM PST 2026 ---
+ERROR: Bundled Java not found at /mnt/Drive20T/scripts/metaRT/nano_gui/../nextflow_pipeline/bin/java-17
+Using Java version:
+openjdk version "11.0.25" 2024-10-15
+OpenJDK Runtime Environment (build 11.0.25+9-post-Ubuntu-1ubuntu122.04)
+OpenJDK 64-Bit Server VM (build 11.0.25+9-post-Ubuntu-1ubuntu122.04, mixed mode, sharing)
+Found bundled Conda environment at: /mnt/Drive20T/scripts/metaRT/nano_gui/../nextflow_pipeline/bin/conda-env
+Updated PATH to include Conda binaries.
+Using Python executable: /mnt/Drive20T/scripts/metaRT/nano_gui/../nextflow_pipeline/bin/conda-env/bin/python
+Executing python script...
+Traceback (most recent call last):
+  File "/mnt/Drive20T/scripts/metaRT/nano_gui/nanort_gui.py", line 106, in generate_web_report
+    output_dir = self.config.get('Paths', 'output_directory')
+AttributeError: 'MainWindow' object has no attribute 'config'
+--- Python script finished with exit code: 0 ---
+--- Starting NanoRT GUI at Mon Jan 19 02:39:43 PM PST 2026 ---
+ERROR: Bundled Java not found at /mnt/Drive20T/scripts/metaRT/nano_gui/../nextflow_pipeline/bin/java-17
+Using Java version:
+openjdk version "11.0.25" 2024-10-15
+OpenJDK Runtime Environment (build 11.0.25+9-post-Ubuntu-1ubuntu122.04)
+OpenJDK 64-Bit Server VM (build 11.0.25+9-post-Ubuntu-1ubuntu122.04, mixed mode, sharing)
+Found bundled Conda environment at: /mnt/Drive20T/scripts/metaRT/nano_gui/../nextflow_pipeline/bin/conda-env
+Updated PATH to include Conda binaries.
+Using Python executable: /mnt/Drive20T/scripts/metaRT/nano_gui/../nextflow_pipeline/bin/conda-env/bin/python
+Executing python script...
+--- Python script finished with exit code: 0 ---
+--- Starting NanoRT GUI at Mon Jan 19 02:40:03 PM PST 2026 ---
+ERROR: Bundled Java not found at /mnt/Drive20T/scripts/metaRT/nano_gui/../nextflow_pipeline/bin/java-17
+Using Java version:
+openjdk version "11.0.25" 2024-10-15
+OpenJDK Runtime Environment (build 11.0.25+9-post-Ubuntu-1ubuntu122.04)
+OpenJDK 64-Bit Server VM (build 11.0.25+9-post-Ubuntu-1ubuntu122.04, mixed mode, sharing)
+Found bundled Conda environment at: /mnt/Drive20T/scripts/metaRT/nano_gui/../nextflow_pipeline/bin/conda-env
+Updated PATH to include Conda binaries.
+Using Python executable: /mnt/Drive20T/scripts/metaRT/nano_gui/../nextflow_pipeline/bin/conda-env/bin/python
+Executing python script...
+--- Python script finished with exit code: 0 ---
+--- Starting NanoRT GUI at Mon Jan 19 02:41:11 PM PST 2026 ---
+ERROR: Bundled Java not found at /mnt/Drive20T/scripts/metaRT/nano_gui/../nextflow_pipeline/bin/java-17
+Using Java version:
+openjdk version "11.0.25" 2024-10-15
+OpenJDK Runtime Environment (build 11.0.25+9-post-Ubuntu-1ubuntu122.04)
+OpenJDK 64-Bit Server VM (build 11.0.25+9-post-Ubuntu-1ubuntu122.04, mixed mode, sharing)
+Found bundled Conda environment at: /mnt/Drive20T/scripts/metaRT/nano_gui/../nextflow_pipeline/bin/conda-env
+Updated PATH to include Conda binaries.
+Using Python executable: /mnt/Drive20T/scripts/metaRT/nano_gui/../nextflow_pipeline/bin/conda-env/bin/python
+Executing python script...
+--- Python script finished with exit code: 0 ---
+--- Starting NanoRT GUI at Mon Jan 19 02:41:34 PM PST 2026 ---
+ERROR: Bundled Java not found at /mnt/Drive20T/scripts/metaRT/nano_gui/../nextflow_pipeline/bin/java-17
+Using Java version:
+openjdk version "11.0.25" 2024-10-15
+OpenJDK Runtime Environment (build 11.0.25+9-post-Ubuntu-1ubuntu122.04)
+OpenJDK 64-Bit Server VM (build 11.0.25+9-post-Ubuntu-1ubuntu122.04, mixed mode, sharing)
+Found bundled Conda environment at: /mnt/Drive20T/scripts/metaRT/nano_gui/../nextflow_pipeline/bin/conda-env
+Updated PATH to include Conda binaries.
+Using Python executable: /mnt/Drive20T/scripts/metaRT/nano_gui/../nextflow_pipeline/bin/conda-env/bin/python
+Executing python script...
+--- Python script finished with exit code: 0 ---
+--- Starting NanoRT GUI at Mon Jan 19 02:42:03 PM PST 2026 ---
+ERROR: Bundled Java not found at /mnt/Drive20T/scripts/metaRT/nano_gui/../nextflow_pipeline/bin/java-17
+Using Java version:
+openjdk version "11.0.25" 2024-10-15
+OpenJDK Runtime Environment (build 11.0.25+9-post-Ubuntu-1ubuntu122.04)
+OpenJDK 64-Bit Server VM (build 11.0.25+9-post-Ubuntu-1ubuntu122.04, mixed mode, sharing)
+Found bundled Conda environment at: /mnt/Drive20T/scripts/metaRT/nano_gui/../nextflow_pipeline/bin/conda-env
+Updated PATH to include Conda binaries.
+Using Python executable: /mnt/Drive20T/scripts/metaRT/nano_gui/../nextflow_pipeline/bin/conda-env/bin/python
+Executing python script...
+--- Python script finished with exit code: 0 ---
+--- Starting NanoRT GUI at Mon Jan 19 02:42:23 PM PST 2026 ---
+ERROR: Bundled Java not found at /mnt/Drive20T/scripts/metaRT/nano_gui/../nextflow_pipeline/bin/java-17
+Using Java version:
+openjdk version "11.0.25" 2024-10-15
+OpenJDK Runtime Environment (build 11.0.25+9-post-Ubuntu-1ubuntu122.04)
+OpenJDK 64-Bit Server VM (build 11.0.25+9-post-Ubuntu-1ubuntu122.04, mixed mode, sharing)
+Found bundled Conda environment at: /mnt/Drive20T/scripts/metaRT/nano_gui/../nextflow_pipeline/bin/conda-env
+Updated PATH to include Conda binaries.
+Using Python executable: /mnt/Drive20T/scripts/metaRT/nano_gui/../nextflow_pipeline/bin/conda-env/bin/python
+Executing python script...
+Traceback (most recent call last):
+  File "/mnt/Drive20T/scripts/metaRT/nano_gui/nanort_gui.py", line 106, in generate_web_report
+    output_dir = self.config.get('Paths', 'output_directory')
+AttributeError: 'MainWindow' object has no attribute 'config'
+--- Python script finished with exit code: 0 ---
+--- Starting NanoRT GUI at Mon Jan 19 02:54:38 PM PST 2026 ---
+ERROR: Bundled Java not found at /mnt/Drive20T/scripts/metaRT/nano_gui/../nextflow_pipeline/bin/java-17
+Using Java version:
+openjdk version "11.0.25" 2024-10-15
+OpenJDK Runtime Environment (build 11.0.25+9-post-Ubuntu-1ubuntu122.04)
+OpenJDK 64-Bit Server VM (build 11.0.25+9-post-Ubuntu-1ubuntu122.04, mixed mode, sharing)
+Found bundled Conda environment at: /mnt/Drive20T/scripts/metaRT/nano_gui/../nextflow_pipeline/bin/conda-env
+Updated PATH to include Conda binaries.
+Using Python executable: /mnt/Drive20T/scripts/metaRT/nano_gui/../nextflow_pipeline/bin/conda-env/bin/python
+Executing python script...
+Could not parse stylesheet of object RunPreparationWindow(0x614e09b53580)
+Could not parse stylesheet of object RunPreparationWindow(0x614e09b53580)
+Could not parse stylesheet of object RunPreparationWindow(0x614e09b53580)
+--- Python script finished with exit code: 0 ---
+--- Starting NanoRT GUI at Mon Jan 19 02:55:20 PM PST 2026 ---
+ERROR: Bundled Java not found at /mnt/Drive20T/scripts/metaRT/nano_gui/../nextflow_pipeline/bin/java-17
+Using Java version:
+openjdk version "11.0.25" 2024-10-15
+OpenJDK Runtime Environment (build 11.0.25+9-post-Ubuntu-1ubuntu122.04)
+OpenJDK 64-Bit Server VM (build 11.0.25+9-post-Ubuntu-1ubuntu122.04, mixed mode, sharing)
+Found bundled Conda environment at: /mnt/Drive20T/scripts/metaRT/nano_gui/../nextflow_pipeline/bin/conda-env
+Updated PATH to include Conda binaries.
+Using Python executable: /mnt/Drive20T/scripts/metaRT/nano_gui/../nextflow_pipeline/bin/conda-env/bin/python
+Executing python script...
+Could not parse stylesheet of object RunPreparationWindow(0x651fa4aa0400)
+Could not parse stylesheet of object RunPreparationWindow(0x651fa4aa0400)
+Could not parse stylesheet of object RunPreparationWindow(0x651fa4aa0400)
+--- Python script finished with exit code: 0 ---
+--- Starting NanoRT GUI at Mon Jan 19 02:55:54 PM PST 2026 ---
+ERROR: Bundled Java not found at /mnt/Drive20T/scripts/metaRT/nano_gui/../nextflow_pipeline/bin/java-17
+Using Java version:
+openjdk version "11.0.25" 2024-10-15
+OpenJDK Runtime Environment (build 11.0.25+9-post-Ubuntu-1ubuntu122.04)
+OpenJDK 64-Bit Server VM (build 11.0.25+9-post-Ubuntu-1ubuntu122.04, mixed mode, sharing)
+Found bundled Conda environment at: /mnt/Drive20T/scripts/metaRT/nano_gui/../nextflow_pipeline/bin/conda-env
+Updated PATH to include Conda binaries.
+Using Python executable: /mnt/Drive20T/scripts/metaRT/nano_gui/../nextflow_pipeline/bin/conda-env/bin/python
+Executing python script...
+Could not parse stylesheet of object RunPreparationWindow(0x564c5d0da190)
+Could not parse stylesheet of object RunPreparationWindow(0x564c5d0da190)
+Could not parse stylesheet of object RunPreparationWindow(0x564c5d0da190)
+--- Python script finished with exit code: 0 ---
+--- Starting NanoRT GUI at Mon Jan 19 02:56:38 PM PST 2026 ---
+ERROR: Bundled Java not found at /mnt/Drive20T/scripts/metaRT/nano_gui/../nextflow_pipeline/bin/java-17
+Using Java version:
+openjdk version "11.0.25" 2024-10-15
+OpenJDK Runtime Environment (build 11.0.25+9-post-Ubuntu-1ubuntu122.04)
+OpenJDK 64-Bit Server VM (build 11.0.25+9-post-Ubuntu-1ubuntu122.04, mixed mode, sharing)
+Found bundled Conda environment at: /mnt/Drive20T/scripts/metaRT/nano_gui/../nextflow_pipeline/bin/conda-env
+Updated PATH to include Conda binaries.
+Using Python executable: /mnt/Drive20T/scripts/metaRT/nano_gui/../nextflow_pipeline/bin/conda-env/bin/python
+Executing python script...
+Could not parse stylesheet of object RunPreparationWindow(0x648b217d9ea0)
+Could not parse stylesheet of object RunPreparationWindow(0x648b217d9ea0)
+Could not parse stylesheet of object RunPreparationWindow(0x648b217d9ea0)
+Traceback (most recent call last):
+  File "/mnt/Drive20T/scripts/metaRT/nano_gui/nanort_gui.py", line 106, in generate_web_report
+    output_dir = self.config.get('Paths', 'output_directory')
+AttributeError: 'MainWindow' object has no attribute 'config'
+--- Python script finished with exit code: 0 ---
+--- Starting NanoRT GUI at Mon Jan 19 03:02:26 PM PST 2026 ---
+ERROR: Bundled Java not found at /mnt/Drive20T/scripts/metaRT/nano_gui/../nextflow_pipeline/bin/java-17
+Using Java version:
+openjdk version "11.0.25" 2024-10-15
+OpenJDK Runtime Environment (build 11.0.25+9-post-Ubuntu-1ubuntu122.04)
+OpenJDK 64-Bit Server VM (build 11.0.25+9-post-Ubuntu-1ubuntu122.04, mixed mode, sharing)
+Found bundled Conda environment at: /mnt/Drive20T/scripts/metaRT/nano_gui/../nextflow_pipeline/bin/conda-env
+Updated PATH to include Conda binaries.
+Using Python executable: /mnt/Drive20T/scripts/metaRT/nano_gui/../nextflow_pipeline/bin/conda-env/bin/python
+Executing python script...
+--- Python script finished with exit code: 0 ---
+--- Starting NanoRT GUI at Mon Jan 19 03:26:32 PM PST 2026 ---
+ERROR: Bundled Java not found at /mnt/Drive20T/scripts/metaRT/nano_gui/../nextflow_pipeline/bin/java-17
+Using Java version:
+openjdk version "11.0.25" 2024-10-15
+OpenJDK Runtime Environment (build 11.0.25+9-post-Ubuntu-1ubuntu122.04)
+OpenJDK 64-Bit Server VM (build 11.0.25+9-post-Ubuntu-1ubuntu122.04, mixed mode, sharing)
+Found bundled Conda environment at: /mnt/Drive20T/scripts/metaRT/nano_gui/../nextflow_pipeline/bin/conda-env
+Updated PATH to include Conda binaries.
+Using Python executable: /mnt/Drive20T/scripts/metaRT/nano_gui/../nextflow_pipeline/bin/conda-env/bin/python
+Executing python script...
+--- Python script finished with exit code: 0 ---
+--- Starting NanoRT GUI at Mon Jan 19 03:26:47 PM PST 2026 ---
+ERROR: Bundled Java not found at /mnt/Drive20T/scripts/metaRT/nano_gui/../nextflow_pipeline/bin/java-17
+Using Java version:
+openjdk version "11.0.25" 2024-10-15
+OpenJDK Runtime Environment (build 11.0.25+9-post-Ubuntu-1ubuntu122.04)
+OpenJDK 64-Bit Server VM (build 11.0.25+9-post-Ubuntu-1ubuntu122.04, mixed mode, sharing)
+Found bundled Conda environment at: /mnt/Drive20T/scripts/metaRT/nano_gui/../nextflow_pipeline/bin/conda-env
+Updated PATH to include Conda binaries.
+Using Python executable: /mnt/Drive20T/scripts/metaRT/nano_gui/../nextflow_pipeline/bin/conda-env/bin/python
+Executing python script...
+--- Python script finished with exit code: 0 ---
+--- Starting NanoRT GUI at Mon Jan 19 03:30:47 PM PST 2026 ---
+ERROR: Bundled Java not found at /mnt/Drive20T/scripts/metaRT/nano_gui/../nextflow_pipeline/bin/java-17
+Using Java version:
+openjdk version "11.0.25" 2024-10-15
+OpenJDK Runtime Environment (build 11.0.25+9-post-Ubuntu-1ubuntu122.04)
+OpenJDK 64-Bit Server VM (build 11.0.25+9-post-Ubuntu-1ubuntu122.04, mixed mode, sharing)
+Found bundled Conda environment at: /mnt/Drive20T/scripts/metaRT/nano_gui/../nextflow_pipeline/bin/conda-env
+Updated PATH to include Conda binaries.
+Using Python executable: /mnt/Drive20T/scripts/metaRT/nano_gui/../nextflow_pipeline/bin/conda-env/bin/python
+Executing python script...
+--- Python script finished with exit code: 0 ---
+--- Starting NanoRT GUI at Mon Jan 19 03:31:24 PM PST 2026 ---
+ERROR: Bundled Java not found at /mnt/Drive20T/scripts/metaRT/nano_gui/../nextflow_pipeline/bin/java-17
+Using Java version:
+openjdk version "11.0.25" 2024-10-15
+OpenJDK Runtime Environment (build 11.0.25+9-post-Ubuntu-1ubuntu122.04)
+OpenJDK 64-Bit Server VM (build 11.0.25+9-post-Ubuntu-1ubuntu122.04, mixed mode, sharing)
+Found bundled Conda environment at: /mnt/Drive20T/scripts/metaRT/nano_gui/../nextflow_pipeline/bin/conda-env
+Updated PATH to include Conda binaries.
+Using Python executable: /mnt/Drive20T/scripts/metaRT/nano_gui/../nextflow_pipeline/bin/conda-env/bin/python
+Executing python script...
+--- Python script finished with exit code: 0 ---
+--- Starting NanoRT GUI at Mon Jan 19 03:35:28 PM PST 2026 ---
+ERROR: Bundled Java not found at /mnt/Drive20T/scripts/metaRT/nano_gui/../nextflow_pipeline/bin/java-17
+Using Java version:
+openjdk version "11.0.25" 2024-10-15
+OpenJDK Runtime Environment (build 11.0.25+9-post-Ubuntu-1ubuntu122.04)
+OpenJDK 64-Bit Server VM (build 11.0.25+9-post-Ubuntu-1ubuntu122.04, mixed mode, sharing)
+Found bundled Conda environment at: /mnt/Drive20T/scripts/metaRT/nano_gui/../nextflow_pipeline/bin/conda-env
+Updated PATH to include Conda binaries.
+Using Python executable: /mnt/Drive20T/scripts/metaRT/nano_gui/../nextflow_pipeline/bin/conda-env/bin/python
+Executing python script...
+--- Python script finished with exit code: 0 ---
+--- Starting NanoRT GUI at Mon Jan 19 03:35:58 PM PST 2026 ---
+ERROR: Bundled Java not found at /mnt/Drive20T/scripts/metaRT/nano_gui/../nextflow_pipeline/bin/java-17
+Using Java version:
+openjdk version "11.0.25" 2024-10-15
+OpenJDK Runtime Environment (build 11.0.25+9-post-Ubuntu-1ubuntu122.04)
+OpenJDK 64-Bit Server VM (build 11.0.25+9-post-Ubuntu-1ubuntu122.04, mixed mode, sharing)
+Found bundled Conda environment at: /mnt/Drive20T/scripts/metaRT/nano_gui/../nextflow_pipeline/bin/conda-env
+Updated PATH to include Conda binaries.
+Using Python executable: /mnt/Drive20T/scripts/metaRT/nano_gui/../nextflow_pipeline/bin/conda-env/bin/python
+Executing python script...
+--- Python script finished with exit code: 0 ---
+--- Starting NanoRT GUI at Mon Jan 19 03:36:36 PM PST 2026 ---
+ERROR: Bundled Java not found at /mnt/Drive20T/scripts/metaRT/nano_gui/../nextflow_pipeline/bin/java-17
+Using Java version:
+openjdk version "11.0.25" 2024-10-15
+OpenJDK Runtime Environment (build 11.0.25+9-post-Ubuntu-1ubuntu122.04)
+OpenJDK 64-Bit Server VM (build 11.0.25+9-post-Ubuntu-1ubuntu122.04, mixed mode, sharing)
+Found bundled Conda environment at: /mnt/Drive20T/scripts/metaRT/nano_gui/../nextflow_pipeline/bin/conda-env
+Updated PATH to include Conda binaries.
+Using Python executable: /mnt/Drive20T/scripts/metaRT/nano_gui/../nextflow_pipeline/bin/conda-env/bin/python
+Executing python script...
+--- Python script finished with exit code: 0 ---
+--- Starting NanoRT GUI at Mon Jan 19 03:39:30 PM PST 2026 ---
+ERROR: Bundled Java not found at /mnt/Drive20T/scripts/metaRT/nano_gui/../nextflow_pipeline/bin/java-17
+Using Java version:
+openjdk version "11.0.25" 2024-10-15
+OpenJDK Runtime Environment (build 11.0.25+9-post-Ubuntu-1ubuntu122.04)
+OpenJDK 64-Bit Server VM (build 11.0.25+9-post-Ubuntu-1ubuntu122.04, mixed mode, sharing)
+Found bundled Conda environment at: /mnt/Drive20T/scripts/metaRT/nano_gui/../nextflow_pipeline/bin/conda-env
+Updated PATH to include Conda binaries.
+Using Python executable: /mnt/Drive20T/scripts/metaRT/nano_gui/../nextflow_pipeline/bin/conda-env/bin/python
+Executing python script...
+--- Python script finished with exit code: 0 ---
+--- Starting NanoRT GUI at Mon Jan 19 03:41:05 PM PST 2026 ---
+ERROR: Bundled Java not found at /mnt/Drive20T/scripts/metaRT/nano_gui/../nextflow_pipeline/bin/java-17
+Using Java version:
+openjdk version "11.0.25" 2024-10-15
+OpenJDK Runtime Environment (build 11.0.25+9-post-Ubuntu-1ubuntu122.04)
+OpenJDK 64-Bit Server VM (build 11.0.25+9-post-Ubuntu-1ubuntu122.04, mixed mode, sharing)
+Found bundled Conda environment at: /mnt/Drive20T/scripts/metaRT/nano_gui/../nextflow_pipeline/bin/conda-env
+Updated PATH to include Conda binaries.
+Using Python executable: /mnt/Drive20T/scripts/metaRT/nano_gui/../nextflow_pipeline/bin/conda-env/bin/python
+Executing python script...
+--- Python script finished with exit code: 0 ---
+--- Starting NanoRT GUI at Mon Jan 19 03:41:11 PM PST 2026 ---
+ERROR: Bundled Java not found at /mnt/Drive20T/scripts/metaRT/nano_gui/../nextflow_pipeline/bin/java-17
+Using Java version:
+openjdk version "11.0.25" 2024-10-15
+OpenJDK Runtime Environment (build 11.0.25+9-post-Ubuntu-1ubuntu122.04)
+OpenJDK 64-Bit Server VM (build 11.0.25+9-post-Ubuntu-1ubuntu122.04, mixed mode, sharing)
+Found bundled Conda environment at: /mnt/Drive20T/scripts/metaRT/nano_gui/../nextflow_pipeline/bin/conda-env
+Updated PATH to include Conda binaries.
+Using Python executable: /mnt/Drive20T/scripts/metaRT/nano_gui/../nextflow_pipeline/bin/conda-env/bin/python
+Executing python script...
+--- Python script finished with exit code: 0 ---
+--- Starting NanoRT GUI at Mon Jan 19 03:42:25 PM PST 2026 ---
+ERROR: Bundled Java not found at /mnt/Drive20T/scripts/metaRT/nano_gui/../nextflow_pipeline/bin/java-17
+Using Java version:
+openjdk version "11.0.25" 2024-10-15
+OpenJDK Runtime Environment (build 11.0.25+9-post-Ubuntu-1ubuntu122.04)
+OpenJDK 64-Bit Server VM (build 11.0.25+9-post-Ubuntu-1ubuntu122.04, mixed mode, sharing)
+Found bundled Conda environment at: /mnt/Drive20T/scripts/metaRT/nano_gui/../nextflow_pipeline/bin/conda-env
+Updated PATH to include Conda binaries.
+Using Python executable: /mnt/Drive20T/scripts/metaRT/nano_gui/../nextflow_pipeline/bin/conda-env/bin/python
+Executing python script...
+--- Python script finished with exit code: 0 ---
+--- Starting NanoRT GUI at Mon Jan 19 03:42:52 PM PST 2026 ---
+ERROR: Bundled Java not found at /mnt/Drive20T/scripts/metaRT/nano_gui/../nextflow_pipeline/bin/java-17
+Using Java version:
+openjdk version "11.0.25" 2024-10-15
+OpenJDK Runtime Environment (build 11.0.25+9-post-Ubuntu-1ubuntu122.04)
+OpenJDK 64-Bit Server VM (build 11.0.25+9-post-Ubuntu-1ubuntu122.04, mixed mode, sharing)
+Found bundled Conda environment at: /mnt/Drive20T/scripts/metaRT/nano_gui/../nextflow_pipeline/bin/conda-env
+Updated PATH to include Conda binaries.
+Using Python executable: /mnt/Drive20T/scripts/metaRT/nano_gui/../nextflow_pipeline/bin/conda-env/bin/python
+Executing python script...
+--- Python script finished with exit code: 0 ---
+--- Starting NanoRT GUI at Mon Jan 19 03:42:59 PM PST 2026 ---
+ERROR: Bundled Java not found at /mnt/Drive20T/scripts/metaRT/nano_gui/../nextflow_pipeline/bin/java-17
+Using Java version:
+openjdk version "11.0.25" 2024-10-15
+OpenJDK Runtime Environment (build 11.0.25+9-post-Ubuntu-1ubuntu122.04)
+OpenJDK 64-Bit Server VM (build 11.0.25+9-post-Ubuntu-1ubuntu122.04, mixed mode, sharing)
+Found bundled Conda environment at: /mnt/Drive20T/scripts/metaRT/nano_gui/../nextflow_pipeline/bin/conda-env
+Updated PATH to include Conda binaries.
+Using Python executable: /mnt/Drive20T/scripts/metaRT/nano_gui/../nextflow_pipeline/bin/conda-env/bin/python
+Executing python script...
+--- Python script finished with exit code: 0 ---
+--- Starting NanoRT GUI at Mon Jan 19 03:43:32 PM PST 2026 ---
+ERROR: Bundled Java not found at /mnt/Drive20T/scripts/metaRT/nano_gui/../nextflow_pipeline/bin/java-17
+Using Java version:
+openjdk version "11.0.25" 2024-10-15
+OpenJDK Runtime Environment (build 11.0.25+9-post-Ubuntu-1ubuntu122.04)
+OpenJDK 64-Bit Server VM (build 11.0.25+9-post-Ubuntu-1ubuntu122.04, mixed mode, sharing)
+Found bundled Conda environment at: /mnt/Drive20T/scripts/metaRT/nano_gui/../nextflow_pipeline/bin/conda-env
+Updated PATH to include Conda binaries.
+Using Python executable: /mnt/Drive20T/scripts/metaRT/nano_gui/../nextflow_pipeline/bin/conda-env/bin/python
+Executing python script...
+--- Python script finished with exit code: 0 ---
+--- Starting NanoRT GUI at Mon Jan 19 03:43:41 PM PST 2026 ---
+ERROR: Bundled Java not found at /mnt/Drive20T/scripts/metaRT/nano_gui/../nextflow_pipeline/bin/java-17
+Using Java version:
+openjdk version "11.0.25" 2024-10-15
+OpenJDK Runtime Environment (build 11.0.25+9-post-Ubuntu-1ubuntu122.04)
+OpenJDK 64-Bit Server VM (build 11.0.25+9-post-Ubuntu-1ubuntu122.04, mixed mode, sharing)
+Found bundled Conda environment at: /mnt/Drive20T/scripts/metaRT/nano_gui/../nextflow_pipeline/bin/conda-env
+Updated PATH to include Conda binaries.
+Using Python executable: /mnt/Drive20T/scripts/metaRT/nano_gui/../nextflow_pipeline/bin/conda-env/bin/python
+Executing python script...
+--- Python script finished with exit code: 0 ---
+--- Starting NanoRT GUI at Mon Jan 19 03:43:57 PM PST 2026 ---
+ERROR: Bundled Java not found at /mnt/Drive20T/scripts/metaRT/nano_gui/../nextflow_pipeline/bin/java-17
+Using Java version:
+openjdk version "11.0.25" 2024-10-15
+OpenJDK Runtime Environment (build 11.0.25+9-post-Ubuntu-1ubuntu122.04)
+OpenJDK 64-Bit Server VM (build 11.0.25+9-post-Ubuntu-1ubuntu122.04, mixed mode, sharing)
+Found bundled Conda environment at: /mnt/Drive20T/scripts/metaRT/nano_gui/../nextflow_pipeline/bin/conda-env
+Updated PATH to include Conda binaries.
+Using Python executable: /mnt/Drive20T/scripts/metaRT/nano_gui/../nextflow_pipeline/bin/conda-env/bin/python
+Executing python script...
+--- Python script finished with exit code: 0 ---
+--- Starting NanoRT GUI at Mon Jan 19 03:44:14 PM PST 2026 ---
+ERROR: Bundled Java not found at /mnt/Drive20T/scripts/metaRT/nano_gui/../nextflow_pipeline/bin/java-17
+Using Java version:
+openjdk version "11.0.25" 2024-10-15
+OpenJDK Runtime Environment (build 11.0.25+9-post-Ubuntu-1ubuntu122.04)
+OpenJDK 64-Bit Server VM (build 11.0.25+9-post-Ubuntu-1ubuntu122.04, mixed mode, sharing)
+Found bundled Conda environment at: /mnt/Drive20T/scripts/metaRT/nano_gui/../nextflow_pipeline/bin/conda-env
+Updated PATH to include Conda binaries.
+Using Python executable: /mnt/Drive20T/scripts/metaRT/nano_gui/../nextflow_pipeline/bin/conda-env/bin/python
+Executing python script...
+--- Python script finished with exit code: 0 ---
+--- Starting NanoRT GUI at Mon Jan 19 03:44:48 PM PST 2026 ---
+ERROR: Bundled Java not found at /mnt/Drive20T/scripts/metaRT/nano_gui/../nextflow_pipeline/bin/java-17
+Using Java version:
+openjdk version "11.0.25" 2024-10-15
+OpenJDK Runtime Environment (build 11.0.25+9-post-Ubuntu-1ubuntu122.04)
+OpenJDK 64-Bit Server VM (build 11.0.25+9-post-Ubuntu-1ubuntu122.04, mixed mode, sharing)
+Found bundled Conda environment at: /mnt/Drive20T/scripts/metaRT/nano_gui/../nextflow_pipeline/bin/conda-env
+Updated PATH to include Conda binaries.
+Using Python executable: /mnt/Drive20T/scripts/metaRT/nano_gui/../nextflow_pipeline/bin/conda-env/bin/python
+Executing python script...
+--- Python script finished with exit code: 0 ---
+--- Starting NanoRT GUI at Mon Jan 19 03:45:18 PM PST 2026 ---
+ERROR: Bundled Java not found at /mnt/Drive20T/scripts/metaRT/nano_gui/../nextflow_pipeline/bin/java-17
+Using Java version:
+openjdk version "11.0.25" 2024-10-15
+OpenJDK Runtime Environment (build 11.0.25+9-post-Ubuntu-1ubuntu122.04)
+OpenJDK 64-Bit Server VM (build 11.0.25+9-post-Ubuntu-1ubuntu122.04, mixed mode, sharing)
+Found bundled Conda environment at: /mnt/Drive20T/scripts/metaRT/nano_gui/../nextflow_pipeline/bin/conda-env
+Updated PATH to include Conda binaries.
+Using Python executable: /mnt/Drive20T/scripts/metaRT/nano_gui/../nextflow_pipeline/bin/conda-env/bin/python
+Executing python script...
+--- Python script finished with exit code: 0 ---
+--- Starting NanoRT GUI at Mon Jan 19 03:45:29 PM PST 2026 ---
+ERROR: Bundled Java not found at /mnt/Drive20T/scripts/metaRT/nano_gui/../nextflow_pipeline/bin/java-17
+Using Java version:
+openjdk version "11.0.25" 2024-10-15
+OpenJDK Runtime Environment (build 11.0.25+9-post-Ubuntu-1ubuntu122.04)
+OpenJDK 64-Bit Server VM (build 11.0.25+9-post-Ubuntu-1ubuntu122.04, mixed mode, sharing)
+Found bundled Conda environment at: /mnt/Drive20T/scripts/metaRT/nano_gui/../nextflow_pipeline/bin/conda-env
+Updated PATH to include Conda binaries.
+Using Python executable: /mnt/Drive20T/scripts/metaRT/nano_gui/../nextflow_pipeline/bin/conda-env/bin/python
+Executing python script...
+--- Python script finished with exit code: 0 ---
+--- Starting NanoRT GUI at Mon Jan 19 03:45:41 PM PST 2026 ---
+ERROR: Bundled Java not found at /mnt/Drive20T/scripts/metaRT/nano_gui/../nextflow_pipeline/bin/java-17
+Using Java version:
+openjdk version "11.0.25" 2024-10-15
+OpenJDK Runtime Environment (build 11.0.25+9-post-Ubuntu-1ubuntu122.04)
+OpenJDK 64-Bit Server VM (build 11.0.25+9-post-Ubuntu-1ubuntu122.04, mixed mode, sharing)
+Found bundled Conda environment at: /mnt/Drive20T/scripts/metaRT/nano_gui/../nextflow_pipeline/bin/conda-env
+Updated PATH to include Conda binaries.
+Using Python executable: /mnt/Drive20T/scripts/metaRT/nano_gui/../nextflow_pipeline/bin/conda-env/bin/python
+Executing python script...
+--- Python script finished with exit code: 0 ---
+--- Starting NanoRT GUI at Mon Jan 19 03:46:12 PM PST 2026 ---
+ERROR: Bundled Java not found at /mnt/Drive20T/scripts/metaRT/nano_gui/../nextflow_pipeline/bin/java-17
+Using Java version:
+openjdk version "11.0.25" 2024-10-15
+OpenJDK Runtime Environment (build 11.0.25+9-post-Ubuntu-1ubuntu122.04)
+OpenJDK 64-Bit Server VM (build 11.0.25+9-post-Ubuntu-1ubuntu122.04, mixed mode, sharing)
+Found bundled Conda environment at: /mnt/Drive20T/scripts/metaRT/nano_gui/../nextflow_pipeline/bin/conda-env
+Updated PATH to include Conda binaries.
+Using Python executable: /mnt/Drive20T/scripts/metaRT/nano_gui/../nextflow_pipeline/bin/conda-env/bin/python
+Executing python script...
+--- Python script finished with exit code: 0 ---
+--- Starting NanoRT GUI at Mon Jan 19 03:46:42 PM PST 2026 ---
+ERROR: Bundled Java not found at /mnt/Drive20T/scripts/metaRT/nano_gui/../nextflow_pipeline/bin/java-17
+Using Java version:
+openjdk version "11.0.25" 2024-10-15
+OpenJDK Runtime Environment (build 11.0.25+9-post-Ubuntu-1ubuntu122.04)
+OpenJDK 64-Bit Server VM (build 11.0.25+9-post-Ubuntu-1ubuntu122.04, mixed mode, sharing)
+Found bundled Conda environment at: /mnt/Drive20T/scripts/metaRT/nano_gui/../nextflow_pipeline/bin/conda-env
+Updated PATH to include Conda binaries.
+Using Python executable: /mnt/Drive20T/scripts/metaRT/nano_gui/../nextflow_pipeline/bin/conda-env/bin/python
+Executing python script...
+--- Python script finished with exit code: 0 ---
+--- Starting NanoRT GUI at Mon Jan 19 03:47:15 PM PST 2026 ---
+ERROR: Bundled Java not found at /mnt/Drive20T/scripts/metaRT/nano_gui/../nextflow_pipeline/bin/java-17
+Using Java version:
+openjdk version "11.0.25" 2024-10-15
+OpenJDK Runtime Environment (build 11.0.25+9-post-Ubuntu-1ubuntu122.04)
+OpenJDK 64-Bit Server VM (build 11.0.25+9-post-Ubuntu-1ubuntu122.04, mixed mode, sharing)
+Found bundled Conda environment at: /mnt/Drive20T/scripts/metaRT/nano_gui/../nextflow_pipeline/bin/conda-env
+Updated PATH to include Conda binaries.
+Using Python executable: /mnt/Drive20T/scripts/metaRT/nano_gui/../nextflow_pipeline/bin/conda-env/bin/python
+Executing python script...
+--- Python script finished with exit code: 0 ---
+--- Starting NanoRT GUI at Mon Jan 19 03:49:27 PM PST 2026 ---
+ERROR: Bundled Java not found at /mnt/Drive20T/scripts/metaRT/nano_gui/../nextflow_pipeline/bin/java-17
+Using Java version:
+openjdk version "11.0.25" 2024-10-15
+OpenJDK Runtime Environment (build 11.0.25+9-post-Ubuntu-1ubuntu122.04)
+OpenJDK 64-Bit Server VM (build 11.0.25+9-post-Ubuntu-1ubuntu122.04, mixed mode, sharing)
+Found bundled Conda environment at: /mnt/Drive20T/scripts/metaRT/nano_gui/../nextflow_pipeline/bin/conda-env
+Updated PATH to include Conda binaries.
+Using Python executable: /mnt/Drive20T/scripts/metaRT/nano_gui/../nextflow_pipeline/bin/conda-env/bin/python
+Executing python script...
+--- Python script finished with exit code: 0 ---
+--- Starting NanoRT GUI at Wed Jan 21 10:00:49 AM PST 2026 ---
+--- Starting NanoRT GUI at Wed Jan 21 10:00:49 AM PST 2026 ---
+ERROR: Bundled Java not found at /mnt/Drive20T/scripts/metaRT/nano_gui/../nextflow_pipeline/bin/java-17
+ERROR: Bundled Java not found at /mnt/Drive20T/scripts/metaRT/nano_gui/../nextflow_pipeline/bin/java-17
+Using Java version:
+Using Java version:
+openjdk version "11.0.25" 2024-10-15
+OpenJDK Runtime Environment (build 11.0.25+9-post-Ubuntu-1ubuntu122.04)
+OpenJDK 64-Bit Server VM (build 11.0.25+9-post-Ubuntu-1ubuntu122.04, mixed mode, sharing)
+openjdk version "11.0.25" 2024-10-15
+OpenJDK Runtime Environment (build 11.0.25+9-post-Ubuntu-1ubuntu122.04)
+OpenJDK 64-Bit Server VM (build 11.0.25+9-post-Ubuntu-1ubuntu122.04, mixed mode, sharing)
+Found bundled Conda environment at: /mnt/Drive20T/scripts/metaRT/nano_gui/../nextflow_pipeline/bin/conda-env
+Found bundled Conda environment at: /mnt/Drive20T/scripts/metaRT/nano_gui/../nextflow_pipeline/bin/conda-env
+Updated PATH to include Conda binaries.
+Using Python executable: /mnt/Drive20T/scripts/metaRT/nano_gui/../nextflow_pipeline/bin/conda-env/bin/python
+Executing python script...
+Updated PATH to include Conda binaries.
+Using Python executable: /mnt/Drive20T/scripts/metaRT/nano_gui/../nextflow_pipeline/bin/conda-env/bin/python
+Executing python script...
+--- Python script finished with exit code: 0 ---
+--- Python script finished with exit code: 0 ---
+--- Starting NanoRT GUI at Wed Jan 21 11:48:28 AM PST 2026 ---
+ERROR: Bundled Java not found at /mnt/Drive20T/scripts/metaRT/nano_gui/../nextflow_pipeline/bin/java-17
+Using Java version:
+openjdk version "11.0.25" 2024-10-15
+OpenJDK Runtime Environment (build 11.0.25+9-post-Ubuntu-1ubuntu122.04)
+OpenJDK 64-Bit Server VM (build 11.0.25+9-post-Ubuntu-1ubuntu122.04, mixed mode, sharing)
+Found bundled Conda environment at: /mnt/Drive20T/scripts/metaRT/nano_gui/../nextflow_pipeline/bin/conda-env
+Updated PATH to include Conda binaries.
+Using Python executable: /mnt/Drive20T/scripts/metaRT/nano_gui/../nextflow_pipeline/bin/conda-env/bin/python
+Executing python script...
+--- Python script finished with exit code: 0 ---
+--- Starting NanoRT GUI at Wed Jan 21 04:30:34 PM PST 2026 ---
+ERROR: Bundled Java not found at /mnt/Drive20T/scripts/metaRT/nano_gui/../nextflow_pipeline/bin/java-17
+Using Java version:
+openjdk version "11.0.25" 2024-10-15
+OpenJDK Runtime Environment (build 11.0.25+9-post-Ubuntu-1ubuntu122.04)
+OpenJDK 64-Bit Server VM (build 11.0.25+9-post-Ubuntu-1ubuntu122.04, mixed mode, sharing)
+Found bundled Conda environment at: /mnt/Drive20T/scripts/metaRT/nano_gui/../nextflow_pipeline/bin/conda-env
+Updated PATH to include Conda binaries.
+Using Python executable: /mnt/Drive20T/scripts/metaRT/nano_gui/../nextflow_pipeline/bin/conda-env/bin/python
+Executing python script...
+--- Python script finished with exit code: 0 ---
+--- Starting NanoRT GUI at Mon Jan 26 10:13:38 AM PST 2026 ---
+ERROR: Bundled Java not found at /mnt/Drive20T/scripts/metaRT/nano_gui/../nextflow_pipeline/bin/java-17
+Using Java version:
+openjdk version "11.0.25" 2024-10-15
+OpenJDK Runtime Environment (build 11.0.25+9-post-Ubuntu-1ubuntu122.04)
+OpenJDK 64-Bit Server VM (build 11.0.25+9-post-Ubuntu-1ubuntu122.04, mixed mode, sharing)
+Found bundled Conda environment at: /mnt/Drive20T/scripts/metaRT/nano_gui/../nextflow_pipeline/bin/conda-env
+Updated PATH to include Conda binaries.
+Using Python executable: /mnt/Drive20T/scripts/metaRT/nano_gui/../nextflow_pipeline/bin/conda-env/bin/python
+Executing python script...
+--- Starting NanoRT GUI at Mon Jan 26 10:15:12 AM PST 2026 ---
+ERROR: Bundled Java not found at /mnt/Drive20T/scripts/metaRT/nano_gui/../nextflow_pipeline/bin/java-17
+Using Java version:
+openjdk version "11.0.25" 2024-10-15
+OpenJDK Runtime Environment (build 11.0.25+9-post-Ubuntu-1ubuntu122.04)
+OpenJDK 64-Bit Server VM (build 11.0.25+9-post-Ubuntu-1ubuntu122.04, mixed mode, sharing)
+Found bundled Conda environment at: /mnt/Drive20T/scripts/metaRT/nano_gui/../nextflow_pipeline/bin/conda-env
+Updated PATH to include Conda binaries.
+Using Python executable: /mnt/Drive20T/scripts/metaRT/nano_gui/../nextflow_pipeline/bin/conda-env/bin/python
+Executing python script...
+--- Starting NanoRT GUI at Mon Jan 26 10:15:57 AM PST 2026 ---
 ERROR: Bundled Java not found at /mnt/Drive20T/scripts/metaRT/nano_gui/../nextflow_pipeline/bin/java-17
 Using Java version:
 openjdk version "11.0.25" 2024-10-15
@@ -20,17 +539,9 @@ Using Python executable: /mnt/Drive20T/scripts/metaRT/nano_gui/../nextflow_pipel
 Executing python script...
 --- Python script finished with exit code: 0 ---
 --- Python script finished with exit code: 0 ---
---- Starting NanoRT GUI at Thu Jan  8 01:40:44 PM PST 2026 ---
-ERROR: Bundled Java not found at /mnt/Drive20T/scripts/metaRT/nano_gui/../nextflow_pipeline/bin/java-17
-Using Java version:
-openjdk version "11.0.25" 2024-10-15
-OpenJDK Runtime Environment (build 11.0.25+9-post-Ubuntu-1ubuntu122.04)
-OpenJDK 64-Bit Server VM (build 11.0.25+9-post-Ubuntu-1ubuntu122.04, mixed mode, sharing)
-Found bundled Conda environment at: /mnt/Drive20T/scripts/metaRT/nano_gui/../nextflow_pipeline/bin/conda-env
-Updated PATH to include Conda binaries.
-Using Python executable: /mnt/Drive20T/scripts/metaRT/nano_gui/../nextflow_pipeline/bin/conda-env/bin/python
-Executing python script...
---- Starting NanoRT GUI at Thu Jan  8 01:40:55 PM PST 2026 ---
+QProcess: Destroyed while process ("/mnt/Drive20T/scripts/metaRT/nano_gui/../nextflow_pipeline/bin/conda-env/bin/python") is still running.
+--- Python script finished with exit code: 0 ---
+--- Starting NanoRT GUI at Mon Jan 26 10:32:28 AM PST 2026 ---
 ERROR: Bundled Java not found at /mnt/Drive20T/scripts/metaRT/nano_gui/../nextflow_pipeline/bin/java-17
 Using Java version:
 openjdk version "11.0.25" 2024-10-15
@@ -41,8 +552,76 @@ Updated PATH to include Conda binaries.
 Using Python executable: /mnt/Drive20T/scripts/metaRT/nano_gui/../nextflow_pipeline/bin/conda-env/bin/python
 Executing python script...
 --- Python script finished with exit code: 0 ---
+--- Starting NanoRT GUI at Mon Jan 26 10:49:44 AM PST 2026 ---
+ERROR: Bundled Java not found at /mnt/Drive20T/scripts/metaRT/nano_gui/../nextflow_pipeline/bin/java-17
+Using Java version:
+openjdk version "11.0.25" 2024-10-15
+OpenJDK Runtime Environment (build 11.0.25+9-post-Ubuntu-1ubuntu122.04)
+OpenJDK 64-Bit Server VM (build 11.0.25+9-post-Ubuntu-1ubuntu122.04, mixed mode, sharing)
+Found bundled Conda environment at: /mnt/Drive20T/scripts/metaRT/nano_gui/../nextflow_pipeline/bin/conda-env
+Updated PATH to include Conda binaries.
+Using Python executable: /mnt/Drive20T/scripts/metaRT/nano_gui/../nextflow_pipeline/bin/conda-env/bin/python
+Executing python script...
 --- Python script finished with exit code: 0 ---
---- Starting NanoRT GUI at Thu Jan  8 01:43:31 PM PST 2026 ---
+--- Starting NanoRT GUI at Mon Jan 26 11:00:52 AM PST 2026 ---
+ERROR: Bundled Java not found at /mnt/Drive20T/scripts/metaRT/nano_gui/../nextflow_pipeline/bin/java-17
+Using Java version:
+openjdk version "11.0.25" 2024-10-15
+OpenJDK Runtime Environment (build 11.0.25+9-post-Ubuntu-1ubuntu122.04)
+OpenJDK 64-Bit Server VM (build 11.0.25+9-post-Ubuntu-1ubuntu122.04, mixed mode, sharing)
+Found bundled Conda environment at: /mnt/Drive20T/scripts/metaRT/nano_gui/../nextflow_pipeline/bin/conda-env
+Updated PATH to include Conda binaries.
+Using Python executable: /mnt/Drive20T/scripts/metaRT/nano_gui/../nextflow_pipeline/bin/conda-env/bin/python
+Executing python script...
+--- Python script finished with exit code: 0 ---
+--- Starting NanoRT GUI at Mon Jan 26 12:33:48 PM PST 2026 ---
+ERROR: Bundled Java not found at /mnt/Drive20T/scripts/metaRT/nano_gui/../nextflow_pipeline/bin/java-17
+Using Java version:
+openjdk version "11.0.25" 2024-10-15
+OpenJDK Runtime Environment (build 11.0.25+9-post-Ubuntu-1ubuntu122.04)
+OpenJDK 64-Bit Server VM (build 11.0.25+9-post-Ubuntu-1ubuntu122.04, mixed mode, sharing)
+Found bundled Conda environment at: /mnt/Drive20T/scripts/metaRT/nano_gui/../nextflow_pipeline/bin/conda-env
+Updated PATH to include Conda binaries.
+Using Python executable: /mnt/Drive20T/scripts/metaRT/nano_gui/../nextflow_pipeline/bin/conda-env/bin/python
+Executing python script...
+Report generation error: [Errno 2] No such file or directory: '/mnt/Drive20T/rt_try/aggregated_results/dashboard.html'
+--- Python script finished with exit code: 0 ---
+--- Starting NanoRT GUI at Mon Jan 26 12:40:12 PM PST 2026 ---
+ERROR: Bundled Java not found at /mnt/Drive20T/scripts/metaRT/nano_gui/../nextflow_pipeline/bin/java-17
+Using Java version:
+openjdk version "11.0.25" 2024-10-15
+OpenJDK Runtime Environment (build 11.0.25+9-post-Ubuntu-1ubuntu122.04)
+OpenJDK 64-Bit Server VM (build 11.0.25+9-post-Ubuntu-1ubuntu122.04, mixed mode, sharing)
+Found bundled Conda environment at: /mnt/Drive20T/scripts/metaRT/nano_gui/../nextflow_pipeline/bin/conda-env
+Updated PATH to include Conda binaries.
+Using Python executable: /mnt/Drive20T/scripts/metaRT/nano_gui/../nextflow_pipeline/bin/conda-env/bin/python
+Executing python script...
+Report generation error: [Errno 2] No such file or directory: '/mnt/Drive20T/rt_try/aggregated_results/dashboard.html'
+Report generation error: [Errno 2] No such file or directory: '/mnt/Drive20T/rt_try/aggregated_results/dashboard.html'
+Report generation error: [Errno 2] No such file or directory: '/mnt/Drive20T/rt_try/aggregated_results/dashboard.html'
+--- Python script finished with exit code: 0 ---
+--- Starting NanoRT GUI at Mon Jan 26 12:51:43 PM PST 2026 ---
+ERROR: Bundled Java not found at /mnt/Drive20T/scripts/metaRT/nano_gui/../nextflow_pipeline/bin/java-17
+Using Java version:
+openjdk version "11.0.25" 2024-10-15
+OpenJDK Runtime Environment (build 11.0.25+9-post-Ubuntu-1ubuntu122.04)
+OpenJDK 64-Bit Server VM (build 11.0.25+9-post-Ubuntu-1ubuntu122.04, mixed mode, sharing)
+Found bundled Conda environment at: /mnt/Drive20T/scripts/metaRT/nano_gui/../nextflow_pipeline/bin/conda-env
+Updated PATH to include Conda binaries.
+Using Python executable: /mnt/Drive20T/scripts/metaRT/nano_gui/../nextflow_pipeline/bin/conda-env/bin/python
+Executing python script...
+Traceback (most recent call last):
+  File "/mnt/Drive20T/scripts/metaRT/nano_gui/nanort_gui.py", line 109, in activate_dashboard
+    self.start_report_generator()
+  File "/mnt/Drive20T/scripts/metaRT/nano_gui/nanort_gui.py", line 123, in start_report_generator
+    log_win = self.windows["Run Preparation"].log_output
+AttributeError: 'RunPreparationWindow' object has no attribute 'log_output'
+Traceback (most recent call last):
+  File "/mnt/Drive20T/scripts/metaRT/nano_gui/nanort_gui.py", line 143, in _enable_tabs_and_timer
+    self.windows["Run Preparation"].log_output.append("--- Activating GUI views ---")
+AttributeError: 'RunPreparationWindow' object has no attribute 'log_output'
+--- Python script finished with exit code: 0 ---
+--- Starting NanoRT GUI at Mon Jan 26 01:01:49 PM PST 2026 ---
 ERROR: Bundled Java not found at /mnt/Drive20T/scripts/metaRT/nano_gui/../nextflow_pipeline/bin/java-17
 Using Java version:
 openjdk version "11.0.25" 2024-10-15
@@ -54,47 +633,7 @@ Using Python executable: /mnt/Drive20T/scripts/metaRT/nano_gui/../nextflow_pipel
 Executing python script...
 QProcess: Destroyed while process ("/mnt/Drive20T/scripts/metaRT/nano_gui/../nextflow_pipeline/bin/conda-env/bin/python") is still running.
 --- Python script finished with exit code: 0 ---
---- Starting NanoRT GUI at Mon Jan 12 04:37:50 PM PST 2026 ---
-ERROR: Bundled Java not found at /mnt/Drive20T/scripts/metaRT/nano_gui/../nextflow_pipeline/bin/java-17
-Using Java version:
-openjdk version "11.0.25" 2024-10-15
-OpenJDK Runtime Environment (build 11.0.25+9-post-Ubuntu-1ubuntu122.04)
-OpenJDK 64-Bit Server VM (build 11.0.25+9-post-Ubuntu-1ubuntu122.04, mixed mode, sharing)
-Found bundled Conda environment at: /mnt/Drive20T/scripts/metaRT/nano_gui/../nextflow_pipeline/bin/conda-env
-Updated PATH to include Conda binaries.
-Using Python executable: /mnt/Drive20T/scripts/metaRT/nano_gui/../nextflow_pipeline/bin/conda-env/bin/python
-Executing python script...
---- Starting NanoRT GUI at Mon Jan 12 04:38:04 PM PST 2026 ---
-ERROR: Bundled Java not found at /mnt/Drive20T/scripts/metaRT/nano_gui/../nextflow_pipeline/bin/java-17
-Using Java version:
-openjdk version "11.0.25" 2024-10-15
-OpenJDK Runtime Environment (build 11.0.25+9-post-Ubuntu-1ubuntu122.04)
-OpenJDK 64-Bit Server VM (build 11.0.25+9-post-Ubuntu-1ubuntu122.04, mixed mode, sharing)
-Found bundled Conda environment at: /mnt/Drive20T/scripts/metaRT/nano_gui/../nextflow_pipeline/bin/conda-env
-Updated PATH to include Conda binaries.
-Using Python executable: /mnt/Drive20T/scripts/metaRT/nano_gui/../nextflow_pipeline/bin/conda-env/bin/python
-Executing python script...
---- Starting NanoRT GUI at Mon Jan 12 04:38:30 PM PST 2026 ---
-ERROR: Bundled Java not found at /mnt/Drive20T/scripts/metaRT/nano_gui/../nextflow_pipeline/bin/java-17
-Using Java version:
-openjdk version "11.0.25" 2024-10-15
-OpenJDK Runtime Environment (build 11.0.25+9-post-Ubuntu-1ubuntu122.04)
-OpenJDK 64-Bit Server VM (build 11.0.25+9-post-Ubuntu-1ubuntu122.04, mixed mode, sharing)
-Found bundled Conda environment at: /mnt/Drive20T/scripts/metaRT/nano_gui/../nextflow_pipeline/bin/conda-env
-Updated PATH to include Conda binaries.
-Using Python executable: /mnt/Drive20T/scripts/metaRT/nano_gui/../nextflow_pipeline/bin/conda-env/bin/python
-Executing python script...
---- Starting NanoRT GUI at Mon Jan 12 04:38:47 PM PST 2026 ---
-ERROR: Bundled Java not found at /mnt/Drive20T/scripts/metaRT/nano_gui/../nextflow_pipeline/bin/java-17
-Using Java version:
-openjdk version "11.0.25" 2024-10-15
-OpenJDK Runtime Environment (build 11.0.25+9-post-Ubuntu-1ubuntu122.04)
-OpenJDK 64-Bit Server VM (build 11.0.25+9-post-Ubuntu-1ubuntu122.04, mixed mode, sharing)
-Found bundled Conda environment at: /mnt/Drive20T/scripts/metaRT/nano_gui/../nextflow_pipeline/bin/conda-env
-Updated PATH to include Conda binaries.
-Using Python executable: /mnt/Drive20T/scripts/metaRT/nano_gui/../nextflow_pipeline/bin/conda-env/bin/python
-Executing python script...
---- Starting NanoRT GUI at Mon Jan 12 04:38:49 PM PST 2026 ---
+--- Starting NanoRT GUI at Mon Jan 26 01:19:52 PM PST 2026 ---
 ERROR: Bundled Java not found at /mnt/Drive20T/scripts/metaRT/nano_gui/../nextflow_pipeline/bin/java-17
 Using Java version:
 openjdk version "11.0.25" 2024-10-15
@@ -105,22 +644,7 @@ Updated PATH to include Conda binaries.
 Using Python executable: /mnt/Drive20T/scripts/metaRT/nano_gui/../nextflow_pipeline/bin/conda-env/bin/python
 Executing python script...
 --- Python script finished with exit code: 0 ---
---- Python script finished with exit code: 0 ---
---- Python script finished with exit code: 0 ---
---- Python script finished with exit code: 0 ---
---- Python script finished with exit code: 0 ---
---- Starting NanoRT GUI at Tue Jan 13 10:32:36 AM PST 2026 ---
-ERROR: Bundled Java not found at /mnt/Drive20T/scripts/metaRT/nano_gui/../nextflow_pipeline/bin/java-17
-Using Java version:
-openjdk version "11.0.25" 2024-10-15
-OpenJDK Runtime Environment (build 11.0.25+9-post-Ubuntu-1ubuntu122.04)
-OpenJDK 64-Bit Server VM (build 11.0.25+9-post-Ubuntu-1ubuntu122.04, mixed mode, sharing)
-Found bundled Conda environment at: /mnt/Drive20T/scripts/metaRT/nano_gui/../nextflow_pipeline/bin/conda-env
-Updated PATH to include Conda binaries.
-Using Python executable: /mnt/Drive20T/scripts/metaRT/nano_gui/../nextflow_pipeline/bin/conda-env/bin/python
-Executing python script...
---- Python script finished with exit code: 0 ---
---- Starting NanoRT GUI at Tue Jan 13 05:45:45 PM PST 2026 ---
+--- Starting NanoRT GUI at Mon Jan 26 01:42:51 PM PST 2026 ---
 ERROR: Bundled Java not found at /mnt/Drive20T/scripts/metaRT/nano_gui/../nextflow_pipeline/bin/java-17
 Using Java version:
 openjdk version "11.0.25" 2024-10-15
@@ -131,7 +655,8 @@ Updated PATH to include Conda binaries.
 Using Python executable: /mnt/Drive20T/scripts/metaRT/nano_gui/../nextflow_pipeline/bin/conda-env/bin/python
 Executing python script...
 QProcess: Destroyed while process ("/mnt/Drive20T/scripts/metaRT/nano_gui/../nextflow_pipeline/bin/conda-env/bin/python") is still running.
---- Starting NanoRT GUI at Wed Jan 14 06:06:13 PM PST 2026 ---
+--- Python script finished with exit code: 0 ---
+--- Starting NanoRT GUI at Mon Jan 26 01:52:12 PM PST 2026 ---
 ERROR: Bundled Java not found at /mnt/Drive20T/scripts/metaRT/nano_gui/../nextflow_pipeline/bin/java-17
 Using Java version:
 openjdk version "11.0.25" 2024-10-15
@@ -141,6 +666,3 @@ Found bundled Conda environment at: /mnt/Drive20T/scripts/metaRT/nano_gui/../nex
 Updated PATH to include Conda binaries.
 Using Python executable: /mnt/Drive20T/scripts/metaRT/nano_gui/../nextflow_pipeline/bin/conda-env/bin/python
 Executing python script...
---- Python script finished with exit code: 0 ---
-QProcess: Destroyed while process ("/mnt/Drive20T/scripts/metaRT/nano_gui/../nextflow_pipeline/bin/conda-env/bin/python") is still running.
---- Python script finished with exit code: 0 ---

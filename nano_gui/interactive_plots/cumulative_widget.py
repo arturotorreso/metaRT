@@ -3,9 +3,27 @@ import os
 import pandas as pd
 import pyqtgraph as pg
 from PyQt6.QtWidgets import QTabWidget, QWidget, QVBoxLayout
+from PyQt6.QtCore import QThread, pyqtSignal, pyqtSlot
+
+class DataLoader(QThread):
+    data_loaded = pyqtSignal(pd.DataFrame)
+    failed = pyqtSignal(str)
+
+    def __init__(self, file_path):
+        super().__init__()
+        self.file_path = file_path
+
+    def run(self):
+        try:
+            if not os.path.exists(self.file_path):
+                return
+            # Optimize: Read only necessary columns if file is huge
+            df = pd.read_csv(self.file_path)
+            self.data_loaded.emit(df)
+        except Exception as e:
+            self.failed.emit(str(e))
 
 class SingleBarcodePlot(QWidget):
-    """A widget to display the cumulative plot for a single barcode."""
     def __init__(self, barcode, parent=None):
         super().__init__(parent)
         self.barcode = barcode
@@ -15,98 +33,93 @@ class SingleBarcodePlot(QWidget):
         self.plot_widget.setLabel('left', 'Cumulative Read Count', color='k')
         self.plot_widget.setLabel('bottom', 'Time', color='k')
         self.plot_widget.setLogMode(y=True)
+        self.plot_widget.setBackground('w')
+        
+        # --- PERFORMANCE OPTIMIZATION ---
+        # 1. Downsampling: Reduces rendering load for large datasets (>10k points)
+        self.plot_widget.setDownsampling(mode='peak') 
+        # 2. ClipToView: Don't render what isn't visible (when zoomed in)
+        self.plot_widget.setClipToView(True)
+        
+        pg.setConfigOptions(antialias=True)
+        
         self.date_axis = pg.DateAxisItem(orientation='bottom')
         self.plot_widget.setAxisItems({'bottom': self.date_axis})
         
-        self.legend = None
+        self.legend = self.plot_widget.addLegend()
+        self.curves = {} # Store references to plot items
         
         layout = QVBoxLayout(self)
         layout.addWidget(self.plot_widget)
         self.setLayout(layout)
 
     def update_plot_data(self, barcode_df):
-        """Updates the plot with the provided DataFrame for this barcode."""
         try:
-            self.plot_widget.clear()
-            if self.legend:
-                # Manually clear items from the legend to prevent duplicates
-                self.legend.clear()
-            else:
-                # Create the legend only once
-                self.legend = self.plot_widget.addLegend()
-
-            if barcode_df.empty:
-                return
+            if barcode_df.empty: return
 
             barcode_df['timestamp'] = pd.to_datetime(barcode_df['timestamp'])
             latest_timestamp = barcode_df['timestamp'].max()
             latest_data = barcode_df[barcode_df['timestamp'] == latest_timestamp]
             
-            # Get top 10 species, ordered by abundance for the legend
+            # Sort by top 10 species
             sorted_latest_data = latest_data.sort_values('cumulative_reads', ascending=False)
             top_species_ordered = sorted_latest_data.nlargest(10, 'cumulative_reads')['name'].tolist()
             
             plot_df = barcode_df[barcode_df['name'].isin(top_species_ordered)]
             if plot_df.empty: return
 
-            # Plot the data in the determined order
+            current_species_in_plot = set()
+
             for i, species_name in enumerate(top_species_ordered):
                 group = plot_df[plot_df['name'] == species_name]
                 if group.empty: continue
 
                 sorted_group = group.sort_values('timestamp')
-                pen = pg.mkPen(color=pg.intColor(i, hues=len(top_species_ordered)), width=2)
-                
-                x_data = (sorted_group['timestamp'].astype(int) / 10**9).to_numpy()
+                x_data = (sorted_group['timestamp'].astype('int64') / 10**9).to_numpy()
                 y_data = sorted_group['cumulative_reads'].to_numpy()
                 
-                # Add the plot and let the legend populate automatically
-                self.plot_widget.plot(x_data, y_data, pen=pen, name=species_name)
+                current_species_in_plot.add(species_name)
 
-            # Manually set up click handlers for each legend item after plotting
-            self.setup_legend_interaction()
+                # --- PERFORMANCE FIX: RECYCLE CURVES ---
+                if species_name in self.curves:
+                    # Instant update, no memory reallocation
+                    self.curves[species_name].setData(x_data, y_data)
+                    # Ensure it is visible if it was hidden
+                    if not self.curves[species_name].isVisible():
+                        self.curves[species_name].show()
+                else:
+                    # Expensive creation (happens only once per species)
+                    color = pg.intColor(i, hues=10, values=1, maxValue=255)
+                    pen = pg.mkPen(color=color, width=2)
+                    curve = self.plot_widget.plot(x_data, y_data, pen=pen, name=species_name)
+                    self.curves[species_name] = curve
+
+            # Hide species that dropped out of top 10 (don't delete, just hide)
+            for name, curve in self.curves.items():
+                if name not in current_species_in_plot:
+                    curve.hide()
 
         except Exception as e:
-            print(f"Error updating cumulative plot for {self.barcode}: {e}")
-
-    def setup_legend_interaction(self):
-        """Iterate through legend items and assign a click handler to each label."""
-        if not self.legend:
-            return
-        # `self.legend.items` holds tuples of (sample, label)
-        for sample, label in self.legend.items:
-            # The `sample.item` attribute is the actual PlotDataItem (the curve)
-            curve = sample.item
-            # Use a lambda with default arguments to capture the current curve and label
-            # for the handler. This is the standard way to solve the loop closure issue.
-            label.mouseClickEvent = lambda event, c=curve, l=label: self.on_legend_item_clicked(c, l)
-            
-    def on_legend_item_clicked(self, curve, label):
-        """Handles a click on a legend's label item."""
-        # Toggle the visibility of the curve
-        is_visible = not curve.isVisible()
-        curve.setVisible(is_visible)
-        
-        # Update the label's text color to reflect the state
-        name = curve.opts['name']
-        if is_visible:
-            label.setText(name, color='k') # Black for visible
-        else:
-            label.setText(name, color='#888888') # Grey for hidden
+            print(f"Error updating plot: {e}")
 
 class CumulativePlot(QTabWidget):
-    """A tabbed widget to display cumulative plots for multiple barcodes."""
     def __init__(self, parent=None):
         super().__init__(parent)
         self.barcode_plots = {} 
+        self.loader = None 
 
     def update_data(self, data_file):
-        if not os.path.exists(data_file):
-            return
-        try:
-            df = pd.read_csv(data_file)
-            if df.empty: return
+        if not os.path.exists(data_file): return
+        if self.loader is not None and self.loader.isRunning(): return
 
+        self.loader = DataLoader(data_file)
+        self.loader.data_loaded.connect(self.on_data_loaded)
+        self.loader.start()
+
+    @pyqtSlot(pd.DataFrame)
+    def on_data_loaded(self, df):
+        if df.empty: return
+        try:
             df['barcode'] = df['barcode'].str.strip()
             all_barcodes = df['barcode'].unique()
 
@@ -116,10 +129,14 @@ class CumulativePlot(QTabWidget):
                     self.barcode_plots[barcode] = plot_widget
                     self.addTab(plot_widget, barcode)
 
-            for barcode, plot_widget in self.barcode_plots.items():
-                barcode_df = df[df['barcode'] == barcode].copy()
-                plot_widget.update_plot_data(barcode_df)
-
+            # Update ONLY the currently visible tab to save resources
+            # Or iterate all if you want background tabs to be up-to-date
+            current_idx = self.currentIndex()
+            if current_idx != -1:
+                current_barcode = self.tabText(current_idx)
+                if current_barcode in self.barcode_plots:
+                    barcode_df = df[df['barcode'] == current_barcode].copy()
+                    self.barcode_plots[current_barcode].update_plot_data(barcode_df)
+                    
         except Exception as e:
-            print(f"Error processing data file {data_file}: {e}")
-
+            print(f"Error processing data: {e}") 

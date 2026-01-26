@@ -1,4 +1,3 @@
-# nano_gui/ui_windows/run_preparation.py
 import configparser
 import os
 import sys
@@ -15,6 +14,166 @@ class RunPreparationWindow(QWidget):
         self.setupUi()
         self.connect_signals()
         self.load_default_config()
+        # self.apply_styles() # Apply the Chromologic Boutique Look
+
+    def apply_styles(self):
+        """Applies the Chromologic-inspired palette (#3c5457 and #bbc9c9)."""
+        
+        # Palette Definition
+        c_dark = "#3c5457"    # Dark Teal (Text, Buttons, Headers)
+        c_light = "#bbc9c9"   # Light Grey-Teal (Backgrounds)
+        c_very_light = "#F1F4F4"
+        c_white = "#ffffff"   # Input fields
+        c_stop = "#A94442"    # Muted Red for Stop button
+
+        style_sheet = f"""
+        /* --- General Window Settings --- */
+        QWidget {{
+            background-color: {c_light};
+            color: {c_dark};
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            font-size: 13px;
+        }}
+
+        /* --- Group Boxes --- */
+        QGroupBox {{
+            border: 2px solid {c_dark};
+            border-radius: 8px;
+            margin-top: 1.5em; /* Leave space for title */
+            font-weight: bold;
+            background-color: {c_light}; 
+        }}
+        QGroupBox::title {{
+            subcontrol-origin: margin;
+            subcontrol-position: top left;
+            padding: 0 5px;
+            color: {c_dark};
+            background-color: {c_light}; /* Matches window bg */
+        }}
+
+        /* --- Input Fields (Text Boxes, Spin Boxes) --- */
+        /* Crucial: Force white background so black text is visible */
+        QLineEdit, QSpinBox, QDoubleSpinBox, QComboBox {{
+            background-color: {c_white};
+            color: #000000;
+            border: 1px solid {c_dark};
+            border-radius: 4px;
+            padding: 6px;
+            selection-background-color: {c_dark};
+            selection-color: {c_white};
+        }}
+        QLineEdit:focus, QSpinBox:focus {{
+            border: 2px solid #007AFF; /* Apple Blue highlight on focus */
+        }}
+
+        /* --- Checkboxes --- */
+        QCheckBox {{
+            color: {c_dark};
+            padding: 5px;
+            font-weight: 500;
+        }}
+        /* Define the indicator to ensure it is visible */
+        QCheckBox::indicator {{
+            width: 18px;
+            height: 18px;
+            background-color: {c_white};
+            border: 1px solid {c_dark};
+            border-radius: 3px;
+        }}
+        QCheckBox::indicator:checked {{
+            background-color: {c_dark};
+            border: 1px solid {c_dark};
+            /* Standard Qt checkmark will overlay here automatically or we can force an image */
+            image: url(data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='white'><path d='M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z'/></svg>);
+        }}
+
+        /* --- Scroll Area --- */
+        QScrollArea {{
+            background-color: {c_light};
+            border: none;
+        }}
+        /* The widget inside the scroll area */
+        QScrollArea > QWidget > QWidget {{
+            background-color: {c_light};
+        }}
+
+        /* --- Buttons (Generic) --- */
+        QPushButton {{
+            background-color: {c_white};
+            color: {c_dark};
+            border: 1px solid {c_dark};
+            border-radius: 6px;
+            padding: 6px 12px;
+            font-weight: 600;
+        }}
+        QPushButton:hover {{
+            background-color: #e0e6e6;
+        }}
+        
+        /* --- Tabs --- */
+        QTabWidget::pane {{
+            border: 1px solid {c_dark};
+            border-radius: 4px;
+        }}
+        QTabBar::tab {{
+            background: #99a8a8; /* Slightly darker than light bg */
+            color: {c_dark};
+            padding: 8px 20px;
+            border-top-left-radius: 4px;
+            border-top-right-radius: 4px;
+        }}
+        QTabBar::tab:selected {{
+            background: {c_light}; /* Blends with body */
+            font-weight: bold;
+            border-bottom: 2px solid {c_dark};
+        }}
+        """
+        self.setStyleSheet(style_sheet)
+
+        # --- Specific Button Styling (Chromologic Colors) ---
+        # Start Button -> Dark Teal (Primary)
+        self.start_btn.setStyleSheet(f"""
+            QPushButton {{
+                background-color: {c_dark};
+                color: white;
+                border: none;
+                font-size: 14px;
+                padding: 10px;
+            }}
+            QPushButton:hover {{
+                background-color: #2a3c3e;
+            }}
+        """)
+        
+        # Stop Button -> Muted Red (Warning)
+        self.stop_btn.setStyleSheet(f"""
+            QPushButton {{
+                background-color: {c_stop};
+                color: white;
+                border: none;
+                font-size: 14px;
+                padding: 10px;
+            }}
+            QPushButton:hover {{
+                background-color: #8a2a2a;
+            }}
+            QPushButton:disabled {{
+                background-color: #99a8a8;
+                color: #d0d0d0;
+            }}
+        """)
+
+        # Log Viewer -> Dark Terminal Look matching palette
+        self.log_viewer.setStyleSheet(f"""
+            QPlainTextEdit {{
+                background-color: {c_dark};
+                color: {c_white};
+                font-family: 'Courier New', monospace;
+                border: 1px solid {c_white};
+                border-radius: 4px;
+            }}
+        """)
+
 
     def setupUi(self):
         main_layout = QVBoxLayout(self)
@@ -27,10 +186,11 @@ class RunPreparationWindow(QWidget):
         
         button_layout = QHBoxLayout()
         self.start_btn = QPushButton("Start Analysis")
-        self.start_btn.setStyleSheet("background-color: #4CAF50; color: white; font-weight: bold;")
+        # Inline style removed here, handled in apply_styles()
+        
         self.stop_btn = QPushButton("Stop Analysis")
-        self.stop_btn.setStyleSheet("background-color: #f44336; color: white; font-weight: bold;")
         self.stop_btn.setEnabled(False)
+        
         button_layout.addWidget(self.start_btn)
         button_layout.addWidget(self.stop_btn)
         main_layout.addLayout(button_layout)
@@ -187,7 +347,7 @@ class RunPreparationWindow(QWidget):
         layout = QVBoxLayout(tab_widget)
         self.log_viewer = QPlainTextEdit()
         self.log_viewer.setReadOnly(True)
-        self.log_viewer.setStyleSheet("background-color: #2b2b2b; color: #f0f0f0; font-family: 'Courier New';")
+        # Style is now set in apply_styles()
         layout.addWidget(self.log_viewer)
         self.tabs.addTab(tab_widget, "Backend Log")
         
