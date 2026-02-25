@@ -12,6 +12,7 @@ class ReportGenerator(QThread):
     def __init__(self, output_dir, run_name="MetaRT Analysis"):
         super().__init__()
         self.output_dir = os.path.abspath(output_dir)
+        # Ensure we look in the correct subdirectory where result_aggregator puts files
         self.agg_dir = os.path.join(self.output_dir, "aggregated_results")
         self.report_path = os.path.join(self.agg_dir, "dashboard.html")
         self.run_name = run_name
@@ -23,6 +24,7 @@ class ReportGenerator(QThread):
             try:
                 self.generate_report()
             except Exception as e:
+                # Log error but keep running to retry next cycle
                 self.log_message.emit(f"Report Error: {str(e)}")
             
             # Sleep 30 seconds
@@ -45,8 +47,8 @@ class ReportGenerator(QThread):
         return None
 
     def generate_report(self):
-        # 1. Load Data with CORRECT filenames matching the GUI widgets
-        df_acc = self._load_csv("cumulative_species_data.csv")  # Fixed filename
+        # 1. Load Data
+        df_acc = self._load_csv("cumulative_species_data.csv")
         df_rare = self._load_csv("rarefaction_data.csv")
         df_abund = self._load_csv("abundance_data.csv")
 
@@ -63,16 +65,14 @@ class ReportGenerator(QThread):
         # 3. Calculate KPIs (Simple totals)
         total_reads_count = 0
         if df_acc is not None and not df_acc.empty:
-            # Sum the maximum cumulative reads for each barcode/species combo to get a rough total
-            # (Approximation depends on how cumulative_species_data is structured, assuming it tracks species counts)
-            # A safer KPI for "Total Reads" is usually in a separate run_stats file, but we can infer:
-             total_reads_count = df_acc.groupby(['barcode', 'name'])['cumulative_reads'].max().sum()
+            # Sum the maximum cumulative reads for each barcode/species combo
+            total_reads_count = df_acc.groupby(['barcode', 'name'])['cumulative_reads'].max().sum()
         
         total_species_count = 0
-        if df_rare is not None:
+        if df_rare is not None and not df_rare.empty:
             total_species_count = df_rare['unique_species_count'].max()
 
-        # 4. Generate HTML (Marti-Style Layout)
+        # 4. Generate HTML
         html_template = f"""
         <!DOCTYPE html>
         <html>
@@ -89,7 +89,7 @@ class ReportGenerator(QThread):
                     padding: 0;
                 }}
                 .navbar {{
-                    background-color: #3c5457; /* Marti/Chromologic Teal */
+                    background-color: #3c5457;
                     color: white;
                     padding: 1rem 2rem;
                     box-shadow: 0 2px 4px rgba(0,0,0,0.1);
@@ -141,13 +141,9 @@ class ReportGenerator(QThread):
                     </div>
                 </div>
 
-                <div class="card">
-                    <h2>Reads Over Time (Accumulation)</h2>
+                <div class="card full-width">
+                    <h2>Species Accumulation per Barcode</h2>
                     {div_acc}
-                </div>
-                <div class="card">
-                    <h2>Species Discovery (Rarefaction)</h2>
-                    {div_rare}
                 </div>
 
                 <div class="card full-width">
@@ -159,8 +155,13 @@ class ReportGenerator(QThread):
                     <h2>Absolute Abundance (Read Counts)</h2>
                     {div_abs_abund}
                 </div>
+                
+                 <div class="card">
+                    <h2>Species Discovery (Rarefaction)</h2>
+                    {div_rare}
+                </div>
 
-                 <div class="card full-width">
+                 <div class="card">
                     <h2>Taxonomy Overview</h2>
                     {div_sunburst}
                 </div>
@@ -169,6 +170,7 @@ class ReportGenerator(QThread):
         </html>
         """
 
+        # Write the file atomically if possible, or just overwrite
         with open(self.report_path, "w", encoding="utf-8") as f:
             f.write(html_template)
             
@@ -179,16 +181,38 @@ class ReportGenerator(QThread):
     def _create_accumulation_chart(self, df):
         if df is None: return "<div>Waiting for data (cumulative_species_data.csv)...</div>"
         
-        # The GUI parses 'cumulative_species_data.csv'. 
-        # Columns: name, tax_id, barcode, timestamp, cumulative_reads
-        # To match the "Total Reads per Barcode" view:
         try:
-            # 1. Group by Barcode + Timestamp -> Sum of reads across all species
-            df_agg = df.groupby(['barcode', 'timestamp'])['cumulative_reads'].sum().reset_index()
+            # 1. Ensure Timestamp is proper datetime for Plotly
+            df['timestamp'] = pd.to_datetime(df['timestamp'])
             
-            fig = px.line(df_agg, x='timestamp', y='cumulative_reads', color='barcode',
-                          template="plotly_white")
-            fig.update_layout(margin=dict(l=0, r=0, t=0, b=0), height=350)
+            # 2. Filter Top Species PER BARCODE
+            #    Plotting all species will crash the browser. We select top 8 per barcode.
+            filtered_dfs = []
+            
+            # Group by barcode to process each separately
+            for barcode, group in df.groupby('barcode'):
+                # Find top species by max cumulative reads
+                top_species = group.groupby('name')['cumulative_reads'].max().nlargest(8).index
+                filtered_dfs.append(group[group['name'].isin(top_species)])
+                
+            if not filtered_dfs:
+                return "<div>No significant data yet</div>"
+                
+            plot_df = pd.concat(filtered_dfs)
+
+            # 3. Create Faceted Plot (One subplot per Barcode)
+            #    This replicates the "one tab per barcode" logic of the GUI in a single view
+            fig = px.line(plot_df, x='timestamp', y='cumulative_reads', 
+                          color='name', 
+                          facet_col='barcode', facet_col_wrap=2,
+                          template="plotly_white",
+                          labels={"cumulative_reads": "Reads", "timestamp": "Time"},
+                          height=500)
+            
+            # Clean up axes titles (removes "barcode=" prefix)
+            fig.for_each_annotation(lambda a: a.update(text=a.text.split("=")[-1]))
+            fig.update_layout(margin=dict(l=0, r=0, t=30, b=0), legend_title_text='Species')
+            
             return fig.to_html(full_html=False, include_plotlyjs=False)
         except Exception as e:
             return f"<div>Error plotting accumulation: {e}</div>"
@@ -197,6 +221,7 @@ class ReportGenerator(QThread):
         if df is None: return "<div>Waiting for data (rarefaction_data.csv)...</div>"
         
         try:
+            df['timestamp'] = pd.to_datetime(df['timestamp'])
             fig = px.line(df, x='timestamp', y='unique_species_count', color='barcode',
                           template="plotly_white")
             fig.update_traces(line=dict(dash='dot'))
@@ -212,24 +237,29 @@ class ReportGenerator(QThread):
         """
         if df is None: return "<div>Waiting for data...</div>"
 
-        # 1. Filter Top 20 Species by Total Count (to avoid overcrowding)
+        # 1. Pre-Calculation: Calculate Relative Percentage on the WHOLE dataset
+        #    This fixes the issue where percentages were calculated AFTER filtering top 20.
+        if mode == 'relative':
+            # Sum all reads per barcode
+            barcode_totals = df.groupby('barcode')['absolute_abundance'].transform('sum')
+            
+            df = df.copy() # Operate on a copy to avoid SettingWithCopy warnings
+            # Avoid division by zero
+            df['calculated_percent'] = (df['absolute_abundance'] / barcode_totals) * 100
+            y_col = 'calculated_percent'
+            title_y = "Relative Abundance (%)"
+        else:
+            y_col = 'absolute_abundance'
+            title_y = "Read Count"
+
+        # 2. Filter Top Species
+        #    Now that % is correct, we can filter for display.
+        #    We select top 20 species by global abundance to keep the legend consistent.
         top_species = df.groupby('name')['absolute_abundance'].sum().nlargest(20).index
         filtered = df[df['name'].isin(top_species)].copy()
 
-        # 2. Sort Barcodes Alphabetically
+        # 3. Sort Barcodes Alphabetically
         filtered.sort_values('barcode', inplace=True)
-
-        if mode == 'absolute':
-            y_col = 'absolute_abundance'
-            title_y = "Read Count"
-        else:
-            # 3. RELATIVE MODE FIX: Re-calculate percentages strictly
-            # Group by barcode to get total reads per barcode
-            barcode_totals = filtered.groupby('barcode')['absolute_abundance'].transform('sum')
-            # Calculate % for the plot
-            filtered['calculated_percent'] = (filtered['absolute_abundance'] / barcode_totals) * 100
-            y_col = 'calculated_percent'
-            title_y = "Relative Abundance (%)"
 
         fig = px.bar(filtered, x='barcode', y=y_col, color='name',
                      template="plotly_white", 
@@ -239,7 +269,7 @@ class ReportGenerator(QThread):
             margin=dict(l=0, r=0, t=0, b=0), 
             height=450, 
             barmode='stack',
-            xaxis={'categoryorder': 'category ascending'}, # Force A-Z order
+            xaxis={'categoryorder': 'category ascending'}, 
             yaxis_title=title_y
         )
         return fig.to_html(full_html=False, include_plotlyjs=False)
@@ -247,11 +277,11 @@ class ReportGenerator(QThread):
     def _create_sunburst_chart(self, df):
         if df is None: return "<div>Waiting for data...</div>"
         
-        # Simple species sunburst
+        # Simple species sunburst for global overview
         top_species = df.groupby('name')['absolute_abundance'].sum().nlargest(30).reset_index()
         
         fig = px.sunburst(top_species, path=['name'], values='absolute_abundance',
                           color_discrete_sequence=px.colors.qualitative.Pastel)
         
-        fig.update_layout(margin=dict(l=0, r=0, t=0, b=0), height=450)
+        fig.update_layout(margin=dict(l=0, r=0, t=0, b=0), height=300)
         return fig.to_html(full_html=False, include_plotlyjs=False)

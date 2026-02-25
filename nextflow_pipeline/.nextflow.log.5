@@ -1,0 +1,140 @@
+Feb-12 13:41:16.948 [main] DEBUG nextflow.cli.Launcher - $> nextflow run main.nf --input_dir /mnt/Drive20T/ont_data/20260121_MGEAS_Manifold_concentration --outdir /mnt/Drive20T/20260121_MGEAS_Manifold_concentration --barcodes barcode15,barcode16,barcode17,barcode18,barcode19,barcode20,barcode21,barcode22,barcode23,barcode24 --verbose
+Feb-12 13:41:17.049 [main] DEBUG nextflow.cli.CmdRun - N E X T F L O W  ~  version 25.04.7
+Feb-12 13:41:17.100 [main] DEBUG nextflow.plugin.PluginsFacade - Setting up plugin manager > mode=prod; embedded=false; plugins-dir=/home/atorres/.nextflow/plugins; core-plugins: nf-amazon@2.15.0-patch1,nf-azure@1.16.0-patch1,nf-cloudcache@0.4.3,nf-codecommit@0.2.3,nf-console@1.2.1,nf-google@1.21.1,nf-k8s@1.0.0,nf-tower@1.11.4-patch1,nf-wave@1.12.1
+Feb-12 13:41:17.134 [main] INFO  o.pf4j.DefaultPluginStatusProvider - Enabled plugins: []
+Feb-12 13:41:17.135 [main] INFO  o.pf4j.DefaultPluginStatusProvider - Disabled plugins: []
+Feb-12 13:41:17.138 [main] INFO  org.pf4j.DefaultPluginManager - PF4J version 3.12.0 in 'deployment' mode
+Feb-12 13:41:17.151 [main] INFO  org.pf4j.AbstractPluginManager - No plugins
+Feb-12 13:41:17.177 [main] DEBUG nextflow.config.ConfigBuilder - Found config local: /mnt/Drive20T/scripts/metaRT/nextflow_pipeline/nextflow.config
+Feb-12 13:41:17.180 [main] DEBUG nextflow.config.ConfigBuilder - Parsing config file: /mnt/Drive20T/scripts/metaRT/nextflow_pipeline/nextflow.config
+Feb-12 13:41:17.217 [main] DEBUG n.secret.LocalSecretsProvider - Secrets store: /home/atorres/.nextflow/secrets/store.json
+Feb-12 13:41:17.222 [main] DEBUG nextflow.secret.SecretsLoader - Discovered secrets providers: [nextflow.secret.LocalSecretsProvider@38548b19] - activable => nextflow.secret.LocalSecretsProvider@38548b19
+Feb-12 13:41:17.239 [main] DEBUG nextflow.config.ConfigBuilder - Applying config profile: `standard`
+Feb-12 13:41:18.061 [main] DEBUG nextflow.cli.CmdRun - Applied DSL=2 from script declaration
+Feb-12 13:41:18.086 [main] DEBUG nextflow.cli.CmdRun - Launching `main.nf` [peaceful_fermat] DSL2 - revision: 91f39e2d3e
+Feb-12 13:41:18.088 [main] DEBUG nextflow.plugin.PluginsFacade - Plugins default=[]
+Feb-12 13:41:18.089 [main] DEBUG nextflow.plugin.PluginsFacade - Plugins resolved requirement=[]
+Feb-12 13:41:18.165 [main] DEBUG nextflow.Session - Session UUID: 1d0adbda-badd-48b8-8819-43b6d34d7962
+Feb-12 13:41:18.165 [main] DEBUG nextflow.Session - Run name: peaceful_fermat
+Feb-12 13:41:18.166 [main] DEBUG nextflow.Session - Executor pool size: 40
+Feb-12 13:41:18.176 [main] DEBUG nextflow.file.FilePorter - File porter settings maxRetries=3; maxTransfers=50; pollTimeout=null
+Feb-12 13:41:18.183 [main] DEBUG nextflow.util.ThreadPoolBuilder - Creating thread pool 'FileTransfer' minSize=10; maxSize=120; workQueue=LinkedBlockingQueue[-1]; allowCoreThreadTimeout=false
+Feb-12 13:41:18.209 [main] DEBUG nextflow.cli.CmdRun - 
+  Version: 25.04.7 build 5955
+  Created: 08-09-2025 13:29 UTC (06:29 PDT)
+  System: Linux 6.8.0-50-generic
+  Runtime: Groovy 4.0.26 on OpenJDK 64-Bit Server VM 23.0.2-internal-adhoc.conda.src
+  Encoding: UTF-8 (UTF-8)
+  Process: 1129228@BEAST [127.0.1.1]
+  CPUs: 40 - Mem: 157 GB (2.5 GB) - Swap: 2 GB (8 KB)
+Feb-12 13:41:18.243 [main] DEBUG nextflow.Session - Work-dir: /mnt/Drive20T/scripts/metaRT/nextflow_pipeline/work [ext2/ext3]
+Feb-12 13:41:18.300 [main] DEBUG nextflow.executor.ExecutorFactory - Extension executors providers=[]
+Feb-12 13:41:18.315 [main] DEBUG nextflow.Session - Observer factory: DefaultObserverFactory
+Feb-12 13:41:18.325 [main] DEBUG nextflow.Session - Observer factory (v2): LinObserverFactory
+Feb-12 13:41:18.367 [main] DEBUG nextflow.cache.CacheFactory - Using Nextflow cache factory: nextflow.cache.DefaultCacheFactory
+Feb-12 13:41:18.381 [main] DEBUG nextflow.util.CustomThreadPool - Creating default thread pool > poolSize: 41; maxThreads: 1000
+Feb-12 13:41:18.587 [main] DEBUG nextflow.Session - Session start
+Feb-12 13:41:19.126 [main] DEBUG nextflow.script.ScriptRunner - > Launching execution
+Feb-12 13:41:19.149 [main] WARN  nextflow.script.ScriptBinding - Access to undefined parameter `classifier` -- Initialise it to a default value eg. `params.classifier = some_value`
+Feb-12 13:41:19.151 [main] INFO  nextflow.Nextflow - 
+N A N O - R T    P I P E L I N E (Modular)
+==========================================
+Input Directory : /mnt/Drive20T/ont_data/20260121_MGEAS_Manifold_concentration
+Output Directory: /mnt/Drive20T/20260121_MGEAS_Manifold_concentration
+Barcodes        : barcode15,barcode16,barcode17,barcode18,barcode19,barcode20,barcode21,barcode22,barcode23,barcode24
+Classifier      : null
+
+Feb-12 13:41:19.856 [main] DEBUG nextflow.script.ProcessConfig - Config settings `withName:COMBINE_FASTQ` matches process COMBINE_FASTQ
+Feb-12 13:41:19.871 [main] DEBUG nextflow.executor.ExecutorFactory - << taskConfig executor: local
+Feb-12 13:41:19.872 [main] DEBUG nextflow.executor.ExecutorFactory - >> processorType: 'local'
+Feb-12 13:41:19.879 [main] DEBUG nextflow.executor.Executor - [warm up] executor > local
+Feb-12 13:41:19.888 [main] DEBUG n.processor.LocalPollingMonitor - Creating local task monitor for executor 'local' > cpus=24; memory=60 GB; capacity=40; pollInterval=100ms; dumpInterval=5m
+Feb-12 13:41:19.890 [main] DEBUG n.processor.TaskPollingMonitor - >>> barrier register (monitor: local)
+Feb-12 13:41:19.919 [main] DEBUG nextflow.processor.TaskProcessor - Creating process 'COMBINE_FASTQ': maxForks=0; fair=false; array=0
+Feb-12 13:41:19.960 [main] DEBUG nextflow.script.ProcessConfig - Config settings `withName:RUN_QC_FASTPLONG` matches process RUN_QC_FASTPLONG
+Feb-12 13:41:19.962 [main] DEBUG nextflow.executor.ExecutorFactory - << taskConfig executor: local
+Feb-12 13:41:19.962 [main] DEBUG nextflow.executor.ExecutorFactory - >> processorType: 'local'
+Feb-12 13:41:19.964 [main] DEBUG nextflow.processor.TaskProcessor - Creating process 'RUN_QC_FASTPLONG': maxForks=0; fair=false; array=0
+Feb-12 13:41:19.974 [main] DEBUG nextflow.script.ProcessConfig - Config settings `withName:PREPARE_KRAKEN_DB` matches process PREPARE_KRAKEN_DB
+Feb-12 13:41:19.976 [main] DEBUG nextflow.executor.ExecutorFactory - << taskConfig executor: local
+Feb-12 13:41:19.976 [main] DEBUG nextflow.executor.ExecutorFactory - >> processorType: 'local'
+Feb-12 13:41:19.977 [main] DEBUG nextflow.processor.TaskProcessor - Creating process 'PREPARE_KRAKEN_DB': maxForks=0; fair=false; array=0
+Feb-12 13:41:19.988 [main] DEBUG nextflow.script.ProcessConfig - Config settings `withName:RUN_KRAKEN2` matches process RUN_KRAKEN2
+Feb-12 13:41:19.990 [main] DEBUG nextflow.executor.ExecutorFactory - << taskConfig executor: local
+Feb-12 13:41:19.991 [main] DEBUG nextflow.executor.ExecutorFactory - >> processorType: 'local'
+Feb-12 13:41:19.992 [main] DEBUG nextflow.processor.TaskProcessor - Creating process 'RUN_KRAKEN2': maxForks=0; fair=false; array=0
+Feb-12 13:41:19.996 [main] DEBUG nextflow.Session - Workflow process names [dsl2]: RUN_KRAKEN2, RUN_SMART, REMOVE_HOST, RUN_MAP2REFSEQ, RUN_QC_FASTPLONG, PREPARE_KRAKEN_DB, COMBINE_FASTQ
+Feb-12 13:41:20.000 [main] DEBUG nextflow.Session - Igniting dataflow network (5)
+Feb-12 13:41:20.006 [main] DEBUG nextflow.processor.TaskProcessor - Starting process > COMBINE_FASTQ
+Feb-12 13:41:20.007 [main] DEBUG nextflow.processor.TaskProcessor - Starting process > RUN_QC_FASTPLONG
+Feb-12 13:41:20.007 [main] DEBUG nextflow.processor.TaskProcessor - Starting process > PREPARE_KRAKEN_DB
+Feb-12 13:41:20.008 [main] DEBUG nextflow.processor.TaskProcessor - Starting process > RUN_KRAKEN2
+Feb-12 13:41:20.008 [PathVisitor-1] DEBUG nextflow.file.PathVisitor - files for syntax: glob; folder: /mnt/Drive20T/ont_data/20260121_MGEAS_Manifold_concentration/; pattern: */*/{fastq_pass,fastq_fail}/barcode*/*.fastq.gz; options: [:]
+Feb-12 13:41:20.009 [main] DEBUG nextflow.script.ScriptRunner - Parsed script files:
+  Script_5de55c1c1d6c5837: /mnt/Drive20T/scripts/metaRT/nextflow_pipeline/modules/local/host_depletion.nf
+  Script_527192fd81930cd3: /mnt/Drive20T/scripts/metaRT/nextflow_pipeline/modules/local/combine_fastq.nf
+  Script_f52324e56062c244: /mnt/Drive20T/scripts/metaRT/nextflow_pipeline/modules/local/read_qc.nf
+  Script_4bad5b10c6ba62ae: /mnt/Drive20T/scripts/metaRT/nextflow_pipeline/modules/local/classification/smart.nf
+  Script_4bb1e2365a7b1866: /mnt/Drive20T/scripts/metaRT/nextflow_pipeline/modules/local/classification/kraken2.nf
+  Script_487c4622933d79f2: /mnt/Drive20T/scripts/metaRT/nextflow_pipeline/modules/local/classification/map2refseq.nf
+  Script_49a889f796014ec5: /mnt/Drive20T/scripts/metaRT/nextflow_pipeline/modules/local/prepare_kraken_db.nf
+  Script_91f6c7a8fd180b7a: /mnt/Drive20T/scripts/metaRT/nextflow_pipeline/main.nf
+Feb-12 13:41:20.009 [main] DEBUG nextflow.script.ScriptRunner - > Awaiting termination 
+Feb-12 13:41:20.009 [main] DEBUG nextflow.Session - Session await
+Feb-12 13:41:20.234 [Task submitter] DEBUG n.executor.local.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Feb-12 13:41:20.239 [Task submitter] INFO  nextflow.Session - [d5/a93881] Submitted process > PREPARE_KRAKEN_DB (Preparing Kraken2 DB)
+Feb-12 13:41:20.279 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 1; name: PREPARE_KRAKEN_DB (Preparing Kraken2 DB); status: COMPLETED; exit: 0; error: -; workDir: /mnt/Drive20T/scripts/metaRT/nextflow_pipeline/work/d5/a938819354eb2244b701d3ccfa60e6]
+Feb-12 13:41:20.281 [Task monitor] DEBUG nextflow.util.ThreadPoolBuilder - Creating thread pool 'TaskFinalizer' minSize=10; maxSize=120; workQueue=LinkedBlockingQueue[-1]; allowCoreThreadTimeout=false
+Feb-12 13:41:22.122 [Task submitter] DEBUG n.executor.local.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Feb-12 13:41:22.123 [Task submitter] INFO  nextflow.Session - [db/3f8182] Submitted process > COMBINE_FASTQ (Combining barcode19 files)
+Feb-12 13:41:22.321 [Task submitter] DEBUG n.executor.local.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Feb-12 13:41:22.324 [Task submitter] INFO  nextflow.Session - [66/6f773b] Submitted process > COMBINE_FASTQ (Combining barcode15 files)
+Feb-12 13:41:22.556 [Task submitter] DEBUG n.executor.local.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Feb-12 13:41:22.557 [Task submitter] INFO  nextflow.Session - [05/72d1fc] Submitted process > COMBINE_FASTQ (Combining barcode18 files)
+Feb-12 13:41:22.757 [Task submitter] DEBUG n.executor.local.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Feb-12 13:41:22.758 [Task submitter] INFO  nextflow.Session - [1b/68ac8b] Submitted process > COMBINE_FASTQ (Combining barcode20 files)
+Feb-12 13:41:22.956 [Task submitter] DEBUG n.executor.local.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Feb-12 13:41:22.957 [Task submitter] INFO  nextflow.Session - [01/07b837] Submitted process > COMBINE_FASTQ (Combining barcode22 files)
+Feb-12 13:41:23.104 [Task submitter] DEBUG n.executor.local.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Feb-12 13:41:23.105 [Task submitter] INFO  nextflow.Session - [2d/8f2403] Submitted process > COMBINE_FASTQ (Combining barcode23 files)
+Feb-12 13:41:23.108 [SIGINT handler] DEBUG nextflow.Session - Session aborted -- Cause: SIGINT
+Feb-12 13:41:23.133 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 9; name: COMBINE_FASTQ (Combining barcode19 files); status: COMPLETED; exit: 1; error: -; workDir: /mnt/Drive20T/scripts/metaRT/nextflow_pipeline/work/db/3f8182418d5e3fa17a71315217544c]
+Feb-12 13:41:23.135 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 11; name: COMBINE_FASTQ (Combining barcode15 files); status: COMPLETED; exit: 1; error: -; workDir: /mnt/Drive20T/scripts/metaRT/nextflow_pipeline/work/66/6f773bf0a570969df36cc5561f9be8]
+Feb-12 13:41:23.136 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 2; name: COMBINE_FASTQ (Combining barcode18 files); status: COMPLETED; exit: 1; error: -; workDir: /mnt/Drive20T/scripts/metaRT/nextflow_pipeline/work/05/72d1fcedcd60f58e4bfc9c06c4d8e4]
+Feb-12 13:41:23.137 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 6; name: COMBINE_FASTQ (Combining barcode20 files); status: COMPLETED; exit: 1; error: -; workDir: /mnt/Drive20T/scripts/metaRT/nextflow_pipeline/work/1b/68ac8b12f05f278f6ad6076572654d]
+Feb-12 13:41:23.138 [Task monitor] DEBUG n.processor.TaskPollingMonitor - <<< barrier arrives (monitor: local) - terminating tasks monitor poll loop
+Feb-12 13:41:23.141 [TaskFinalizer-4] DEBUG nextflow.processor.TaskProcessor - Handling unexpected condition for
+  task: name=COMBINE_FASTQ (Combining barcode18 files); work-dir=/mnt/Drive20T/scripts/metaRT/nextflow_pipeline/work/05/72d1fcedcd60f58e4bfc9c06c4d8e4
+  error [nextflow.exception.ProcessFailedException]: Process `COMBINE_FASTQ (Combining barcode18 files)` terminated with an error exit status (1)
+Feb-12 13:41:23.146 [SIGINT handler] DEBUG nextflow.Session - The following nodes are still active:
+[process] RUN_QC_FASTPLONG
+  status=ACTIVE
+  port 0: (queue) OPEN  ; channel: -
+  port 1: (value) bound ; channel: qc_opts
+  port 2: (cntrl) -     ; channel: $
+
+[process] RUN_KRAKEN2
+  status=ACTIVE
+  port 0: (queue) OPEN  ; channel: -
+  port 1: (value) bound ; channel: done_signal
+  port 2: (value) bound ; channel: kraken_opts
+  port 3: (cntrl) -     ; channel: $
+
+Feb-12 13:41:23.148 [TaskFinalizer-5] DEBUG nextflow.processor.TaskProcessor - Handling unexpected condition for
+  task: name=COMBINE_FASTQ (Combining barcode20 files); work-dir=/mnt/Drive20T/scripts/metaRT/nextflow_pipeline/work/1b/68ac8b12f05f278f6ad6076572654d
+  error [nextflow.exception.ProcessFailedException]: Process `COMBINE_FASTQ (Combining barcode20 files)` terminated with an error exit status (1)
+Feb-12 13:41:23.149 [TaskFinalizer-3] DEBUG nextflow.processor.TaskProcessor - Handling unexpected condition for
+  task: name=COMBINE_FASTQ (Combining barcode15 files); work-dir=/mnt/Drive20T/scripts/metaRT/nextflow_pipeline/work/66/6f773bf0a570969df36cc5561f9be8
+  error [nextflow.exception.ProcessFailedException]: Process `COMBINE_FASTQ (Combining barcode15 files)` terminated with an error exit status (1)
+Feb-12 13:41:23.150 [TaskFinalizer-2] DEBUG nextflow.processor.TaskProcessor - Handling unexpected condition for
+  task: name=COMBINE_FASTQ (Combining barcode19 files); work-dir=/mnt/Drive20T/scripts/metaRT/nextflow_pipeline/work/db/3f8182418d5e3fa17a71315217544c
+  error [nextflow.exception.ProcessFailedException]: Process `COMBINE_FASTQ (Combining barcode19 files)` terminated with an error exit status (1)
+Feb-12 13:41:23.154 [main] DEBUG nextflow.Session - Session await > all processes finished
+Feb-12 13:41:23.155 [main] DEBUG nextflow.Session - Session await > all barriers passed
+Feb-12 13:41:23.166 [main] WARN  n.processor.TaskPollingMonitor - Killing running tasks (2)
+Feb-12 13:41:23.203 [main] DEBUG n.trace.WorkflowStatsObserver - Workflow completed > WorkflowStats[succeededCount=1; failedCount=4; ignoredCount=0; cachedCount=0; pendingCount=4; submittedCount=1; runningCount=-1; retriesCount=0; abortedCount=2; succeedDuration=10ms; failedDuration=2.6s; cachedDuration=0ms;loadCpus=-1; loadMemory=0; peakRunning=5; peakCpus=5; peakMemory=5 GB; ]
+Feb-12 13:41:23.303 [Task submitter] DEBUG n.executor.local.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Feb-12 13:41:23.306 [Task submitter] DEBUG nextflow.processor.TaskProcessor - Handling unexpected condition for
+  task: name=COMBINE_FASTQ (Combining barcode16 files); work-dir=/mnt/Drive20T/scripts/metaRT/nextflow_pipeline/work/b9/e9d22235248cf83c7c878a11a97759
+  error [java.lang.NullPointerException]: Cannot invoke "java.util.concurrent.ExecutorService.submit(java.lang.Runnable)" because the return value of "nextflow.Session.getExecService()" is null
+Feb-12 13:41:23.461 [SIGINT handler] INFO  nextflow.Session - Adieu
