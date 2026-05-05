@@ -261,18 +261,20 @@ class RunPreparationWindow(QWidget):
         self.classification_cb = QCheckBox("Kraken2")
         self.mapping_cb = QCheckBox("Mapping")
         self.smart_cb = QCheckBox("SMART")
+        self.amr_cb = QCheckBox("AMR")
         steps_layout.addWidget(self.host_depletion_cb)
         steps_layout.addWidget(self.read_qc_cb)
         steps_layout.addWidget(self.classification_cb)
         steps_layout.addWidget(self.mapping_cb)
         steps_layout.addWidget(self.smart_cb)
+        steps_layout.addWidget(self.amr_cb)
         steps_group.setLayout(steps_layout)
         layout.addWidget(steps_group)
 
         db_group = QGroupBox("Database Paths")
         db_grid = QGridLayout()
         self.db_widgets = {}
-        db_params = ["host_reference", "kraken_db", "taxonomy_dir", "refseq_db", "smart_db"]
+        db_params = ["host_reference", "kraken_db", "taxonomy_dir", "refseq_db", "smart_db", "card_db"]
         for i, param in enumerate(db_params):
             db_grid.addWidget(QLabel(f"{param}:"), i, 0)
             line_edit = QLineEdit()
@@ -333,6 +335,23 @@ class RunPreparationWindow(QWidget):
             mapping_grid.addWidget(widget, i, 1)
         mapping_group.setLayout(mapping_grid)
         other_params_vbox.addWidget(mapping_group)
+
+        amr_group = QGroupBox("AMR Parameters (amr_opts)")
+        amr_grid = QGridLayout()
+        self.amr_widgets = {
+            "min_coverage": QDoubleSpinBox(),
+            "min_depth": QSpinBox()
+        }
+        self.amr_widgets["min_coverage"].setRange(0, 100)
+        self.amr_widgets["min_coverage"].setValue(80.0)
+        self.amr_widgets["min_depth"].setRange(0, 1000)
+        self.amr_widgets["min_depth"].setValue(2)
+        for i, (name, widget) in enumerate(self.amr_widgets.items()):
+            amr_grid.addWidget(QLabel(name.replace('_', ' ').title()), i, 0)
+            amr_grid.addWidget(widget, i, 1)
+        amr_group.setLayout(amr_grid)
+        other_params_vbox.addWidget(amr_group)
+        
         other_params_vbox.addStretch()
 
         params_layout.addLayout(other_params_vbox)
@@ -378,6 +397,7 @@ class RunPreparationWindow(QWidget):
         self.classification_cb.setChecked(config.getboolean('WorkflowSteps', 'run_classification'))
         self.mapping_cb.setChecked(config.getboolean('WorkflowSteps', 'run_mapping'))
         self.smart_cb.setChecked(config.getboolean('WorkflowSteps', 'run_smart'))
+        self.amr_cb.setChecked(config.getboolean('WorkflowSteps', 'run_amr', fallback=False))
         
         # Populate DatabasePaths
         for name, widget in self.db_widgets.items():
@@ -405,6 +425,13 @@ class RunPreparationWindow(QWidget):
         for name, widget in self.mapping_widgets.items():
             widget.setValue(config.getint('MappingParams', name))
 
+        # Populate AmrParams
+        if config.has_section('AmrParams'):
+            for name, widget in self.amr_widgets.items():
+                if isinstance(widget, QDoubleSpinBox):
+                    widget.setValue(config.getfloat('AmrParams', name, fallback=widget.value()))
+                else:
+                    widget.setValue(config.getint('AmrParams', name, fallback=widget.value()))
 
     def get_sample_config(self):
         """Provides a complete, default configuration."""
@@ -422,6 +449,7 @@ class RunPreparationWindow(QWidget):
         default_tax_dir = os.path.join(project_root, "scripts", "kraken2", "data")
         default_refseq_db = os.path.join(project_root, "db", "refseq", "target.fna.gz.mm2idx")
         default_smart_db = os.path.join(project_root, "smart", "database", "test", "python_wrapped")
+        default_card_db = os.path.join(project_root, "db", "card_db")
 
         config.read_string(f"""
 [Paths]
@@ -441,6 +469,7 @@ run_classification = true
 run_kraken = true
 run_mapping = false
 run_smart = false
+run_amr = false
 
 [DatabasePaths]
 host_reference = {default_host_ref}
@@ -448,6 +477,7 @@ kraken_db = {default_kraken_db}
 taxonomy_dir = {default_tax_dir}
 refseq_db = {default_refseq_db}
 smart_db = {default_smart_db}
+card_db = {default_card_db}
 
 [HostDepletionParams]
 keep_bam = false
@@ -475,6 +505,10 @@ min_hit_groups = 2
 
 [MappingParams]
 secondary_aligns = 5
+
+[AmrParams]
+min_coverage = 80.0
+min_depth = 2
         """)
         return config
 
@@ -601,7 +635,8 @@ secondary_aligns = 5
             'run_classification': str(self.classification_cb.isChecked()).lower(),
             'run_kraken': str(self.classification_cb.isChecked()).lower(),
             'run_mapping': str(self.mapping_cb.isChecked()).lower(),
-            'run_smart': str(self.smart_cb.isChecked()).lower()
+            'run_smart': str(self.smart_cb.isChecked()).lower(),
+            'run_amr': str(self.amr_cb.isChecked()).lower()
         }
         
         # Section [DatabasePaths]
@@ -612,6 +647,7 @@ secondary_aligns = 5
         config['QcParams'] = {name: str(w.isChecked()).lower() if isinstance(w, QCheckBox) else str(w.value()) for name, w in self.qc_widgets.items()}
         config['KrakenParams'] = {name: str(w.isChecked()).lower() if isinstance(w, QCheckBox) else str(w.value()) for name, w in self.kraken_widgets.items()}
         config['MappingParams'] = {name: str(w.value()) for name, w in self.mapping_widgets.items()}
+        config['AmrParams'] = {name: str(w.value()) for name, w in self.amr_widgets.items()}
 
         config_path = os.path.abspath(os.path.join(current_dir, '..', '..', 'config.ini'))
         with open(config_path, 'w') as configfile:

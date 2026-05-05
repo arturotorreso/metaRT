@@ -13,6 +13,7 @@ from ui_windows.basic_stats import BasicStatsWindow
 from ui_windows.taxonomy import TaxonomyWindow
 from ui_windows.accumulation import AccumulationWindow
 from ui_windows.abundance import AbundanceWindow
+from ui_windows.amr_antibiogram import AntibiogramWindow
 from styles import apply_boutique_style
 from report_generator import ReportGenerator
 
@@ -79,7 +80,8 @@ class MainWindow(QMainWindow):
             "Basic Stats": BasicStatsWindow(),
             "Taxonomy": TaxonomyWindow(),
             "Accumulation Plots": AccumulationWindow(),
-            "Abundance Plots": AbundanceWindow()
+            "Abundance Plots": AbundanceWindow(),
+            "AMR Antibiogram": AntibiogramWindow()
         }
         
         for name, widget in self.windows.items():

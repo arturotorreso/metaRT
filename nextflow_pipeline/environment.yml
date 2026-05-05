@@ -7,20 +7,19 @@ dependencies:
   # --- Bioinformatics Tools ---
   - fastp=1.0
   - fastplong=0.4
-  - bbmap=39.33
   - minimap2=2.30
-  - samtools=1.22
+  - samtools=1.21
   - bracken=1.0
-
+  - rgi=6.0.5
+  - nextflow=26.04.0
   # --- Core & Scientific Python ---
   - python=3.10
-  - openjdk=24.0
+  - openjdk=21.0.0
   - numpy
   - pandas
   - scipy
   - matplotlib
   - seaborn
-
   # --- GUI & Utility Libraries ---
   - pyqt6
   - pyqtgraph

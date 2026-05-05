@@ -12,6 +12,9 @@ from typing import Optional, Tuple
 from minimizer_tracker import MinimizerTracker
 from scipy import stats
 
+# --- CONFIGURATION FLAGS ---
+# Set to False if you need to keep Nextflow batch folders (Kraken TSVs, BAMs, etc.) for testing/debugging
+CLEANUP_BATCH_FOLDERS = True
 
 # Define the absolute path to the project's root directory based on this script's location
 PROJECT_ROOT = os.path.dirname(os.path.abspath(__file__))
@@ -279,6 +282,128 @@ def aggregate_and_plot(batch_result_dir: str, config: configparser.ConfigParser)
                 # Regenerate static cumulative plot for this barcode
                 cumulative_script = os.path.join(PROJECT_ROOT, "plotting", "cumulative_plot.py")
                 subprocess.run([sys.executable, cumulative_script, cumulative_data_log, barcode, barcode_agg_dir])
+
+                # --- AMR Aggregation ---
+                if config.getboolean('WorkflowSteps', 'run_amr', fallback=False):
+                    try:
+                        batch_amr_dir = os.path.join(batch_result_dir, "3_classification", "amr", barcode)
+                        agg_amr_dir = os.path.join(barcode_agg_dir, "amr_batches")
+                        os.makedirs(agg_amr_dir, exist_ok=True)
+                        
+                        # Copy immutable batch text files
+                        if os.path.exists(batch_amr_dir):
+                            for f in os.listdir(batch_amr_dir):
+                                if f.endswith(".txt"):
+                                    shutil.copy2(os.path.join(batch_amr_dir, f), os.path.join(agg_amr_dir, f))
+                        
+                        # Glob all collected amr files
+                        all_amr_files = glob.glob(os.path.join(agg_amr_dir, "*.allele_mapping_data.txt"))
+                        amr_df_list = []
+                        for amr_f in all_amr_files:
+                            try:
+                                df = pd.read_csv(amr_f, sep='\t')
+                                if not df.empty:
+                                    amr_df_list.append(df)
+                            except Exception as e:
+                                logger.warning(f"Failed to read AMR file {amr_f}: {e}")
+                                
+                        if amr_df_list:
+                            master_amr = pd.concat(amr_df_list, ignore_index=True)
+                            
+                            if 'AMR Gene Family' in master_amr.columns and 'Mapped Reads' in master_amr.columns:
+                                # Ensure Reference Sequence is kept for BAM joining
+                                group_cols = [c for c in ['AMR Gene Family', 'Drug Class', 'Resistance Mechanism', 'Reference Sequence'] if c in master_amr.columns]
+                                
+                                agg_amr = master_amr.groupby(group_cols).agg({
+                                    'Mapped Reads': 'sum',
+                                    'Percentage Length of Reference Sequence': 'mean',
+                                    'Depth': 'mean'
+                                }).reset_index()
+                                
+                                min_cov = config.getfloat('AmrParams', 'min_coverage', fallback=80.0)
+                                min_depth = config.getfloat('AmrParams', 'min_depth', fallback=2.0)
+                                
+                                filtered_amr = agg_amr[(agg_amr['Percentage Length of Reference Sequence'] >= min_cov) & 
+                                                       (agg_amr['Depth'] >= min_depth)]
+                                                       
+                                amr_summary_path = os.path.join(barcode_agg_dir, f"master_{barcode}.amr_summary.csv")
+                                _safe_write_csv(filtered_amr, amr_summary_path)
+                                logger.info(f"Aggregated AMR data saved to {amr_summary_path}")
+
+                                # --- Batch Read-Level Join (Kraken + AMR BAM) ---
+                                batch_kraken_tsv = os.path.join(barcode_batch_dir, f"{barcode}.kraken2.tsv")
+                                batch_bam_files = glob.glob(os.path.join(batch_amr_dir, "*.bam"))
+                                master_join_path = os.path.join(barcode_agg_dir, f"master_{barcode}.amr_reads.csv")
+                                
+                                if os.path.exists(batch_kraken_tsv) and batch_bam_files:
+                                    try:
+                                        k_df = pd.read_csv(batch_kraken_tsv, sep='\t', header=None, usecols=[1, 2], names=['ReadID', 'TaxID'])
+                                        bam_records = []
+                                        for bam in batch_bam_files:
+                                            # Fast extraction of mapped ReadIDs to Reference Alleles
+                                            res = subprocess.run(f"samtools view -F 4 {bam} | cut -f1,3", shell=True, capture_output=True, text=True)
+                                            for line in res.stdout.strip().split('\n'):
+                                                if '\t' in line:
+                                                    rid, ref = line.split('\t', 1)
+                                                    bam_records.append({'ReadID': rid, 'Allele': ref})
+                                        
+                                        if bam_records:
+                                            bam_df = pd.DataFrame(bam_records)
+                                            joined_df = pd.merge(bam_df, k_df, on='ReadID', how='left')
+                                            joined_df['TaxID'] = joined_df['TaxID'].fillna(0).astype(int)
+                                            joined_df.to_csv(master_join_path, mode='a', index=False, header=not os.path.exists(master_join_path))
+                                    except Exception as e:
+                                        logger.warning(f"Failed to join batch reads for Antibiogram: {e}")
+
+                                # --- Generate Antibiogram JSON ---
+                                if os.path.exists(master_join_path) and not filtered_amr.empty:
+                                    try:
+                                        import json
+                                        amr_reads_df = pd.read_csv(master_join_path)
+                                        
+                                        # Dict to map TaxID to organism name
+                                        tax_dict = {0: "Unassigned / Mobile Elements"}
+                                        if os.path.exists(master_report_tsv):
+                                            rep_df = pd.read_csv(master_report_tsv, sep='\t', header=None, names=['pct', 'reads', 'lreads', 'lvl', 'taxid', 'name'])
+                                            tax_dict.update(dict(zip(rep_df['taxid'], rep_df['name'].str.strip())))
+                                        
+                                        antibiogram = {}
+                                        hit_counts = amr_reads_df.groupby(['TaxID', 'Allele']).size().reset_index(name='count')
+                                        
+                                        for _, row in hit_counts.iterrows():
+                                            allele_str = str(row['Allele'])
+                                            # Match against filtered genes to enforce coverage/depth thresholds
+                                            matching_amr = filtered_amr[filtered_amr['Reference Sequence'] == allele_str]
+                                            if matching_amr.empty:
+                                                continue 
+                                            
+                                            tax_name = tax_dict.get(row['TaxID'], "Unassigned / Mobile Elements")
+                                            dc_str = matching_amr.iloc[0]['Drug Class']
+                                            drug_classes = [c.strip().capitalize() for c in str(dc_str).split(';')]
+                                            gene_name = matching_amr.iloc[0]['AMR Gene Family']
+                                            
+                                            if tax_name not in antibiogram:
+                                                antibiogram[tax_name] = {}
+                                            
+                                            for dc in drug_classes:
+                                                if dc not in antibiogram[tax_name]:
+                                                    antibiogram[tax_name][dc] = set()
+                                                antibiogram[tax_name][dc].add(f"{gene_name} ({row['count']}x)")
+                                        
+                                        # Convert sets back to lists for JSON serialization
+                                        for org in antibiogram:
+                                            for dc in antibiogram[org]:
+                                                antibiogram[org][dc] = list(antibiogram[org][dc])
+                                                
+                                        anti_json_path = os.path.join(barcode_agg_dir, f"master_{barcode}.antibiogram.json")
+                                        with open(anti_json_path + '.tmp', 'w') as f:
+                                            json.dump(antibiogram, f, indent=2)
+                                        os.rename(anti_json_path + '.tmp', anti_json_path)
+                                        logger.info(f"Generated Antibiogram JSON for {barcode}")
+                                    except Exception as e:
+                                        logger.error(f"Failed to generate Antibiogram JSON: {e}")
+                    except Exception as e:
+                        logger.error(f"AMR Aggregation failed for {barcode}: {e}", exc_info=True)
     
     if barcodes:
         logger.info("--- Updating summary plots for all barcodes ---")
@@ -288,3 +413,11 @@ def aggregate_and_plot(batch_result_dir: str, config: configparser.ConfigParser)
 
         rarefaction_script = os.path.join(PROJECT_ROOT, "plotting", "rarefaction_plot.py")
         subprocess.run([sys.executable, rarefaction_script, rarefaction_data_log, aggregated_output_dir])
+
+    # --- BATCH CLEANUP ---
+    if CLEANUP_BATCH_FOLDERS:
+        try:
+            shutil.rmtree(batch_result_dir, ignore_errors=True)
+            logger.info(f"Cleaned up batch directory to save space: {batch_result_dir}")
+        except Exception as e:
+            logger.error(f"Failed to clean up batch directory {batch_result_dir}: {e}")

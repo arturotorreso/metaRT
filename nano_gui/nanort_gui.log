@@ -90,3 +90,57 @@ Rarefaction update error: [Errno 2] No such file or directory: '/home/atorres/me
 Rarefaction update error: [Errno 2] No such file or directory: '/home/atorres/metaRT_outputs/20260501_MGEAS_LoD_Wipes/aggregated_results/rarefaction_data.csv'
 Rarefaction update error: [Errno 2] No such file or directory: '/home/atorres/metaRT_outputs/20260501_MGEAS_LoD_Wipes/aggregated_results/rarefaction_data.csv'
 --- Python script finished with exit code: 0 ---
+--- Starting NanoRT GUI at Tue May  5 02:58:24 PM PDT 2026 ---
+Found bundled Java at: /home/atorres/scripts/metaRT/nano_gui/../nextflow_pipeline/bin/java-24
+Using Java version:
+openjdk version "24.0.2" 2025-07-15
+OpenJDK Runtime Environment Temurin-24.0.2+12 (build 24.0.2+12)
+OpenJDK 64-Bit Server VM Temurin-24.0.2+12 (build 24.0.2+12, mixed mode, sharing)
+Found bundled Conda environment at: /home/atorres/scripts/metaRT/nano_gui/../nextflow_pipeline/bin/conda-env
+Updated PATH to include Conda binaries.
+Using Python executable: /home/atorres/scripts/metaRT/nano_gui/../nextflow_pipeline/bin/conda-env/bin/python
+Executing python script...
+--- Python script finished with exit code: 0 ---
+--- Starting NanoRT GUI at Tue May  5 03:31:02 PM PDT 2026 ---
+Found bundled Java at: /home/atorres/scripts/metaRT/nano_gui/../nextflow_pipeline/bin/java-24
+Using Java version:
+openjdk version "24.0.2" 2025-07-15
+OpenJDK Runtime Environment Temurin-24.0.2+12 (build 24.0.2+12)
+OpenJDK 64-Bit Server VM Temurin-24.0.2+12 (build 24.0.2+12, mixed mode, sharing)
+Found bundled Conda environment at: /home/atorres/scripts/metaRT/nano_gui/../nextflow_pipeline/bin/conda-env
+Updated PATH to include Conda binaries.
+Using Python executable: /home/atorres/scripts/metaRT/nano_gui/../nextflow_pipeline/bin/conda-env/bin/python
+Executing python script...
+--- Python script finished with exit code: 0 ---
+--- Starting NanoRT GUI at Tue May  5 03:51:31 PM PDT 2026 ---
+Found bundled Java at: /home/atorres/scripts/metaRT/nano_gui/../nextflow_pipeline/bin/java-24
+Using Java version:
+openjdk version "24.0.2" 2025-07-15
+OpenJDK Runtime Environment Temurin-24.0.2+12 (build 24.0.2+12)
+OpenJDK 64-Bit Server VM Temurin-24.0.2+12 (build 24.0.2+12, mixed mode, sharing)
+Found bundled Conda environment at: /home/atorres/scripts/metaRT/nano_gui/../nextflow_pipeline/bin/conda-env
+Updated PATH to include Conda binaries.
+Using Python executable: /home/atorres/scripts/metaRT/nano_gui/../nextflow_pipeline/bin/conda-env/bin/python
+Executing python script...
+--- Python script finished with exit code: 0 ---
+--- Starting NanoRT GUI at Tue May  5 03:54:11 PM PDT 2026 ---
+Found bundled Java at: /home/atorres/scripts/metaRT/nano_gui/../nextflow_pipeline/bin/java-24
+Using Java version:
+openjdk version "24.0.2" 2025-07-15
+OpenJDK Runtime Environment Temurin-24.0.2+12 (build 24.0.2+12)
+OpenJDK 64-Bit Server VM Temurin-24.0.2+12 (build 24.0.2+12, mixed mode, sharing)
+Found bundled Conda environment at: /home/atorres/scripts/metaRT/nano_gui/../nextflow_pipeline/bin/conda-env
+Updated PATH to include Conda binaries.
+Using Python executable: /home/atorres/scripts/metaRT/nano_gui/../nextflow_pipeline/bin/conda-env/bin/python
+Executing python script...
+--- Python script finished with exit code:  ---
+--- Starting NanoRT GUI at Tue May  5 04:30:05 PM PDT 2026 ---
+ERROR: Bundled Java not found at /home/atorres/scripts/metaRT/nano_gui/../nextflow_pipeline/bin/java
+Using Java version:
+openjdk version "11.0.30" 2026-01-20
+OpenJDK Runtime Environment (build 11.0.30+7-post-Ubuntu-1ubuntu122.04)
+OpenJDK 64-Bit Server VM (build 11.0.30+7-post-Ubuntu-1ubuntu122.04, mixed mode, sharing)
+Found bundled Conda environment at: /home/atorres/scripts/metaRT/nano_gui/../nextflow_pipeline/bin/conda-env
+Updated PATH to include Conda binaries.
+Using Python executable: /home/atorres/scripts/metaRT/nano_gui/../nextflow_pipeline/bin/conda-env/bin/python
+Executing python script...

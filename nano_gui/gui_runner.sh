@@ -11,7 +11,7 @@ exec >> "$LOG_FILE" 2>&1
 echo "--- Starting NanoRT GUI at $(date) ---"
 
 # --- Setup Bundled Java ---
-BUNDLED_JAVA_HOME="$SCRIPT_DIR/../nextflow_pipeline/bin/java-24"
+BUNDLED_JAVA_HOME="$SCRIPT_DIR/../nextflow_pipeline/bin/java"
 if [ -d "$BUNDLED_JAVA_HOME" ]; then
     echo "Found bundled Java at: $BUNDLED_JAVA_HOME"
     export JAVA_HOME="$BUNDLED_JAVA_HOME"

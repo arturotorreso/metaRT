@@ -28,7 +28,7 @@ params.run_classification  = true
 params.run_kraken = true
 params.run_mapping = false
 params.run_smart = false
-
+params.run_amr = false
 
 if (params.help) {
     log.info """
@@ -57,6 +57,7 @@ include { PREPARE_KRAKEN_DB }   from './modules/local/prepare_kraken_db'
 include { RUN_KRAKEN2 }         from './modules/local/classification/kraken2'
 include { RUN_MAP2REFSEQ }      from './modules/local/classification/map2refseq'
 include { RUN_SMART }           from './modules/local/classification/smart'
+include { RUN_AMR }             from './modules/local/amr_rgi'
 
 // ====================================================================================
 // == WORKFLOW DEFINITION
@@ -76,6 +77,9 @@ workflow {
         }
         if (params.run_smart && !params.smart_db) {
             exit 1, "ERROR: --smart_db must be provided when --run_smart is true."
+        }
+        if (params.run_amr && !params.card_db) {
+            exit 1, "ERROR: --card_db must be provided when --run_amr is true."
         }
     }
 
@@ -131,7 +135,6 @@ workflow {
         if (params.run_kraken) {
             PREPARE_KRAKEN_DB(params.kraken_db, params.kraken_opts)
 
-            // <-- CHANGED: The logic below is updated
             // Call the process with all three required inputs directly.
             // Nextflow will automatically pair the single 'done' signal
             // with each item from the 'ch_for_classification' channel.
@@ -149,6 +152,9 @@ workflow {
         }
         if (params.run_smart) {
             RUN_SMART(ch_for_classification)
+        }
+        if (params.run_amr) {
+            RUN_AMR(ch_for_classification, params.card_db)
         }
     }
 }
