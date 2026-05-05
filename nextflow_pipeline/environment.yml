@@ -13,7 +13,7 @@ dependencies:
   - bracken=1.0
 
   # --- Core & Scientific Python ---
-  - python=3.9
+  - python=3.10
   - openjdk=24.0
   - numpy
   - pandas
@@ -22,7 +22,8 @@ dependencies:
   - seaborn
 
   # --- GUI & Utility Libraries ---
-  - pyqt
+  - pyqt6
   - pyqtgraph
   - watchdog
   - pip
+  - plotly

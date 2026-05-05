@@ -409,10 +409,24 @@ class RunPreparationWindow(QWidget):
     def get_sample_config(self):
         """Provides a complete, default configuration."""
         config = configparser.ConfigParser()
-        config.read_string("""
+
+        # Dynamically determine the project root and user home
+        current_dir = os.path.dirname(os.path.realpath(__file__))
+        project_root = os.path.abspath(os.path.join(current_dir, '..', '..'))
+        user_home = os.path.expanduser("~")
+
+        # Create portable default paths
+        default_out_dir = os.path.join(user_home, "metaRT_outputs")
+        default_host_ref = os.path.join(project_root, "db", "human_genome", "GCF_000001405.40_GRCh38.p14_genomic.fna")
+        default_kraken_db = os.path.join(project_root, "db", "kraken2_standard_pluspf")
+        default_tax_dir = os.path.join(project_root, "scripts", "kraken2", "data")
+        default_refseq_db = os.path.join(project_root, "db", "refseq", "target.fna.gz.mm2idx")
+        default_smart_db = os.path.join(project_root, "smart", "database", "test", "python_wrapped")
+
+        config.read_string(f"""
 [Paths]
 fastq_directory = /var/lib/minknow/data/
-output_directory = /mnt/Drive20T/
+output_directory = {default_out_dir}
 nextflow_script = ../nextflow_pipeline/main.nf
 
 [Settings]
@@ -429,11 +443,11 @@ run_mapping = false
 run_smart = false
 
 [DatabasePaths]
-host_reference = /mnt/Drive20T/db/human_genome/GCF_000001405.40_GRCh38.p14_genomic.fna
-kraken_db = /mnt/Drive20T/db/kraken2_standard_pluspf
-taxonomy_dir = /mnt/Drive20T/scripts/metaRT/scripts/kraken2/data
-refseq_db = /mnt/Drive20T/db/refseq/target.fna.gz.mm2idx
-smart_db = /mnt/Drive20T/smart/database/test/python_wrapped/
+host_reference = {default_host_ref}
+kraken_db = {default_kraken_db}
+taxonomy_dir = {default_tax_dir}
+refseq_db = {default_refseq_db}
+smart_db = {default_smart_db}
 
 [HostDepletionParams]
 keep_bam = false
@@ -470,8 +484,11 @@ secondary_aligns = 5
     def update_paths_from_project(self, text):
         """Automatically update input and output paths based on project name."""
         if text:
+            user_home = os.path.expanduser("~")
             self.input_dir_edit.setText(os.path.join("/var/lib/minknow/data", text))
-            self.output_dir_edit.setText(os.path.join("/mnt/Drive20T", text))
+            
+            # Use the home directory to build a portable output path
+            self.output_dir_edit.setText(os.path.join(user_home, "metaRT_outputs", text))
         else:
             self.input_dir_edit.clear()
             self.output_dir_edit.clear()

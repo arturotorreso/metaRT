@@ -92,6 +92,19 @@ def main():
 
     file_queue = Queue()
     processed_files_set = read_processed_files_log(processed_log_path)
+
+    # --- START CATCH-UP MECHANISM ---
+    logger.info("Scanning for existing files to catch up...")
+    for root, _, files in os.walk(fastq_dir_to_watch):
+        for file in files:
+            if file.endswith(".fastq.gz"):
+                file_path = os.path.abspath(os.path.join(root, file))
+                if file_path not in processed_files_set:
+                    logger.info(f"Catch-up: Queuing unprocessed file: {file}")
+                    file_queue.put(file_path)
+                    processed_files_set.add(file_path)
+    # --- END CATCH-UP MECHANISM ---
+
     observer = start_monitoring(config.get('Paths', 'fastq_directory'), file_queue, processed_files_set)
 
     try:

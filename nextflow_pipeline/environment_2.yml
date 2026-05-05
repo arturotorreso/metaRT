@@ -149,4 +149,3 @@ dependencies:
       - tzdata==2025.2
       - watchdog==6.0.0
       - zipp==3.23.0
-prefix: /home/atorres/miniforge3/envs/nanort-nf

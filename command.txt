@@ -1,1 +1,0 @@
-nextflow run main.nf --input_dir /mnt/Drive20T/ont_data/20260121_MGEAS_Manifold_concentration --outdir /mnt/Drive20T/20260121_MGEAS_Manifold_concentration --barcodes barcode15,barcode16,barcode17,barcode18,barcode19,barcode20,barcode21,barcode22,barcode23,barcode24 --qc_opts.min_length 100

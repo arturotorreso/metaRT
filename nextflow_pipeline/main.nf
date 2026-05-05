@@ -62,7 +62,23 @@ include { RUN_SMART }           from './modules/local/classification/smart'
 // == WORKFLOW DEFINITION
 // ====================================================================================
 workflow {
-    
+
+    // --- Validation: Ensure databases are provided if their modules are active ---
+    if (params.run_host_depletion && !params.host_reference) {
+        exit 1, "ERROR: --host_reference must be provided when --run_host_depletion is true."
+    }
+    if (params.run_classification) {
+        if (params.run_kraken && !params.kraken_db) {
+            exit 1, "ERROR: --kraken_db must be provided when --run_kraken is true."
+        }
+        if (params.run_mapping && !params.refseq_db) {
+            exit 1, "ERROR: --refseq_db must be provided when --run_mapping is true."
+        }
+        if (params.run_smart && !params.smart_db) {
+            exit 1, "ERROR: --smart_db must be provided when --run_smart is true."
+        }
+    }
+
     // STEP 1: Determine the input source
     if (params.input_files) {
         // --- REAL-TIME MODE (FIXED) ---

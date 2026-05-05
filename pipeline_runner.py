@@ -4,6 +4,7 @@ import os
 import logging
 from datetime import datetime
 import configparser
+import json
 
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
@@ -31,9 +32,17 @@ def run_pipeline_for_batch(fastq_files: list, config: configparser.ConfigParser)
     # --- DYNAMIC COMMAND BUILDING (Corrected Logic) ---
     nextflow_exe = config.get('Paths', 'nextflow_executable', fallback='nextflow')
 
+    # === FIX: ARG_MAX limit solution ===
+    # Write the long comma-separated string of files to a JSON file.
+    # This bypasses the OS "argument list too long" error by feeding 
+    # the parameter directly into Nextflow's internal parser.
+    params_file_path = os.path.join(batch_output_dir, "batch_params.json")
+    with open(params_file_path, "w") as f:
+        json.dump({"input_files": input_files_str}, f)
+
     command = [
         nextflow_exe, "run", nextflow_script,
-        "--input_files", input_files_str,
+        "-params-file", params_file_path,  # <--- Replaced --input_files with -params-file
         "--outdir", batch_output_dir
         # "-profile", "conda" 
     ]

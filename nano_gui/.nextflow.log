@@ -1,0 +1,420 @@
+Apr-20 09:49:43.184 [main] DEBUG nextflow.cli.Launcher - $> nextflow run /home/atorres/scripts/metaRT/nextflow_pipeline/main.nf -params-file /home/atorres/20260417_Nepal_clin_sple_set_1/batch_20260420_094942/batch_params.json --outdir /home/atorres/20260417_Nepal_clin_sple_set_1/batch_20260420_094942 --barcodes 'barcode01, barcode02, barcode03, barcode04, barcode05, barcode06, barcode07, barcode08, barcode09, barcode10, barcode11, barcode12, barcode13, barcode14' --host_reference /home/atorres/scripts/metaRT/db/human_genome/GCF_000001405.40_GRCh38.p14_genomic.fna --kraken_db /home/atorres/db/kraken2_standard_pluspf/ --taxonomy_dir /home/atorres/db/kraken2_standard_pluspf/ --refseq_db /home/atorres/scripts/metaRT/db/refseq/target.fna.gz.mm2idx --smart_db /home/atorres/scripts/metaRT/smart/database/test/python_wrapped --run_read_qc --run_classification --run_kraken --host_opts.keep_bam false --qc_opts.min_mean_q 10 --qc_opts.min_length 75 --qc_opts.trim5 true --qc_opts.trim3 true --qc_opts.window_size 10 --qc_opts.cut_quality 10 --qc_opts.perc_low_qual 40 --qc_opts.min_base_q 10 --qc_opts.low_complexity true --qc_opts.entropy 0.6 --qc_opts.entropy_window 50 --qc_opts.entropy_kmer 5 --qc_opts.disable_adapters false --kraken_opts.confidence 0.0 --kraken_opts.memory_mapping true --kraken_opts.min_base_q 0 --kraken_opts.min_hit_groups 2 --mapping_opts.secondary_aligns 5
+Apr-20 09:49:43.242 [main] DEBUG nextflow.cli.CmdRun - N E X T F L O W  ~  version 25.10.4
+Apr-20 09:49:43.261 [main] DEBUG nextflow.plugin.PluginsFacade - Setting up plugin manager > mode=prod; embedded=false; plugins-dir=/home/atorres/.nextflow/plugins; core-plugins: nf-amazon@3.4.4,nf-azure@1.20.2,nf-cloudcache@0.5.0,nf-codecommit@0.5.0,nf-console@1.3.0,nf-google@1.23.5,nf-k8s@1.2.2,nf-tower@1.17.5,nf-wave@1.16.1
+Apr-20 09:49:43.283 [main] INFO  o.pf4j.DefaultPluginStatusProvider - Enabled plugins: []
+Apr-20 09:49:43.283 [main] INFO  o.pf4j.DefaultPluginStatusProvider - Disabled plugins: []
+Apr-20 09:49:43.285 [main] INFO  org.pf4j.DefaultPluginManager - PF4J version 3.12.0 in 'deployment' mode
+Apr-20 09:49:43.295 [main] DEBUG nextflow.util.RetryConfig - Missing nextflow session - using default retry config
+Apr-20 09:49:43.406 [main] INFO  org.pf4j.AbstractPluginManager - No plugins
+Apr-20 09:49:43.447 [main] DEBUG nextflow.config.ConfigBuilder - Found config base: /home/atorres/scripts/metaRT/nextflow_pipeline/nextflow.config
+Apr-20 09:49:43.448 [main] DEBUG nextflow.config.ConfigBuilder - Parsing config file: /home/atorres/scripts/metaRT/nextflow_pipeline/nextflow.config
+Apr-20 09:49:43.460 [main] DEBUG nextflow.config.ConfigBuilder - Applying config profile: `standard`
+Apr-20 09:49:43.745 [main] DEBUG nextflow.plugin.PluginsFacade - Plugins default=[]
+Apr-20 09:49:43.746 [main] DEBUG nextflow.plugin.PluginsFacade - Plugins resolved requirement=[]
+Apr-20 09:49:43.755 [main] DEBUG n.secret.LocalSecretsProvider - Secrets store: /home/atorres/.nextflow/secrets/store.json
+Apr-20 09:49:43.757 [main] DEBUG nextflow.secret.SecretsLoader - Discovered secrets providers: [nextflow.secret.LocalSecretsProvider@55651434] - activable => nextflow.secret.LocalSecretsProvider@55651434
+Apr-20 09:49:43.758 [main] DEBUG nextflow.cli.CmdRun - Applied DSL=2 from script declaration
+Apr-20 09:49:43.767 [main] DEBUG nextflow.cli.CmdRun - Launching `/home/atorres/scripts/metaRT/nextflow_pipeline/main.nf` [cheeky_shockley] DSL2 - revision: 94236b364d
+Apr-20 09:49:43.796 [main] DEBUG nextflow.Session - Session UUID: 5191f92d-2107-45dd-a74f-9c9d3dfc4cab
+Apr-20 09:49:43.796 [main] DEBUG nextflow.Session - Run name: cheeky_shockley
+Apr-20 09:49:43.797 [main] DEBUG nextflow.Session - Executor pool size: 32
+Apr-20 09:49:43.801 [main] DEBUG nextflow.file.FilePorter - File porter settings maxRetries=3; maxTransfers=50; pollTimeout=null
+Apr-20 09:49:43.803 [main] DEBUG nextflow.util.ThreadPoolBuilder - Creating thread pool 'FileTransfer' minSize=10; maxSize=96; workQueue=LinkedBlockingQueue[-1]; allowCoreThreadTimeout=false
+Apr-20 09:49:43.817 [main] DEBUG nextflow.cli.CmdRun - 
+  Version: 25.10.4 build 11173
+  Created: 10-02-2026 15:17 UTC (07:17 PDT)
+  System: Linux 6.8.0-107-generic
+  Runtime: Groovy 4.0.28 on OpenJDK 64-Bit Server VM 24.0.2+12
+  Encoding: UTF-8 (UTF-8)
+  Process: 3003637@arion [127.0.1.1]
+  CPUs: 32 - Mem: 125.6 GB (1.1 GB) - Swap: 2 GB (2 GB)
+Apr-20 09:49:43.829 [main] DEBUG nextflow.Session - Work-dir: /home/atorres/scripts/metaRT/nano_gui/work [ext2/ext3]
+Apr-20 09:49:43.847 [main] DEBUG nextflow.executor.ExecutorFactory - Extension executors providers=[]
+Apr-20 09:49:43.858 [main] DEBUG nextflow.Session - Observer factory (v2): LinObserverFactory
+Apr-20 09:49:43.860 [main] DEBUG nextflow.Session - Observer factory (v2): DefaultObserverFactory
+Apr-20 09:49:43.878 [main] DEBUG nextflow.cache.CacheFactory - Using Nextflow cache factory: nextflow.cache.DefaultCacheFactory
+Apr-20 09:49:43.884 [main] DEBUG nextflow.util.CustomThreadPool - Creating default thread pool > poolSize: 33; maxThreads: 1000
+Apr-20 09:49:43.935 [main] DEBUG nextflow.Session - Session start
+Apr-20 09:49:44.098 [main] DEBUG nextflow.script.ScriptRunner - > Launching execution
+Apr-20 09:49:44.103 [main] WARN  nextflow.script.ScriptBinding - Access to undefined parameter `classifier` -- Initialise it to a default value eg. `params.classifier = some_value`
+Apr-20 09:49:44.104 [main] INFO  nextflow.Nextflow - 
+N A N O - R T    P I P E L I N E (Modular)
+==========================================
+Input Directory : false
+Output Directory: /home/atorres/20260417_Nepal_clin_sple_set_1/batch_20260420_094942
+Barcodes        : barcode01, barcode02, barcode03, barcode04, barcode05, barcode06, barcode07, barcode08, barcode09, barcode10, barcode11, barcode12, barcode13, barcode14
+Classifier      : null
+
+Apr-20 09:49:44.393 [main] DEBUG n.script.dsl.ProcessConfigBuilder - Config settings `withName:COMBINE_FASTQ` matches process COMBINE_FASTQ
+Apr-20 09:49:44.394 [main] DEBUG nextflow.executor.ExecutorFactory - << taskConfig executor: local
+Apr-20 09:49:44.395 [main] DEBUG nextflow.executor.ExecutorFactory - >> processorType: 'local'
+Apr-20 09:49:44.399 [main] DEBUG nextflow.executor.Executor - [warm up] executor > local
+Apr-20 09:49:44.403 [main] DEBUG n.processor.LocalPollingMonitor - Creating local task monitor for executor 'local' > cpus=24; memory=60 GB; capacity=32; pollInterval=100ms; dumpInterval=5m
+Apr-20 09:49:44.404 [main] DEBUG n.processor.TaskPollingMonitor - >>> barrier register (monitor: local)
+Apr-20 09:49:44.421 [main] DEBUG nextflow.processor.TaskProcessor - Creating process 'COMBINE_FASTQ': maxForks=0; fair=false; array=0
+Apr-20 09:49:44.444 [main] DEBUG n.script.dsl.ProcessConfigBuilder - Config settings `withName:RUN_QC_FASTPLONG` matches process RUN_QC_FASTPLONG
+Apr-20 09:49:44.444 [main] DEBUG nextflow.executor.ExecutorFactory - << taskConfig executor: local
+Apr-20 09:49:44.444 [main] DEBUG nextflow.executor.ExecutorFactory - >> processorType: 'local'
+Apr-20 09:49:44.445 [main] DEBUG nextflow.processor.TaskProcessor - Creating process 'RUN_QC_FASTPLONG': maxForks=0; fair=false; array=0
+Apr-20 09:49:44.448 [main] DEBUG n.script.dsl.ProcessConfigBuilder - Config settings `withName:PREPARE_KRAKEN_DB` matches process PREPARE_KRAKEN_DB
+Apr-20 09:49:44.449 [main] DEBUG nextflow.executor.ExecutorFactory - << taskConfig executor: local
+Apr-20 09:49:44.449 [main] DEBUG nextflow.executor.ExecutorFactory - >> processorType: 'local'
+Apr-20 09:49:44.449 [main] DEBUG nextflow.processor.TaskProcessor - Creating process 'PREPARE_KRAKEN_DB': maxForks=0; fair=false; array=0
+Apr-20 09:49:44.452 [main] DEBUG n.script.dsl.ProcessConfigBuilder - Config settings `withName:RUN_KRAKEN2` matches process RUN_KRAKEN2
+Apr-20 09:49:44.453 [main] DEBUG nextflow.executor.ExecutorFactory - << taskConfig executor: local
+Apr-20 09:49:44.453 [main] DEBUG nextflow.executor.ExecutorFactory - >> processorType: 'local'
+Apr-20 09:49:44.453 [main] DEBUG nextflow.processor.TaskProcessor - Creating process 'RUN_KRAKEN2': maxForks=0; fair=false; array=0
+Apr-20 09:49:44.455 [main] DEBUG nextflow.Session - Workflow process names [dsl2]: RUN_KRAKEN2, REMOVE_HOST, RUN_SMART, RUN_MAP2REFSEQ, RUN_QC_FASTPLONG, PREPARE_KRAKEN_DB, COMBINE_FASTQ
+Apr-20 09:49:44.456 [main] DEBUG nextflow.Session - Igniting dataflow network (5)
+Apr-20 09:49:44.462 [main] DEBUG nextflow.processor.TaskProcessor - Starting process > COMBINE_FASTQ
+Apr-20 09:49:44.463 [main] DEBUG nextflow.processor.TaskProcessor - Starting process > RUN_QC_FASTPLONG
+Apr-20 09:49:44.463 [main] DEBUG nextflow.processor.TaskProcessor - Starting process > PREPARE_KRAKEN_DB
+Apr-20 09:49:44.463 [main] DEBUG nextflow.processor.TaskProcessor - Starting process > RUN_KRAKEN2
+Apr-20 09:49:44.463 [main] DEBUG nextflow.script.ScriptRunner - Parsed script files:
+  Script_5de55c1c1d6c5837: /home/atorres/scripts/metaRT/nextflow_pipeline/modules/local/host_depletion.nf
+  Script_f52324e56062c244: /home/atorres/scripts/metaRT/nextflow_pipeline/modules/local/read_qc.nf
+  Script_527192fd81930cd3: /home/atorres/scripts/metaRT/nextflow_pipeline/modules/local/combine_fastq.nf
+  Script_4bad5b10c6ba62ae: /home/atorres/scripts/metaRT/nextflow_pipeline/modules/local/classification/smart.nf
+  Script_43a6bbd9ff20d35f: /home/atorres/scripts/metaRT/nextflow_pipeline/main.nf
+  Script_4bb1e2365a7b1866: /home/atorres/scripts/metaRT/nextflow_pipeline/modules/local/classification/kraken2.nf
+  Script_487c4622933d79f2: /home/atorres/scripts/metaRT/nextflow_pipeline/modules/local/classification/map2refseq.nf
+  Script_49a889f796014ec5: /home/atorres/scripts/metaRT/nextflow_pipeline/modules/local/prepare_kraken_db.nf
+Apr-20 09:49:44.463 [main] DEBUG nextflow.script.ScriptRunner - > Awaiting termination 
+Apr-20 09:49:44.463 [main] DEBUG nextflow.Session - Session await
+Apr-20 09:49:44.565 [Task submitter] DEBUG n.executor.local.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Apr-20 09:49:44.567 [Task submitter] INFO  nextflow.Session - [6d/71197a] Submitted process > PREPARE_KRAKEN_DB (Preparing Kraken2 DB)
+Apr-20 09:49:44.814 [Task submitter] DEBUG n.executor.local.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Apr-20 09:49:44.815 [Task submitter] INFO  nextflow.Session - [32/f4e8f7] Submitted process > COMBINE_FASTQ (Combining barcode10 files)
+Apr-20 09:49:44.822 [Task submitter] DEBUG n.executor.local.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Apr-20 09:49:44.822 [Task submitter] INFO  nextflow.Session - [1c/d8d873] Submitted process > COMBINE_FASTQ (Combining barcode05 files)
+Apr-20 09:49:44.830 [Task submitter] DEBUG n.executor.local.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Apr-20 09:49:44.830 [Task submitter] INFO  nextflow.Session - [cf/0e1b92] Submitted process > COMBINE_FASTQ (Combining barcode11 files)
+Apr-20 09:49:44.839 [Task submitter] DEBUG n.executor.local.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Apr-20 09:49:44.839 [Task submitter] INFO  nextflow.Session - [14/f904a6] Submitted process > COMBINE_FASTQ (Combining barcode08 files)
+Apr-20 09:49:44.840 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 9; name: COMBINE_FASTQ (Combining barcode10 files); status: COMPLETED; exit: 0; error: -; workDir: /home/atorres/scripts/metaRT/nano_gui/work/32/f4e8f7101cf84a08476281b14b94b6]
+Apr-20 09:49:44.841 [Task monitor] DEBUG nextflow.util.ThreadPoolBuilder - Creating thread pool 'TaskFinalizer' minSize=10; maxSize=96; workQueue=LinkedBlockingQueue[-1]; allowCoreThreadTimeout=false
+Apr-20 09:49:44.845 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 11; name: COMBINE_FASTQ (Combining barcode05 files); status: COMPLETED; exit: 0; error: -; workDir: /home/atorres/scripts/metaRT/nano_gui/work/1c/d8d873fd182f2d42ff5d87b7359491]
+Apr-20 09:49:44.867 [Task submitter] DEBUG n.executor.local.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Apr-20 09:49:44.868 [Task submitter] INFO  nextflow.Session - [7c/b3c393] Submitted process > COMBINE_FASTQ (Combining barcode03 files)
+Apr-20 09:49:44.868 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 6; name: COMBINE_FASTQ (Combining barcode11 files); status: COMPLETED; exit: 0; error: -; workDir: /home/atorres/scripts/metaRT/nano_gui/work/cf/0e1b927778ec538a6f3f44d1c420fd]
+Apr-20 09:49:44.870 [TaskFinalizer-2] DEBUG nextflow.util.ThreadPoolBuilder - Creating thread pool 'PublishDir' minSize=10; maxSize=96; workQueue=LinkedBlockingQueue[-1]; allowCoreThreadTimeout=false
+Apr-20 09:49:44.895 [Task submitter] DEBUG n.executor.local.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Apr-20 09:49:44.895 [Task submitter] INFO  nextflow.Session - [86/0d7156] Submitted process > COMBINE_FASTQ (Combining barcode14 files)
+Apr-20 09:49:44.921 [Task submitter] DEBUG n.executor.local.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Apr-20 09:49:44.922 [Task submitter] INFO  nextflow.Session - [e8/438fe8] Submitted process > COMBINE_FASTQ (Combining barcode04 files)
+Apr-20 09:49:44.933 [Task submitter] DEBUG n.executor.local.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Apr-20 09:49:44.933 [Task submitter] INFO  nextflow.Session - [6a/0eed5a] Submitted process > COMBINE_FASTQ (Combining barcode13 files)
+Apr-20 09:49:44.934 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 3; name: COMBINE_FASTQ (Combining barcode08 files); status: COMPLETED; exit: 0; error: -; workDir: /home/atorres/scripts/metaRT/nano_gui/work/14/f904a66e0eb928148ea64305de6fc0]
+Apr-20 09:49:44.945 [Task submitter] DEBUG n.executor.local.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Apr-20 09:49:44.945 [Task submitter] INFO  nextflow.Session - [3f/c59631] Submitted process > COMBINE_FASTQ (Combining barcode12 files)
+Apr-20 09:49:44.960 [Task submitter] DEBUG n.executor.local.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Apr-20 09:49:44.960 [Task submitter] INFO  nextflow.Session - [29/0c6e17] Submitted process > COMBINE_FASTQ (Combining barcode07 files)
+Apr-20 09:49:44.975 [Task submitter] DEBUG n.executor.local.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Apr-20 09:49:44.975 [Task submitter] INFO  nextflow.Session - [05/d4002e] Submitted process > COMBINE_FASTQ (Combining barcode02 files)
+Apr-20 09:49:44.988 [Task submitter] DEBUG n.executor.local.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Apr-20 09:49:44.988 [Task submitter] INFO  nextflow.Session - [58/448d2b] Submitted process > COMBINE_FASTQ (Combining barcode09 files)
+Apr-20 09:49:44.999 [Task submitter] DEBUG n.executor.local.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Apr-20 09:49:44.999 [Task submitter] INFO  nextflow.Session - [df/204e47] Submitted process > COMBINE_FASTQ (Combining barcode06 files)
+Apr-20 09:49:45.011 [Task submitter] DEBUG n.executor.local.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Apr-20 09:49:45.011 [Task submitter] INFO  nextflow.Session - [3d/e9ce12] Submitted process > COMBINE_FASTQ (Combining barcode01 files)
+Apr-20 09:49:45.013 [Task submitter] DEBUG n.executor.local.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Apr-20 09:49:45.013 [Task submitter] INFO  nextflow.Session - [df/5e5e77] Submitted process > RUN_QC_FASTPLONG (QC for barcode05)
+Apr-20 09:49:45.016 [Task submitter] DEBUG n.executor.local.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Apr-20 09:49:45.016 [Task submitter] INFO  nextflow.Session - [35/e43b7d] Submitted process > RUN_QC_FASTPLONG (QC for barcode10)
+Apr-20 09:49:45.017 [Task submitter] DEBUG n.executor.local.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Apr-20 09:49:45.017 [Task submitter] INFO  nextflow.Session - [f3/f90059] Submitted process > RUN_QC_FASTPLONG (QC for barcode11)
+Apr-20 09:49:45.047 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 17; name: RUN_QC_FASTPLONG (QC for barcode10); status: COMPLETED; exit: 0; error: -; workDir: /home/atorres/scripts/metaRT/nano_gui/work/35/e43b7d568e7464305a50544ae00fa6]
+Apr-20 09:49:45.049 [Task submitter] DEBUG n.executor.local.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Apr-20 09:49:45.049 [Task submitter] INFO  nextflow.Session - [3d/77c51d] Submitted process > RUN_QC_FASTPLONG (QC for barcode08)
+Apr-20 09:49:45.057 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 16; name: RUN_QC_FASTPLONG (QC for barcode05); status: COMPLETED; exit: 0; error: -; workDir: /home/atorres/scripts/metaRT/nano_gui/work/df/5e5e77927d0db8f783bf3f19fa6848]
+Apr-20 09:49:45.096 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 19; name: RUN_QC_FASTPLONG (QC for barcode08); status: COMPLETED; exit: 0; error: -; workDir: /home/atorres/scripts/metaRT/nano_gui/work/3d/77c51db6b4dad8150bd54540b0b0da]
+Apr-20 09:49:45.987 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 18; name: RUN_QC_FASTPLONG (QC for barcode11); status: COMPLETED; exit: 0; error: -; workDir: /home/atorres/scripts/metaRT/nano_gui/work/f3/f900599b0bef620957832da1d8dabe]
+Apr-20 09:50:22.496 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 2; name: COMBINE_FASTQ (Combining barcode13 files); status: COMPLETED; exit: 0; error: -; workDir: /home/atorres/scripts/metaRT/nano_gui/work/6a/0eed5a705e1d35c61512e94e93a96d]
+Apr-20 09:50:22.505 [Task submitter] DEBUG n.executor.local.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Apr-20 09:50:22.505 [Task submitter] INFO  nextflow.Session - [97/7669c5] Submitted process > RUN_QC_FASTPLONG (QC for barcode13)
+Apr-20 09:50:36.010 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 8; name: COMBINE_FASTQ (Combining barcode12 files); status: COMPLETED; exit: 0; error: -; workDir: /home/atorres/scripts/metaRT/nano_gui/work/3f/c59631a8d02649b9b0a932301c54f9]
+Apr-20 09:50:36.016 [Task submitter] DEBUG n.executor.local.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Apr-20 09:50:36.016 [Task submitter] INFO  nextflow.Session - [d5/92c9f0] Submitted process > RUN_QC_FASTPLONG (QC for barcode12)
+Apr-20 09:50:43.025 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 4; name: COMBINE_FASTQ (Combining barcode14 files); status: COMPLETED; exit: 0; error: -; workDir: /home/atorres/scripts/metaRT/nano_gui/work/86/0d715662a0be125ee63db8c1fcafc1]
+Apr-20 09:50:43.030 [Task submitter] DEBUG n.executor.local.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Apr-20 09:50:43.030 [Task submitter] INFO  nextflow.Session - [4c/8f1dd1] Submitted process > RUN_QC_FASTPLONG (QC for barcode14)
+Apr-20 09:50:47.886 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 14; name: COMBINE_FASTQ (Combining barcode03 files); status: COMPLETED; exit: 0; error: -; workDir: /home/atorres/scripts/metaRT/nano_gui/work/7c/b3c3938ba010f0b1a093917267a7ee]
+Apr-20 09:50:47.891 [Task submitter] DEBUG n.executor.local.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Apr-20 09:50:47.891 [Task submitter] INFO  nextflow.Session - [29/848ae7] Submitted process > RUN_QC_FASTPLONG (QC for barcode03)
+Apr-20 09:50:57.406 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 7; name: COMBINE_FASTQ (Combining barcode06 files); status: COMPLETED; exit: 0; error: -; workDir: /home/atorres/scripts/metaRT/nano_gui/work/df/204e47ba30c8eb3b1e3062ceeb343b]
+Apr-20 09:50:59.030 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 13; name: COMBINE_FASTQ (Combining barcode02 files); status: COMPLETED; exit: 0; error: -; workDir: /home/atorres/scripts/metaRT/nano_gui/work/05/d4002ee648912bb98b62da873151c1]
+Apr-20 09:50:59.613 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 12; name: COMBINE_FASTQ (Combining barcode09 files); status: COMPLETED; exit: 0; error: -; workDir: /home/atorres/scripts/metaRT/nano_gui/work/58/448d2bd3478cceafd1d1e3be8a4f64]
+Apr-20 09:50:59.769 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 5; name: COMBINE_FASTQ (Combining barcode07 files); status: COMPLETED; exit: 0; error: -; workDir: /home/atorres/scripts/metaRT/nano_gui/work/29/0c6e17b7c519fffc924bb75fb82078]
+Apr-20 09:50:59.772 [Task submitter] DEBUG n.executor.local.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+Apr-20 09:50:59.772 [Task submitter] INFO  nextflow.Session - [a6/72f46d] Submitted process > RUN_QC_FASTPLONG (QC for barcode06)
+Apr-20 09:51:00.448 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 10; name: COMBINE_FASTQ (Combining barcode04 files); status: COMPLETED; exit: 0; error: -; workDir: /home/atorres/scripts/metaRT/nano_gui/work/e8/438fe8724c306d47e0caaa42e19f74]
+Apr-20 09:51:04.872 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 15; name: COMBINE_FASTQ (Combining barcode01 files); status: COMPLETED; exit: 1; error: -; workDir: /home/atorres/scripts/metaRT/nano_gui/work/3d/e9ce1247db6dd5ad384be5cba899a5]
+Apr-20 09:51:04.879 [TaskFinalizer-8] DEBUG nextflow.processor.TaskProcessor - Handling unexpected condition for
+  task: name=COMBINE_FASTQ (Combining barcode01 files); work-dir=/home/atorres/scripts/metaRT/nano_gui/work/3d/e9ce1247db6dd5ad384be5cba899a5
+  error [nextflow.exception.ProcessFailedException]: Process `COMBINE_FASTQ (Combining barcode01 files)` terminated with an error exit status (1)
+Apr-20 09:51:04.917 [TaskFinalizer-8] ERROR nextflow.processor.TaskProcessor - Error executing process > 'COMBINE_FASTQ (Combining barcode01 files)'
+
+Caused by:
+  Process `COMBINE_FASTQ (Combining barcode01 files)` terminated with an error exit status (1)
+
+
+Command executed:
+
+  cat PBK50554_pass_barcode01_d24ce37b_d0be27f6_51.fastq.gz PBK50554_pass_barcode01_d24ce37b_d0be27f6_222.fastq.gz PBK50554_pass_barcode01_d24ce37b_d0be27f6_171.fastq.gz PBK50554_pass_barcode01_d24ce37b_d0be27f6_34.fastq.gz PBK50554_pass_barcode01_d24ce37b_d0be27f6_94.fastq.gz PBK50554_pass_barcode01_d24ce37b_d0be27f6_40.fastq.gz PBK50554_pass_barcode01_d24ce37b_d0be27f6_244.fastq.gz PBK50554_pass_barcode01_d24ce37b_d0be27f6_180.fastq.gz PBK50554_pass_barcode01_d24ce37b_d0be27f6_43.fastq.gz PBK50554_pass_barcode01_d24ce37b_d0be27f6_130.fastq.gz PBK50554_pass_barcode01_d24ce37b_d0be27f6_33.fastq.gz PBK50554_pass_barcode01_d24ce37b_d0be27f6_347.fastq.gz PBK50554_pass_barcode01_d24ce37b_d0be27f6_92.fastq.gz PBK50554_pass_barcode01_d24ce37b_d0be27f6_48.fastq.gz PBK50554_pass_barcode01_d24ce37b_d0be27f6_155.fastq.gz PBK50554_pass_barcode01_d24ce37b_d0be27f6_67.fastq.gz PBK50554_pass_barcode01_d24ce37b_d0be27f6_301.fastq.gz PBK50554_pass_barcode01_d24ce37b_d0be27f6_203.fastq.gz PBK50554_pass_barcode01_d24ce37b_d0be27f6_14.fastq.gz PBK50554_pass_barcode01_d24ce37b_d0be27f6_302.fastq.gz PBK50554_pass_barcode01_d24ce37b_d0be27f6_248.fastq.gz PBK50554_pass_barcode01_d24ce37b_d0be27f6_25.fastq.gz PBK50554_pass_barcode01_d24ce37b_d0be27f6_29.fastq.gz PBK50554_pass_barcode01_d24ce37b_d0be27f6_313.fastq.gz PBK50554_pass_barcode01_d24ce37b_d0be27f6_202.fastq.gz PBK50554_pass_barcode01_d24ce37b_d0be27f6_129.fastq.gz PBK50554_pass_barcode01_d24ce37b_d0be27f6_373.fastq.gz PBK50554_pass_barcode01_d24ce37b_d0be27f6_142.fastq.gz PBK50554_pass_barcode01_d24ce37b_d0be27f6_162.fastq.gz PBK50554_pass_barcode01_d24ce37b_d0be27f6_55.fastq.gz PBK50554_pass_barcode01_d24ce37b_d0be27f6_258.fastq.gz PBK50554_pass_barcode01_d24ce37b_d0be27f6_260.fastq.gz PBK50554_pass_barcode01_d24ce37b_d0be27f6_76.fastq.gz PBK50554_pass_barcode01_d24ce37b_d0be27f6_219.fastq.gz PBK50554_pass_barcode01_d24ce37b_d0be27f6_344.fastq.gz PBK50554_pass_barcode01_d24ce37b_d0be27f6_289.fastq.gz PBK50554_pass_barcode01_d24ce37b_d0be27f6_325.fastq.gz PBK50554_pass_barcode01_d24ce37b_d0be27f6_210.fastq.gz PBK50554_pass_barcode01_d24ce37b_d0be27f6_117.fastq.gz PBK50554_pass_barcode01_d24ce37b_d0be27f6_167.fastq.gz PBK50554_pass_barcode01_d24ce37b_d0be27f6_146.fastq.gz PBK50554_pass_barcode01_d24ce37b_d0be27f6_284.fastq.gz PBK50554_pass_barcode01_d24ce37b_d0be27f6_103.fastq.gz PBK50554_pass_barcode01_d24ce37bApr-20 09:51:04.936 [TaskFinalizer-8] DEBUG nextflow.Session - Session aborted -- Cause: Process `COMBINE_FASTQ (Combining barcode01 files)` terminated with an error exit status (1)
+Apr-20 09:51:04.938 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 23; name: RUN_QC_FASTPLONG (QC for barcode03); status: COMPLETED; exit: 1; error: -; workDir: /home/atorres/scripts/metaRT/nano_gui/work/29/848ae752f9dbdee4ecc524a583efa8]
+Apr-20 09:51:04.939 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 24; name: RUN_QC_FASTPLONG (QC for barcode06); status: COMPLETED; exit: 1; error: -; workDir: /home/atorres/scripts/metaRT/nano_gui/work/a6/72f46d1ea3b2fc05ea138888f7ef02]
+Apr-20 09:51:04.940 [TaskFinalizer-9] DEBUG nextflow.processor.TaskProcessor - Handling unexpected condition for
+  task: name=RUN_QC_FASTPLONG (QC for barcode03); work-dir=/home/atorres/scripts/metaRT/nano_gui/work/29/848ae752f9dbdee4ecc524a583efa8
+  error [nextflow.exception.ProcessFailedException]: Process `RUN_QC_FASTPLONG (QC for barcode03)` terminated with an error exit status (1)
+Apr-20 09:51:04.940 [TaskFinalizer-10] DEBUG nextflow.processor.TaskProcessor - Handling unexpected condition for
+  task: name=RUN_QC_FASTPLONG (QC for barcode06); work-dir=/home/atorres/scripts/metaRT/nano_gui/work/a6/72f46d1ea3b2fc05ea138888f7ef02
+  error [nextflow.exception.ProcessFailedException]: Process `RUN_QC_FASTPLONG (QC for barcode06)` terminated with an error exit status (1)
+Apr-20 09:51:04.944 [Task monitor] DEBUG n.processor.TaskPollingMonitor - <<< barrier arrives (monitor: local) - terminating tasks monitor poll loop
+Apr-20 09:51:04.954 [TaskFinalizer-8] DEBUG nextflow.Session - The following nodes are still active:
+[process] RUN_KRAKEN2
+  status=ACTIVE
+  port 0: (queue) OPEN  ; channel: -
+  port 1: (value) OPEN  ; channel: done_signal
+  port 2: (value) bound ; channel: kraken_opts
+  port 3: (cntrl) -     ; channel: $
+
+Apr-20 09:51:04.978 [TaskFinalizer-8] WARN  n.processor.TaskPollingMonitor - Killing running tasks (4)
+Apr-20 09:51:04.989 [TaskFinalizer-8] DEBUG n.executor.local.LocalTaskHandler - Unable to kill RUN_QC_FASTPLONG (QC for barcode13) -- command: kill -TERM 3011289; exit: 1 
+ bash: line 1: kill: (3011289) - No such process
+
+Apr-20 09:51:04.992 [TaskFinalizer-8] DEBUG n.executor.local.LocalTaskHandler - Unable to kill RUN_QC_FASTPLONG (QC for barcode12) -- command: kill -TERM 3011329; exit: 1 
+ bash: line 1: kill: (3011329) - No such process
+
+Apr-20 09:51:04.994 [TaskFinalizer-8] DEBUG n.executor.local.LocalTaskHandler - Unable to kill RUN_QC_FASTPLONG (QC for barcode14) -- command: kill -TERM 3011361; exit: 1 
+ bash: line 1: kill: (3011361) - No such process
+
+Apr-20 09:51:04.998 [TaskFinalizer-8] DEBUG n.trace.WorkflowStatsObserver - Workflow completed > WorkflowStats[succeededCount=17; failedCount=3; ignoredCount=0; cachedCount=0; pendingCount=4; submittedCount=0; runningCount=0; retriesCount=0; abortedCount=4; succeedDuration=9m 45s; failedDuration=2m 48s; cachedDuration=0ms;loadCpus=0; loadMemory=0; peakRunning=14; peakCpus=24; peakMemory=46 GB; ]
+Apr-20 09:51:05.151 [main] DEBUG nextflow.Session - Session await > all processes finished
+Apr-20 09:51:05.151 [main] DEBUG nextflow.Session - Session await > all barriers passed
+Apr-20 09:51:05.152 [main] DEBUG n.trace.WorkflowStatsObserver - Workflow completed > WorkflowStats[succeededCount=17; failedCount=3; ignoredCount=0; cachedCount=0; pendingCount=4; submittedCount=0; runningCount=0; retriesCount=0; abortedCount=4; succeedDuration=9m 45s; failedDuration=2m 48s; cachedDuration=0ms;loadCpus=0; loadMemory=0; peakRunning=14; peakCpus=24; peakMemory=46 GB; ]
+Apr-20 09:51:05.152 [PublishDir-3] ERROR nextflow.processor.PublishDir - Failed to publish file: /home/atorres/scripts/metaRT/nano_gui/work/05/d4002ee648912bb98b62da873151c1/barcode02.fastq.gz; to: /home/atorres/20260417_Nepal_clin_sple_set_1/batch_20260420_094942/0_combined_fastq/barcode02/barcode02.fastq.gz [copy] -- See log file for details
+dev.failsafe.FailsafeException: java.lang.InterruptedException: sleep interrupted
+	at dev.failsafe.FailsafeExecutor.call(FailsafeExecutor.java:444)
+	at dev.failsafe.FailsafeExecutor.get(FailsafeExecutor.java:129)
+	at nextflow.processor.PublishDir.retryableProcessFile(PublishDir.groovy:408)
+	at nextflow.processor.PublishDir.safeProcessFile(PublishDir.groovy:379)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:565)
+	at org.codehaus.groovy.reflection.CachedMethod.invoke(CachedMethod.java:343)
+	at groovy.lang.MetaMethod.doMethodInvoke(MetaMethod.java:328)
+	at groovy.lang.MetaClassImpl.doInvokeMethod(MetaClassImpl.java:1339)
+	at groovy.lang.MetaClassImpl.invokeMethod(MetaClassImpl.java:1094)
+	at groovy.lang.MetaClassImpl.invokeMethod(MetaClassImpl.java:1007)
+	at org.codehaus.groovy.runtime.InvokerHelper.invokePogoMethod(InvokerHelper.java:645)
+	at org.codehaus.groovy.runtime.InvokerHelper.invokeMethod(InvokerHelper.java:628)
+	at org.codehaus.groovy.runtime.InvokerHelper.invokeMethodSafe(InvokerHelper.java:82)
+	at nextflow.processor.PublishDir$_apply1_closure2.doCall(PublishDir.groovy:354)
+	at nextflow.processor.PublishDir$_apply1_closure2.call(PublishDir.groovy)
+	at groovy.lang.Closure.run(Closure.java:505)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:545)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:328)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1095)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:619)
+	at java.base/java.lang.Thread.run(Thread.java:1447)
+Caused by: java.lang.InterruptedException: sleep interrupted
+	at java.base/java.lang.Thread.sleepNanos0(Native Method)
+	at java.base/java.lang.Thread.sleepNanos(Thread.java:482)
+	at java.base/java.lang.Thread.sleep(Thread.java:513)
+	at dev.failsafe.internal.RetryPolicyExecutor.lambda$apply$0(RetryPolicyExecutor.java:90)
+	at dev.failsafe.SyncExecutionImpl.executeSync(SyncExecutionImpl.java:176)
+	at dev.failsafe.FailsafeExecutor.call(FailsafeExecutor.java:437)
+	... 21 common frames omitted
+Apr-20 09:51:05.152 [PublishDir-6] ERROR nextflow.processor.PublishDir - Failed to publish file: /home/atorres/scripts/metaRT/nano_gui/work/e8/438fe8724c306d47e0caaa42e19f74/barcode04.fastq.gz; to: /home/atorres/20260417_Nepal_clin_sple_set_1/batch_20260420_094942/0_combined_fastq/barcode04/barcode04.fastq.gz [copy] -- See log file for details
+dev.failsafe.FailsafeException: java.lang.InterruptedException: sleep interrupted
+	at dev.failsafe.FailsafeExecutor.call(FailsafeExecutor.java:444)
+	at dev.failsafe.FailsafeExecutor.get(FailsafeExecutor.java:129)
+	at nextflow.processor.PublishDir.retryableProcessFile(PublishDir.groovy:408)
+	at nextflow.processor.PublishDir.safeProcessFile(PublishDir.groovy:379)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:565)
+	at org.codehaus.groovy.reflection.CachedMethod.invoke(CachedMethod.java:343)
+	at groovy.lang.MetaMethod.doMethodInvoke(MetaMethod.java:328)
+	at groovy.lang.MetaClassImpl.doInvokeMethod(MetaClassImpl.java:1339)
+	at groovy.lang.MetaClassImpl.invokeMethod(MetaClassImpl.java:1094)
+	at groovy.lang.MetaClassImpl.invokeMethod(MetaClassImpl.java:1007)
+	at org.codehaus.groovy.runtime.InvokerHelper.invokePogoMethod(InvokerHelper.java:645)
+	at org.codehaus.groovy.runtime.InvokerHelper.invokeMethod(InvokerHelper.java:628)
+	at org.codehaus.groovy.runtime.InvokerHelper.invokeMethodSafe(InvokerHelper.java:82)
+	at nextflow.processor.PublishDir$_apply1_closure2.doCall(PublishDir.groovy:354)
+	at nextflow.processor.PublishDir$_apply1_closure2.call(PublishDir.groovy)
+	at groovy.lang.Closure.run(Closure.java:505)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:545)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:328)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1095)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:619)
+	at java.base/java.lang.Thread.run(Thread.java:1447)
+Caused by: java.lang.InterruptedException: sleep interrupted
+	at java.base/java.lang.Thread.sleepNanos0(Native Method)
+	at java.base/java.lang.Thread.sleepNanos(Thread.java:482)
+	at java.base/java.lang.Thread.sleep(Thread.java:513)
+	at dev.failsafe.internal.RetryPolicyExecutor.lambda$apply$0(RetryPolicyExecutor.java:90)
+	at dev.failsafe.SyncExecutionImpl.executeSync(SyncExecutionImpl.java:176)
+	at dev.failsafe.FailsafeExecutor.call(FailsafeExecutor.java:437)
+	... 21 common frames omitted
+Apr-20 09:51:05.152 [PublishDir-4] ERROR nextflow.processor.PublishDir - Failed to publish file: /home/atorres/scripts/metaRT/nano_gui/work/29/0c6e17b7c519fffc924bb75fb82078/barcode07.fastq.gz; to: /home/atorres/20260417_Nepal_clin_sple_set_1/batch_20260420_094942/0_combined_fastq/barcode07/barcode07.fastq.gz [copy] -- See log file for details
+dev.failsafe.FailsafeException: java.lang.InterruptedException: sleep interrupted
+	at dev.failsafe.FailsafeExecutor.call(FailsafeExecutor.java:444)
+	at dev.failsafe.FailsafeExecutor.get(FailsafeExecutor.java:129)
+	at nextflow.processor.PublishDir.retryableProcessFile(PublishDir.groovy:408)
+	at nextflow.processor.PublishDir.safeProcessFile(PublishDir.groovy:379)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:565)
+	at org.codehaus.groovy.reflection.CachedMethod.invoke(CachedMethod.java:343)
+	at groovy.lang.MetaMethod.doMethodInvoke(MetaMethod.java:328)
+	at groovy.lang.MetaClassImpl.doInvokeMethod(MetaClassImpl.java:1339)
+	at groovy.lang.MetaClassImpl.invokeMethod(MetaClassImpl.java:1094)
+	at groovy.lang.MetaClassImpl.invokeMethod(MetaClassImpl.java:1007)
+	at org.codehaus.groovy.runtime.InvokerHelper.invokePogoMethod(InvokerHelper.java:645)
+	at org.codehaus.groovy.runtime.InvokerHelper.invokeMethod(InvokerHelper.java:628)
+	at org.codehaus.groovy.runtime.InvokerHelper.invokeMethodSafe(InvokerHelper.java:82)
+	at nextflow.processor.PublishDir$_apply1_closure2.doCall(PublishDir.groovy:354)
+	at nextflow.processor.PublishDir$_apply1_closure2.call(PublishDir.groovy)
+	at groovy.lang.Closure.run(Closure.java:505)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:545)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:328)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1095)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:619)
+	at java.base/java.lang.Thread.run(Thread.java:1447)
+Caused by: java.lang.InterruptedException: sleep interrupted
+	at java.base/java.lang.Thread.sleepNanos0(Native Method)
+	at java.base/java.lang.Thread.sleepNanos(Thread.java:482)
+	at java.base/java.lang.Thread.sleep(Thread.java:513)
+	at dev.failsafe.internal.RetryPolicyExecutor.lambda$apply$0(RetryPolicyExecutor.java:90)
+	at dev.failsafe.SyncExecutionImpl.executeSync(SyncExecutionImpl.java:176)
+	at dev.failsafe.FailsafeExecutor.call(FailsafeExecutor.java:437)
+	... 21 common frames omitted
+Apr-20 09:51:05.152 [PublishDir-10] ERROR nextflow.processor.PublishDir - Failed to publish file: /home/atorres/scripts/metaRT/nano_gui/work/86/0d715662a0be125ee63db8c1fcafc1/barcode14.fastq.gz; to: /home/atorres/20260417_Nepal_clin_sple_set_1/batch_20260420_094942/0_combined_fastq/barcode14/barcode14.fastq.gz [copy] -- See log file for details
+dev.failsafe.FailsafeException: java.lang.InterruptedException: sleep interrupted
+	at dev.failsafe.FailsafeExecutor.call(FailsafeExecutor.java:444)
+	at dev.failsafe.FailsafeExecutor.get(FailsafeExecutor.java:129)
+	at nextflow.processor.PublishDir.retryableProcessFile(PublishDir.groovy:408)
+	at nextflow.processor.PublishDir.safeProcessFile(PublishDir.groovy:379)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:565)
+	at org.codehaus.groovy.reflection.CachedMethod.invoke(CachedMethod.java:343)
+	at groovy.lang.MetaMethod.doMethodInvoke(MetaMethod.java:328)
+	at groovy.lang.MetaClassImpl.doInvokeMethod(MetaClassImpl.java:1339)
+	at groovy.lang.MetaClassImpl.invokeMethod(MetaClassImpl.java:1094)
+	at groovy.lang.MetaClassImpl.invokeMethod(MetaClassImpl.java:1007)
+	at org.codehaus.groovy.runtime.InvokerHelper.invokePogoMethod(InvokerHelper.java:645)
+	at org.codehaus.groovy.runtime.InvokerHelper.invokeMethod(InvokerHelper.java:628)
+	at org.codehaus.groovy.runtime.InvokerHelper.invokeMethodSafe(InvokerHelper.java:82)
+	at nextflow.processor.PublishDir$_apply1_closure2.doCall(PublishDir.groovy:354)
+	at nextflow.processor.PublishDir$_apply1_closure2.call(PublishDir.groovy)
+	at groovy.lang.Closure.run(Closure.java:505)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:545)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:328)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1095)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:619)
+	at java.base/java.lang.Thread.run(Thread.java:1447)
+Caused by: java.lang.InterruptedException: sleep interrupted
+	at java.base/java.lang.Thread.sleepNanos0(Native Method)
+	at java.base/java.lang.Thread.sleepNanos(Thread.java:482)
+	at java.base/java.lang.Thread.sleep(Thread.java:513)
+	at dev.failsafe.internal.RetryPolicyExecutor.lambda$apply$0(RetryPolicyExecutor.java:90)
+	at dev.failsafe.SyncExecutionImpl.executeSync(SyncExecutionImpl.java:176)
+	at dev.failsafe.FailsafeExecutor.call(FailsafeExecutor.java:437)
+	... 21 common frames omitted
+Apr-20 09:51:05.152 [PublishDir-1] ERROR nextflow.processor.PublishDir - Failed to publish file: /home/atorres/scripts/metaRT/nano_gui/work/58/448d2bd3478cceafd1d1e3be8a4f64/barcode09.fastq.gz; to: /home/atorres/20260417_Nepal_clin_sple_set_1/batch_20260420_094942/0_combined_fastq/barcode09/barcode09.fastq.gz [copy] -- See log file for details
+dev.failsafe.FailsafeException: java.lang.InterruptedException: sleep interrupted
+	at dev.failsafe.FailsafeExecutor.call(FailsafeExecutor.java:444)
+	at dev.failsafe.FailsafeExecutor.get(FailsafeExecutor.java:129)
+	at nextflow.processor.PublishDir.retryableProcessFile(PublishDir.groovy:408)
+	at nextflow.processor.PublishDir.safeProcessFile(PublishDir.groovy:379)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:565)
+	at org.codehaus.groovy.reflection.CachedMethod.invoke(CachedMethod.java:343)
+	at groovy.lang.MetaMethod.doMethodInvoke(MetaMethod.java:328)
+	at groovy.lang.MetaClassImpl.doInvokeMethod(MetaClassImpl.java:1339)
+	at groovy.lang.MetaClassImpl.invokeMethod(MetaClassImpl.java:1094)
+	at groovy.lang.MetaClassImpl.invokeMethod(MetaClassImpl.java:1007)
+	at org.codehaus.groovy.runtime.InvokerHelper.invokePogoMethod(InvokerHelper.java:645)
+	at org.codehaus.groovy.runtime.InvokerHelper.invokeMethod(InvokerHelper.java:628)
+	at org.codehaus.groovy.runtime.InvokerHelper.invokeMethodSafe(InvokerHelper.java:82)
+	at nextflow.processor.PublishDir$_apply1_closure2.doCall(PublishDir.groovy:354)
+	at nextflow.processor.PublishDir$_apply1_closure2.call(PublishDir.groovy)
+	at groovy.lang.Closure.run(Closure.java:505)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:545)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:328)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1095)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:619)
+	at java.base/java.lang.Thread.run(Thread.java:1447)
+Caused by: java.lang.InterruptedException: sleep interrupted
+	at java.base/java.lang.Thread.sleepNanos0(Native Method)
+	at java.base/java.lang.Thread.sleepNanos(Thread.java:482)
+	at java.base/java.lang.Thread.sleep(Thread.java:513)
+	at dev.failsafe.internal.RetryPolicyExecutor.lambda$apply$0(RetryPolicyExecutor.java:90)
+	at dev.failsafe.SyncExecutionImpl.executeSync(SyncExecutionImpl.java:176)
+	at dev.failsafe.FailsafeExecutor.call(FailsafeExecutor.java:437)
+	... 21 common frames omitted
+Apr-20 09:51:05.152 [PublishDir-9] ERROR nextflow.processor.PublishDir - Failed to publish file: /home/atorres/scripts/metaRT/nano_gui/work/7c/b3c3938ba010f0b1a093917267a7ee/barcode03.fastq.gz; to: /home/atorres/20260417_Nepal_clin_sple_set_1/batch_20260420_094942/0_combined_fastq/barcode03/barcode03.fastq.gz [copy] -- See log file for details
+dev.failsafe.FailsafeException: java.lang.InterruptedException: sleep interrupted
+	at dev.failsafe.FailsafeExecutor.call(FailsafeExecutor.java:444)
+	at dev.failsafe.FailsafeExecutor.get(FailsafeExecutor.java:129)
+	at nextflow.processor.PublishDir.retryableProcessFile(PublishDir.groovy:408)
+	at nextflow.processor.PublishDir.safeProcessFile(PublishDir.groovy:379)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:565)
+	at org.codehaus.groovy.reflection.CachedMethod.invoke(CachedMethod.java:343)
+	at groovy.lang.MetaMethod.doMethodInvoke(MetaMethod.java:328)
+	at groovy.lang.MetaClassImpl.doInvokeMethod(MetaClassImpl.java:1339)
+	at groovy.lang.MetaClassImpl.invokeMethod(MetaClassImpl.java:1094)
+	at groovy.lang.MetaClassImpl.invokeMethod(MetaClassImpl.java:1007)
+	at org.codehaus.groovy.runtime.InvokerHelper.invokePogoMethod(InvokerHelper.java:645)
+	at org.codehaus.groovy.runtime.InvokerHelper.invokeMethod(InvokerHelper.java:628)
+	at org.codehaus.groovy.runtime.InvokerHelper.invokeMethodSafe(InvokerHelper.java:82)
+	at nextflow.processor.PublishDir$_apply1_closure2.doCall(PublishDir.groovy:354)
+	at nextflow.processor.PublishDir$_apply1_closure2.call(PublishDir.groovy)
+	at groovy.lang.Closure.run(Closure.java:505)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:545)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:328)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1095)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:619)
+	at java.base/java.lang.Thread.run(Thread.java:1447)
+Caused by: java.lang.InterruptedException: sleep interrupted
+	at java.base/java.lang.Thread.sleepNanos0(Native Method)
+	at java.base/java.lang.Thread.sleepNanos(Thread.java:482)
+	at java.base/java.lang.Thread.sleep(Thread.java:513)
+	at dev.failsafe.internal.RetryPolicyExecutor.lambda$apply$0(RetryPolicyExecutor.java:90)
+	at dev.failsafe.SyncExecutionImpl.executeSync(SyncExecutionImpl.java:176)
+	at dev.failsafe.FailsafeExecutor.call(FailsafeExecutor.java:437)
+	... 21 common frames omitted
+Apr-20 09:51:05.152 [PublishDir-2] ERROR nextflow.processor.PublishDir - Failed to publish file: /home/atorres/scripts/metaRT/nano_gui/work/df/204e47ba30c8eb3b1e3062ceeb343b/barcode06.fastq.gz; to: /home/atorres/20260417_Nepal_clin_sple_set_1/batch_20260420_094942/0_combined_fastq/barcode06/barcode06.fastq.gz [copy] -- See log file for details
+dev.failsafe.FailsafeException: java.lang.InterruptedException: sleep interrupted
+	at dev.failsafe.FailsafeExecutor.call(FailsafeExecutor.java:444)
+	at dev.failsafe.FailsafeExecutor.get(FailsafeExecutor.java:129)
+	at nextflow.processor.PublishDir.retryableProcessFile(PublishDir.groovy:408)
+	at nextflow.processor.PublishDir.safeProcessFile(PublishDir.groovy:379)
+	at java.base/jdk.internal.reflect.DirectMethodHandleAccessor.invoke(DirectMethodHandleAccessor.java:104)
+	at java.base/java.lang.reflect.Method.invoke(Method.java:565)
+	at org.codehaus.groovy.reflection.CachedMethod.invoke(CachedMethod.java:343)
+	at groovy.lang.MetaMethod.doMethodInvoke(MetaMethod.java:328)
+	at groovy.lang.MetaClassImpl.doInvokeMethod(MetaClassImpl.java:1339)
+	at groovy.lang.MetaClassImpl.invokeMethod(MetaClassImpl.java:1094)
+	at groovy.lang.MetaClassImpl.invokeMethod(MetaClassImpl.java:1007)
+	at org.codehaus.groovy.runtime.InvokerHelper.invokePogoMethod(InvokerHelper.java:645)
+	at org.codehaus.groovy.runtime.InvokerHelper.invokeMethod(InvokerHelper.java:628)
+	at org.codehaus.groovy.runtime.InvokerHelper.invokeMethodSafe(InvokerHelper.java:82)
+	at nextflow.processor.PublishDir$_apply1_closure2.doCall(PublishDir.groovy:354)
+	at nextflow.processor.PublishDir$_apply1_closure2.call(PublishDir.groovy)
+	at groovy.lang.Closure.run(Closure.java:505)
+	at java.base/java.util.concurrent.Executors$RunnableAdapter.call(Executors.java:545)
+	at java.base/java.util.concurrent.FutureTask.run(FutureTask.java:328)
+	at java.base/java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1095)
+	at java.base/java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:619)
+	at java.base/java.lang.Thread.run(Thread.java:1447)
+Caused by: java.lang.InterruptedException: sleep interrupted
+	at java.base/java.lang.Thread.sleepNanos0(Native Method)
+	at java.base/java.lang.Thread.sleepNanos(Thread.java:482)
+	at java.base/java.lang.Thread.sleep(Thread.java:513)
+	at dev.failsafe.internal.RetryPolicyExecutor.lambda$apply$0(RetryPolicyExecutor.java:90)
+	at dev.failsafe.SyncExecutionImpl.executeSync(SyncExecutionImpl.java:176)
+	at dev.failsafe.FailsafeExecutor.call(FailsafeExecutor.java:437)
+	... 21 common frames omitted
+Apr-20 09:51:05.187 [main] DEBUG nextflow.cache.CacheDB - Closing CacheDB done
+Apr-20 09:51:05.208 [main] DEBUG nextflow.script.ScriptRunner - > Execution complete -- Goodbye
