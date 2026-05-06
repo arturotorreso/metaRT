@@ -5,7 +5,7 @@ nextflow.enable.dsl=2
 
 process RUN_SMART {
     tag "SMART on ${sample_id}"
-    publishDir "${params.outdir}/3_classification/smart/${sample_id}", mode: 'copy'
+    publishDir path: { "${params.outdir}/3_classification/smart/${sample_id}" }, mode: 'copy'
 
     input:
     tuple val(sample_id), path(reads)

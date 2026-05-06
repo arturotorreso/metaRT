@@ -245,7 +245,7 @@ class RunPreparationWindow(QWidget):
         layout.addWidget(barcode_group)
         layout.addStretch()
         
-        self.tabs.addTab(tab_widget, "Run & Barcodes")
+        self.tabs.addTab(tab_widget, "Run Input")
 
     def setup_pipeline_options_tab(self):
         """Creates the 'Pipeline Options' tab with a scroll area."""
@@ -449,7 +449,7 @@ class RunPreparationWindow(QWidget):
         default_tax_dir = os.path.join(project_root, "scripts", "kraken2", "data")
         default_refseq_db = os.path.join(project_root, "db", "refseq", "target.fna.gz.mm2idx")
         default_smart_db = os.path.join(project_root, "smart", "database", "test", "python_wrapped")
-        default_card_db = os.path.join(project_root, "db", "card_db")
+        default_card_db = os.path.join(project_root, "db", "card")
 
         config.read_string(f"""
 [Paths]

@@ -5,7 +5,7 @@ nextflow.enable.dsl=2
 
 process COMBINE_FASTQ {
     tag "Combining ${sample_id} files"
-    publishDir "${params.outdir}/0_combined_fastq/${sample_id}", mode: 'copy'
+    publishDir path: { "${params.outdir}/0_combined_fastq/${sample_id}" }, mode: 'copy'
 
     input:
     tuple val(sample_id), path(reads) // 'reads' is a list of files

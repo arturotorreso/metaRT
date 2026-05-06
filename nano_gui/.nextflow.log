@@ -1,75 +1,162 @@
-May-05 16:32:05.576 [main] DEBUG nextflow.cli.Launcher - $> nextflow run /home/atorres/scripts/metaRT/nextflow_pipeline/main.nf -params-file /media/atorres/ont_data/20260429_CpG_vs_no_CpG_Bactec_Bottle_results2/batch_20260505_163204/batch_params.json --outdir /media/atorres/ont_data/20260429_CpG_vs_no_CpG_Bactec_Bottle_results2/batch_20260505_163204 --barcodes 'barcode08, barcode09, barcode10, barcode11, barcode12, barcode13' --host_reference /home/atorres/db/human_genome/GCF_000001405.40_GRCh38.p14_genomic.fna --kraken_db /home/atorres/db/kraken2_standard_pluspf --taxonomy_dir /home/atorres/scripts/metaRT/scripts/kraken2/data --refseq_db /home/atorres/scripts/metaRT/db/refseq/target.fna.gz.mm2idx --smart_db /home/atorres/scripts/metaRT/smart/database/test/python_wrapped --card_db /home/atorres/db/card --run_host_depletion --run_read_qc --run_classification --run_kraken --run_amr --host_opts.keep_bam false --qc_opts.min_mean_q 10 --qc_opts.min_length 1000 --qc_opts.trim5 true --qc_opts.trim3 true --qc_opts.window_size 10 --qc_opts.cut_quality 10 --qc_opts.perc_low_qual 40 --qc_opts.min_base_q 10 --qc_opts.low_complexity true --qc_opts.entropy 0.6 --qc_opts.entropy_window 50 --qc_opts.entropy_kmer 5 --qc_opts.disable_adapters false --kraken_opts.confidence 0.0 --kraken_opts.memory_mapping true --kraken_opts.min_base_q 0 --kraken_opts.min_hit_groups 2 --mapping_opts.secondary_aligns 5
-May-05 16:32:05.614 [main] DEBUG nextflow.cli.CmdRun - N E X T F L O W  ~  version 26.04.0
-May-05 16:32:05.624 [main] DEBUG nextflow.plugin.PluginsFacade - Setting up plugin manager > mode=prod; embedded=false; plugins-dir=/home/atorres/.nextflow/plugins; core-plugins: nf-amazon@3.9.0,nf-azure@1.22.2,nf-cloudcache@0.6.0,nf-codecommit@0.5.1,nf-console@1.3.0,nf-google@1.27.2,nf-k8s@1.5.2,nf-seqera@0.19.0,nf-tower@1.27.0,nf-wave@1.20.0
-May-05 16:32:05.637 [main] INFO  o.pf4j.DefaultPluginStatusProvider - Enabled plugins: []
-May-05 16:32:05.638 [main] INFO  o.pf4j.DefaultPluginStatusProvider - Disabled plugins: []
-May-05 16:32:05.639 [main] INFO  org.pf4j.DefaultPluginManager - PF4J version 3.14.1 in 'deployment' mode
-May-05 16:32:05.647 [main] DEBUG nextflow.util.RetryConfig - Missing nextflow session - using default retry config
-May-05 16:32:05.701 [main] DEBUG nextflow.plugin.PluginUpdater - Using plugin repository: HttpPluginRepository [registry]; url=https://registry.nextflow.io/api
-May-05 16:32:05.704 [main] INFO  org.pf4j.AbstractPluginManager - No plugins
-May-05 16:32:05.740 [main] DEBUG nextflow.config.ConfigBuilder - Found config base: /home/atorres/scripts/metaRT/nextflow_pipeline/nextflow.config
-May-05 16:32:05.741 [main] DEBUG nextflow.config.ConfigBuilder - Parsing config file: /home/atorres/scripts/metaRT/nextflow_pipeline/nextflow.config
-May-05 16:32:05.742 [main] DEBUG nextflow.config.ConfigParserFactory - Using config parser v2
-May-05 16:32:05.749 [main] DEBUG nextflow.config.ConfigBuilder - Applying config profile: `standard`
-May-05 16:32:05.955 [main] DEBUG nextflow.plugin.PluginsFacade - Plugins default=[]
-May-05 16:32:05.955 [main] DEBUG nextflow.plugin.PluginsFacade - Plugins resolved requirement=[]
-May-05 16:32:05.962 [main] DEBUG n.secret.LocalSecretsProvider - Secrets store: /home/atorres/.nextflow/secrets/store.json
-May-05 16:32:05.964 [main] DEBUG nextflow.secret.SecretsLoader - Discovered secrets providers: [nextflow.secret.LocalSecretsProvider@7f93dd4e] - activable => nextflow.secret.LocalSecretsProvider@7f93dd4e
-May-05 16:32:05.971 [main] DEBUG nextflow.cli.CmdRun - Launching `/home/atorres/scripts/metaRT/nextflow_pipeline/main.nf` [goofy_pasteur] - revision: 8d742a6078
-May-05 16:32:05.986 [main] WARN  nextflow.config.ConfigValidator - Unrecognized config option 'conda.conda.useMamba'
-May-05 16:32:05.987 [main] WARN  nextflow.config.ConfigValidator - Unrecognized config option 'conda.environment'
-May-05 16:32:06.010 [main] DEBUG nextflow.Session - Session UUID: c95cc1fc-f2d0-4d25-b658-0f37efbb72f4
-May-05 16:32:06.011 [main] DEBUG nextflow.Session - Run name: goofy_pasteur
-May-05 16:32:06.011 [main] DEBUG nextflow.Session - Executor pool size: 32
-May-05 16:32:06.015 [main] DEBUG nextflow.file.FilePorter - File porter settings maxRetries=3; maxTransfers=50; pollTimeout=null
-May-05 16:32:06.018 [main] DEBUG nextflow.util.ThreadPoolBuilder - Creating thread pool 'FileTransfer' minSize=10; maxSize=96; workQueue=LinkedBlockingQueue[-1]; allowCoreThreadTimeout=false
-May-05 16:32:06.028 [main] DEBUG nextflow.cli.CmdRun - 
+May-06 14:34:27.718 [main] DEBUG nextflow.cli.Launcher - $> nextflow run /home/atorres/scripts/metaRT/nextflow_pipeline/main.nf -params-file /media/atorres/ont_data/20260429_CpG_vs_no_CpG_Bactec_Bottle_results2/batch_20260506_143427/batch_params.json --outdir /media/atorres/ont_data/20260429_CpG_vs_no_CpG_Bactec_Bottle_results2/batch_20260506_143427 --barcodes 'barcode01, barcode02, barcode03, barcode04, barcode05, barcode06, barcode14, barcode15, barcode16' --host_reference /home/atorres/db/human_genome/GCF_000001405.40_GRCh38.p14_genomic.fna --kraken_db /home/atorres/db/kraken2_standard_pluspf --taxonomy_dir /home/scripts/metaRT/scripts/kraken2/data --refseq_db /home/scripts/metaRT/db/refseq/target.fna.gz.mm2idx --smart_db /home/scripts/metaRT/smart/database/test/python_wrapped --card_db /home/atorres/db/card_db --run_host_depletion --run_read_qc --run_classification --run_kraken --run_amr --host_opts.keep_bam false --qc_opts.min_mean_q 10 --qc_opts.min_length 1000 --qc_opts.trim5 true --qc_opts.trim3 true --qc_opts.window_size 10 --qc_opts.cut_quality 10 --qc_opts.perc_low_qual 40 --qc_opts.min_base_q 10 --qc_opts.low_complexity true --qc_opts.entropy 0.6 --qc_opts.entropy_window 50 --qc_opts.entropy_kmer 5 --qc_opts.disable_adapters false --kraken_opts.confidence 0.0 --kraken_opts.memory_mapping true --kraken_opts.min_base_q 0 --kraken_opts.min_hit_groups 2 --mapping_opts.secondary_aligns 5
+May-06 14:34:27.763 [main] DEBUG nextflow.cli.CmdRun - N E X T F L O W  ~  version 26.04.0
+May-06 14:34:27.774 [main] DEBUG nextflow.plugin.PluginsFacade - Setting up plugin manager > mode=prod; embedded=false; plugins-dir=/home/atorres/.nextflow/plugins; core-plugins: nf-amazon@3.9.0,nf-azure@1.22.2,nf-cloudcache@0.6.0,nf-codecommit@0.5.1,nf-console@1.3.0,nf-google@1.27.2,nf-k8s@1.5.2,nf-seqera@0.19.0,nf-tower@1.27.0,nf-wave@1.20.0
+May-06 14:34:27.788 [main] INFO  o.pf4j.DefaultPluginStatusProvider - Enabled plugins: []
+May-06 14:34:27.788 [main] INFO  o.pf4j.DefaultPluginStatusProvider - Disabled plugins: []
+May-06 14:34:27.790 [main] INFO  org.pf4j.DefaultPluginManager - PF4J version 3.14.1 in 'deployment' mode
+May-06 14:34:27.797 [main] DEBUG nextflow.util.RetryConfig - Missing nextflow session - using default retry config
+May-06 14:34:27.854 [main] DEBUG nextflow.plugin.PluginUpdater - Using plugin repository: HttpPluginRepository [registry]; url=https://registry.nextflow.io/api
+May-06 14:34:27.856 [main] INFO  org.pf4j.AbstractPluginManager - No plugins
+May-06 14:34:27.890 [main] DEBUG nextflow.config.ConfigBuilder - Found config base: /home/atorres/scripts/metaRT/nextflow_pipeline/nextflow.config
+May-06 14:34:27.891 [main] DEBUG nextflow.config.ConfigBuilder - Parsing config file: /home/atorres/scripts/metaRT/nextflow_pipeline/nextflow.config
+May-06 14:34:27.892 [main] DEBUG nextflow.config.ConfigParserFactory - Using config parser v2
+May-06 14:34:27.899 [main] DEBUG nextflow.config.ConfigBuilder - Applying config profile: `standard`
+May-06 14:34:28.115 [main] DEBUG nextflow.plugin.PluginsFacade - Plugins default=[]
+May-06 14:34:28.115 [main] DEBUG nextflow.plugin.PluginsFacade - Plugins resolved requirement=[]
+May-06 14:34:28.125 [main] DEBUG n.secret.LocalSecretsProvider - Secrets store: /home/atorres/.nextflow/secrets/store.json
+May-06 14:34:28.127 [main] DEBUG nextflow.secret.SecretsLoader - Discovered secrets providers: [nextflow.secret.LocalSecretsProvider@6535117e] - activable => nextflow.secret.LocalSecretsProvider@6535117e
+May-06 14:34:28.137 [main] DEBUG nextflow.cli.CmdRun - Launching `/home/atorres/scripts/metaRT/nextflow_pipeline/main.nf` [evil_ochoa] - revision: 1bf0c44e29
+May-06 14:34:28.177 [main] DEBUG nextflow.Session - Session UUID: 9f7d0b5a-dd9d-43c4-82d8-f9a74f68bb7f
+May-06 14:34:28.177 [main] DEBUG nextflow.Session - Run name: evil_ochoa
+May-06 14:34:28.177 [main] DEBUG nextflow.Session - Executor pool size: 32
+May-06 14:34:28.182 [main] DEBUG nextflow.file.FilePorter - File porter settings maxRetries=3; maxTransfers=50; pollTimeout=null
+May-06 14:34:28.184 [main] DEBUG nextflow.util.ThreadPoolBuilder - Creating thread pool 'FileTransfer' minSize=10; maxSize=96; workQueue=LinkedBlockingQueue[-1]; allowCoreThreadTimeout=false
+May-06 14:34:28.195 [main] DEBUG nextflow.cli.CmdRun - 
   Version: 26.04.0 build 12031
   Created: 29-04-2026 04:00 UTC (28-04-2026 21:00 PDT)
-  System: Linux 6.8.0-107-generic
+  System: Linux 6.8.0-111-generic
   Runtime: Groovy 4.0.31 on OpenJDK 64-Bit Server VM 21-internal-adhoc.conda.src
   Encoding: UTF-8 (UTF-8)
-  Process: 2468036@arion [127.0.1.1]
-  CPUs: 32 - Mem: 125.6 GB (6.6 GB) - Swap: 2 GB (1.4 GB)
-May-05 16:32:06.038 [main] DEBUG nextflow.Session - Work-dir: /home/atorres/scripts/metaRT/nano_gui/work [ext2/ext3]
-May-05 16:32:06.057 [main] DEBUG nextflow.executor.ExecutorFactory - Extension executors providers=[]
-May-05 16:32:06.062 [main] DEBUG nextflow.Session - Observer factory (v2): LinObserverFactory
-May-05 16:32:06.063 [main] DEBUG nextflow.Session - Observer factory (v2): DefaultObserverFactory
-May-05 16:32:06.075 [main] DEBUG nextflow.cache.CacheFactory - Using Nextflow cache factory: nextflow.cache.DefaultCacheFactory
-May-05 16:32:06.079 [main] DEBUG nextflow.util.CustomThreadPool - Creating default thread pool > poolSize: 33; maxThreads: 1000
-May-05 16:32:06.115 [main] DEBUG nextflow.Session - Session start
-May-05 16:32:06.118 [main] DEBUG nextflow.script.ScriptLoaderFactory - Using script parser v2
-May-05 16:32:06.240 [main] DEBUG nextflow.script.ScriptRunner - Parsed script files:
-May-05 16:32:06.246 [main] DEBUG n.trace.WorkflowStatsObserver - Workflow completed > WorkflowStats[succeededCount=0; failedCount=0; ignoredCount=0; cachedCount=0; pendingCount=0; submittedCount=0; runningCount=0; retriesCount=0; abortedCount=0; succeedDuration=0ms; failedDuration=0ms; cachedDuration=0ms;loadCpus=0; loadMemory=0; peakRunning=0; peakCpus=0; peakMemory=0; ]
-May-05 16:32:06.329 [main] ERROR nextflow.cli.Launcher - Script compilation failed
-nextflow.exception.ScriptCompilationException: Script compilation failed
-	at nextflow.script.parser.v2.ScriptLoaderV2.parse0(ScriptLoaderV2.groovy:129)
-	at nextflow.script.parser.v2.ScriptLoaderV2.parse(ScriptLoaderV2.groovy:81)
-	at nextflow.script.parser.v2.ScriptLoaderV2.parse(ScriptLoaderV2.groovy)
-	at nextflow.script.ScriptRunner.parseScript(ScriptRunner.groovy:215)
-	at nextflow.script.ScriptRunner.execute(ScriptRunner.groovy:126)
-	at nextflow.cli.CmdRun.run(CmdRun.groovy:441)
-	at nextflow.cli.Launcher.run(Launcher.groovy:526)
-	at nextflow.cli.Launcher.main(Launcher.groovy:686)
-Caused by: org.codehaus.groovy.control.MultipleCompilationErrorsException: startup failed:
-Main: 7: Statements cannot be mixed with script declarations -- move statements into a process, workflow, or function @ line 7, column 1.
-   log.info """
-   ^
+  Process: 100332@arion [127.0.1.1]
+  CPUs: 32 - Mem: 125.6 GB (31.3 GB) - Swap: 2 GB (3.4 MB)
+May-06 14:34:28.204 [main] DEBUG nextflow.Session - Work-dir: /home/atorres/scripts/metaRT/nano_gui/work [ext2/ext3]
+May-06 14:34:28.221 [main] DEBUG nextflow.executor.ExecutorFactory - Extension executors providers=[]
+May-06 14:34:28.226 [main] DEBUG nextflow.Session - Observer factory (v2): LinObserverFactory
+May-06 14:34:28.227 [main] DEBUG nextflow.Session - Observer factory (v2): DefaultObserverFactory
+May-06 14:34:28.239 [main] DEBUG nextflow.cache.CacheFactory - Using Nextflow cache factory: nextflow.cache.DefaultCacheFactory
+May-06 14:34:28.244 [main] DEBUG nextflow.util.CustomThreadPool - Creating default thread pool > poolSize: 33; maxThreads: 1000
+May-06 14:34:28.287 [main] DEBUG nextflow.Session - Session start
+May-06 14:34:28.290 [main] DEBUG nextflow.script.ScriptLoaderFactory - Using script parser v2
+May-06 14:34:28.544 [main] DEBUG nextflow.script.ScriptRunner - > Launching execution
+May-06 14:34:28.624 [main] INFO  nextflow.Nextflow - 
+N A N O - R T    P I P E L I N E (Modular)
+==========================================
+Input Directory : false
+Output Directory: /media/atorres/ont_data/20260429_CpG_vs_no_CpG_Bactec_Bottle_results2/batch_20260506_143427
+Barcodes        : barcode01, barcode02, barcode03, barcode04, barcode05, barcode06, barcode14, barcode15, barcode16
+Classifier      : None
 
-1 error
-
-	at org.codehaus.groovy.control.ErrorCollector.failIfErrors(ErrorCollector.java:292)
-	at org.codehaus.groovy.control.ErrorCollector.addFatalError(ErrorCollector.java:148)
-	at nextflow.script.parser.ScriptAstBuilder.collectSyntaxError(ScriptAstBuilder.java:2187)
-	at nextflow.script.parser.ScriptAstBuilder.compilationUnit(ScriptAstBuilder.java:239)
-	at nextflow.script.parser.ScriptAstBuilder.buildAST(ScriptAstBuilder.java:202)
-	at nextflow.script.parser.ScriptParserPlugin.buildAST(ScriptParserPlugin.java:51)
-	at org.codehaus.groovy.control.SourceUnit.buildAST(SourceUnit.java:256)
-	at java.base/java.util.Iterator.forEachRemaining(Iterator.java:133)
-	at java.base/java.util.Spliterators$IteratorSpliterator.forEachRemaining(Spliterators.java:1939)
-	at java.base/java.util.stream.ReferencePipeline$Head.forEach(ReferencePipeline.java:762)
-	at org.codehaus.groovy.control.CompilationUnit.compile(CompilationUnit.java:631)
-	at nextflow.script.parser.v2.ScriptCompiler.compile0(ScriptCompiler.java:146)
-	at nextflow.script.parser.v2.ScriptCompiler.compile(ScriptCompiler.java:112)
-	at nextflow.script.parser.v2.ScriptLoaderV2.parse0(ScriptLoaderV2.groovy:114)
-	... 7 common frames omitted
+May-06 14:34:28.687 [main] DEBUG n.script.dsl.ProcessConfigBuilder - Config settings `withName:COMBINE_FASTQ` matches process COMBINE_FASTQ
+May-06 14:34:28.689 [main] DEBUG nextflow.executor.ExecutorFactory - << taskConfig executor: local
+May-06 14:34:28.689 [main] DEBUG nextflow.executor.ExecutorFactory - >> processorType: 'local'
+May-06 14:34:28.692 [main] DEBUG nextflow.executor.Executor - [warm up] executor > local
+May-06 14:34:28.696 [main] DEBUG n.processor.LocalPollingMonitor - Creating local task monitor for executor 'local' > cpus=24; memory=60 GB; capacity=32; pollInterval=100ms; dumpInterval=5m
+May-06 14:34:28.697 [main] DEBUG n.processor.TaskPollingMonitor - >>> barrier register (monitor: local)
+May-06 14:34:28.714 [main] DEBUG nextflow.processor.TaskProcessor - Creating process 'COMBINE_FASTQ': maxForks=0; fair=false; array=0
+May-06 14:34:28.731 [main] DEBUG n.script.dsl.ProcessConfigBuilder - Config settings `withName:REMOVE_HOST` matches process REMOVE_HOST
+May-06 14:34:28.732 [main] DEBUG nextflow.executor.ExecutorFactory - << taskConfig executor: local
+May-06 14:34:28.732 [main] DEBUG nextflow.executor.ExecutorFactory - >> processorType: 'local'
+May-06 14:34:28.732 [main] DEBUG nextflow.processor.TaskProcessor - Creating process 'REMOVE_HOST': maxForks=0; fair=false; array=0
+May-06 14:34:28.736 [main] DEBUG n.script.dsl.ProcessConfigBuilder - Config settings `withName:RUN_QC_FASTPLONG` matches process RUN_QC_FASTPLONG
+May-06 14:34:28.736 [main] DEBUG nextflow.executor.ExecutorFactory - << taskConfig executor: local
+May-06 14:34:28.736 [main] DEBUG nextflow.executor.ExecutorFactory - >> processorType: 'local'
+May-06 14:34:28.737 [main] DEBUG nextflow.processor.TaskProcessor - Creating process 'RUN_QC_FASTPLONG': maxForks=0; fair=false; array=0
+May-06 14:34:28.740 [main] DEBUG n.script.dsl.ProcessConfigBuilder - Config settings `withName:PREPARE_KRAKEN_DB` matches process PREPARE_KRAKEN_DB
+May-06 14:34:28.740 [main] DEBUG nextflow.executor.ExecutorFactory - << taskConfig executor: local
+May-06 14:34:28.740 [main] DEBUG nextflow.executor.ExecutorFactory - >> processorType: 'local'
+May-06 14:34:28.741 [main] DEBUG nextflow.processor.TaskProcessor - Creating process 'PREPARE_KRAKEN_DB': maxForks=0; fair=false; array=0
+May-06 14:34:28.743 [main] DEBUG n.script.dsl.ProcessConfigBuilder - Config settings `withName:RUN_KRAKEN2` matches process RUN_KRAKEN2
+May-06 14:34:28.743 [main] DEBUG nextflow.executor.ExecutorFactory - << taskConfig executor: local
+May-06 14:34:28.743 [main] DEBUG nextflow.executor.ExecutorFactory - >> processorType: 'local'
+May-06 14:34:28.743 [main] DEBUG nextflow.processor.TaskProcessor - Creating process 'RUN_KRAKEN2': maxForks=0; fair=false; array=0
+May-06 14:34:28.746 [main] DEBUG n.script.dsl.ProcessConfigBuilder - Config settings `withName:RUN_AMR` matches process RUN_AMR
+May-06 14:34:28.746 [main] DEBUG nextflow.executor.ExecutorFactory - << taskConfig executor: local
+May-06 14:34:28.746 [main] DEBUG nextflow.executor.ExecutorFactory - >> processorType: 'local'
+May-06 14:34:28.746 [main] DEBUG nextflow.processor.TaskProcessor - Creating process 'RUN_AMR': maxForks=0; fair=false; array=0
+May-06 14:34:28.748 [main] DEBUG nextflow.Session - Process names: RUN_AMR, RUN_KRAKEN2, REMOVE_HOST, RUN_SMART, RUN_MAP2REFSEQ, RUN_QC_FASTPLONG, PREPARE_KRAKEN_DB, COMBINE_FASTQ
+May-06 14:34:28.749 [main] DEBUG nextflow.Session - Igniting dataflow network (7)
+May-06 14:34:28.755 [main] DEBUG nextflow.processor.TaskProcessor - Starting process > COMBINE_FASTQ
+May-06 14:34:28.755 [main] DEBUG nextflow.processor.TaskProcessor - Starting process > REMOVE_HOST
+May-06 14:34:28.755 [main] DEBUG nextflow.processor.TaskProcessor - Starting process > RUN_QC_FASTPLONG
+May-06 14:34:28.755 [main] DEBUG nextflow.processor.TaskProcessor - Starting process > PREPARE_KRAKEN_DB
+May-06 14:34:28.755 [main] DEBUG nextflow.processor.TaskProcessor - Starting process > RUN_KRAKEN2
+May-06 14:34:28.756 [main] DEBUG nextflow.processor.TaskProcessor - Starting process > RUN_AMR
+May-06 14:34:28.756 [main] DEBUG nextflow.script.ScriptRunner - Parsed script files:
+  _nf_script_28cd5c7533df4d59: /home/atorres/scripts/metaRT/nextflow_pipeline/modules/local/classification/map2refseq.nf
+  _nf_script_fbf605c104a7fd0d: /home/atorres/scripts/metaRT/nextflow_pipeline/modules/local/classification/smart.nf
+  _nf_script_e03118a575c6b1c6: /home/atorres/scripts/metaRT/nextflow_pipeline/modules/local/amr_rgi.nf
+  _nf_script_2e9cb2cec37e3aaf: /home/atorres/scripts/metaRT/nextflow_pipeline/modules/local/read_qc.nf
+  _nf_script_c09e36656aedf3f8: /home/atorres/scripts/metaRT/nextflow_pipeline/modules/local/host_depletion.nf
+  _nf_script_8a9fe47ae4d689a6: /home/atorres/scripts/metaRT/nextflow_pipeline/modules/local/combine_fastq.nf
+  _nf_script_feae81176fcf92bd: /home/atorres/scripts/metaRT/nextflow_pipeline/modules/local/prepare_kraken_db.nf
+  Main: /home/atorres/scripts/metaRT/nextflow_pipeline/main.nf
+  _nf_script_39ce0aa658fe1d3c: /home/atorres/scripts/metaRT/nextflow_pipeline/modules/local/classification/kraken2.nf
+May-06 14:34:28.756 [main] DEBUG nextflow.script.ScriptRunner - > Awaiting termination 
+May-06 14:34:28.756 [main] DEBUG nextflow.Session - Session await
+May-06 14:34:28.833 [Task submitter] DEBUG n.executor.local.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+May-06 14:34:28.834 [Task submitter] INFO  nextflow.Session - [81/ebf6da] Submitted process > PREPARE_KRAKEN_DB (Preparing Kraken2 DB)
+May-06 14:34:28.854 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 1; name: PREPARE_KRAKEN_DB (Preparing Kraken2 DB); status: COMPLETED; exit: 0; error: -; workDir: /home/atorres/scripts/metaRT/nano_gui/work/81/ebf6daaf8a5b44d9dbfdd5f61e6c8a]
+May-06 14:34:28.855 [Task monitor] DEBUG nextflow.util.ThreadPoolBuilder - Creating thread pool 'TaskFinalizer' minSize=10; maxSize=96; workQueue=LinkedBlockingQueue[-1]; allowCoreThreadTimeout=false
+May-06 14:34:29.993 [Task submitter] DEBUG n.executor.local.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+May-06 14:34:29.993 [Task submitter] INFO  nextflow.Session - [57/949cff] Submitted process > COMBINE_FASTQ (Combining barcode16 files)
+May-06 14:34:30.007 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 2; name: COMBINE_FASTQ (Combining barcode16 files); status: COMPLETED; exit: 0; error: -; workDir: /home/atorres/scripts/metaRT/nano_gui/work/57/949cff81737796dd92f4362096e0f1]
+May-06 14:34:30.016 [TaskFinalizer-2] DEBUG nextflow.util.ThreadPoolBuilder - Creating thread pool 'PublishDir' minSize=10; maxSize=96; workQueue=LinkedBlockingQueue[-1]; allowCoreThreadTimeout=false
+May-06 14:34:30.023 [Task submitter] DEBUG n.executor.local.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+May-06 14:34:30.023 [Task submitter] INFO  nextflow.Session - [87/80a830] Submitted process > COMBINE_FASTQ (Combining barcode03 files)
+May-06 14:34:30.034 [Task submitter] DEBUG n.executor.local.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+May-06 14:34:30.034 [Task submitter] INFO  nextflow.Session - [33/d585ea] Submitted process > COMBINE_FASTQ (Combining barcode02 files)
+May-06 14:34:30.043 [Task submitter] DEBUG n.executor.local.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+May-06 14:34:30.043 [Task submitter] INFO  nextflow.Session - [30/656f11] Submitted process > COMBINE_FASTQ (Combining barcode01 files)
+May-06 14:34:30.055 [Task submitter] DEBUG n.executor.local.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+May-06 14:34:30.055 [Task submitter] INFO  nextflow.Session - [f7/2899f1] Submitted process > COMBINE_FASTQ (Combining barcode06 files)
+May-06 14:34:30.065 [Task submitter] DEBUG n.executor.local.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+May-06 14:34:30.065 [Task submitter] INFO  nextflow.Session - [b3/3806ea] Submitted process > COMBINE_FASTQ (Combining barcode04 files)
+May-06 14:34:30.074 [Task submitter] DEBUG n.executor.local.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+May-06 14:34:30.074 [Task submitter] INFO  nextflow.Session - [d4/4c8ec8] Submitted process > COMBINE_FASTQ (Combining barcode15 files)
+May-06 14:34:30.083 [Task submitter] DEBUG n.executor.local.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+May-06 14:34:30.083 [Task submitter] INFO  nextflow.Session - [ee/879c54] Submitted process > COMBINE_FASTQ (Combining barcode05 files)
+May-06 14:34:30.092 [Task submitter] DEBUG n.executor.local.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+May-06 14:34:30.092 [Task submitter] INFO  nextflow.Session - [f1/4ae95f] Submitted process > COMBINE_FASTQ (Combining barcode14 files)
+May-06 14:34:30.094 [Task submitter] DEBUG n.executor.local.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+May-06 14:34:30.095 [Task submitter] INFO  nextflow.Session - [53/e7bcf8] Submitted process > REMOVE_HOST (Removing host from barcode16)
+May-06 14:34:43.535 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 9; name: COMBINE_FASTQ (Combining barcode03 files); status: COMPLETED; exit: 0; error: -; workDir: /home/atorres/scripts/metaRT/nano_gui/work/87/80a830a939f30fbe18eb2885eea7d2]
+May-06 14:34:43.961 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 10; name: COMBINE_FASTQ (Combining barcode01 files); status: COMPLETED; exit: 0; error: -; workDir: /home/atorres/scripts/metaRT/nano_gui/work/30/656f114277fa7d30da0e6c03d8c767]
+May-06 14:34:44.004 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 8; name: COMBINE_FASTQ (Combining barcode02 files); status: COMPLETED; exit: 0; error: -; workDir: /home/atorres/scripts/metaRT/nano_gui/work/33/d585ea9e03961399ddd74ff59a7ae9]
+May-06 14:34:44.093 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 6; name: COMBINE_FASTQ (Combining barcode04 files); status: COMPLETED; exit: 0; error: -; workDir: /home/atorres/scripts/metaRT/nano_gui/work/b3/3806ea4e88e6c697ea2de0dc470cbb]
+May-06 14:34:44.132 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 5; name: COMBINE_FASTQ (Combining barcode06 files); status: COMPLETED; exit: 0; error: -; workDir: /home/atorres/scripts/metaRT/nano_gui/work/f7/2899f1b6dec810ba88d95cc401f5ac]
+May-06 14:34:44.180 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 3; name: COMBINE_FASTQ (Combining barcode14 files); status: COMPLETED; exit: 0; error: -; workDir: /home/atorres/scripts/metaRT/nano_gui/work/f1/4ae95fa32c18626b3cbb2eb6f14c3e]
+May-06 14:34:44.368 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 7; name: COMBINE_FASTQ (Combining barcode05 files); status: COMPLETED; exit: 0; error: -; workDir: /home/atorres/scripts/metaRT/nano_gui/work/ee/879c544e803948783f80f28c2bc646]
+May-06 14:34:44.867 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 4; name: COMBINE_FASTQ (Combining barcode15 files); status: COMPLETED; exit: 0; error: -; workDir: /home/atorres/scripts/metaRT/nano_gui/work/d4/4c8ec8545b9e3a24249cff761dd06f]
+May-06 14:34:44.871 [Task submitter] DEBUG n.executor.local.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+May-06 14:34:44.871 [Task submitter] INFO  nextflow.Session - [49/73c94c] Submitted process > REMOVE_HOST (Removing host from barcode03)
+May-06 14:34:59.800 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 11; name: REMOVE_HOST (Removing host from barcode16); status: COMPLETED; exit: 0; error: -; workDir: /home/atorres/scripts/metaRT/nano_gui/work/53/e7bcf81ee873e3ea697cdbecb26559]
+May-06 14:34:59.803 [Task submitter] DEBUG n.executor.local.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+May-06 14:34:59.804 [Task submitter] INFO  nextflow.Session - [66/01021c] Submitted process > REMOVE_HOST (Removing host from barcode01)
+May-06 14:35:47.909 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 12; name: REMOVE_HOST (Removing host from barcode03); status: COMPLETED; exit: 0; error: -; workDir: /home/atorres/scripts/metaRT/nano_gui/work/49/73c94c5b6d73470aa4ed5d42ca4cb9]
+May-06 14:35:47.912 [Task submitter] DEBUG n.executor.local.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+May-06 14:35:47.912 [Task submitter] INFO  nextflow.Session - [98/cc87ee] Submitted process > REMOVE_HOST (Removing host from barcode02)
+May-06 14:36:19.448 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 13; name: REMOVE_HOST (Removing host from barcode01); status: COMPLETED; exit: 0; error: -; workDir: /home/atorres/scripts/metaRT/nano_gui/work/66/01021cb31e9a55b6fb3a68916acac0]
+May-06 14:36:19.451 [Task submitter] DEBUG n.executor.local.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+May-06 14:36:19.452 [Task submitter] INFO  nextflow.Session - [27/0967d9] Submitted process > REMOVE_HOST (Removing host from barcode04)
+May-06 14:37:18.455 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 14; name: REMOVE_HOST (Removing host from barcode02); status: COMPLETED; exit: 0; error: -; workDir: /home/atorres/scripts/metaRT/nano_gui/work/98/cc87eeda07558f64e0ba258a71ebc0]
+May-06 14:37:18.458 [Task submitter] DEBUG n.executor.local.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+May-06 14:37:18.459 [Task submitter] INFO  nextflow.Session - [ba/4dffd8] Submitted process > REMOVE_HOST (Removing host from barcode06)
+May-06 14:38:08.237 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 15; name: REMOVE_HOST (Removing host from barcode04); status: COMPLETED; exit: 0; error: -; workDir: /home/atorres/scripts/metaRT/nano_gui/work/27/0967d9342f8744de486277abe56994]
+May-06 14:38:08.240 [Task submitter] DEBUG n.executor.local.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+May-06 14:38:08.241 [Task submitter] INFO  nextflow.Session - [93/9654eb] Submitted process > REMOVE_HOST (Removing host from barcode14)
+May-06 14:39:05.810 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 16; name: REMOVE_HOST (Removing host from barcode06); status: COMPLETED; exit: 0; error: -; workDir: /home/atorres/scripts/metaRT/nano_gui/work/ba/4dffd8712062c35b6e9a39be0a2948]
+May-06 14:39:05.814 [Task submitter] DEBUG n.executor.local.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+May-06 14:39:05.815 [Task submitter] INFO  nextflow.Session - [15/ee776b] Submitted process > REMOVE_HOST (Removing host from barcode05)
+May-06 14:39:28.839 [Task monitor] DEBUG n.processor.TaskPollingMonitor - !! executor local > tasks to be completed: 2 -- submitted tasks are shown below
+~> TaskHandler[id: 17; name: REMOVE_HOST (Removing host from barcode14); status: RUNNING; exit: -; error: -; workDir: /home/atorres/scripts/metaRT/nano_gui/work/93/9654eb6b5a57974d1b68012b228444]
+~> TaskHandler[id: 18; name: REMOVE_HOST (Removing host from barcode05); status: RUNNING; exit: -; error: -; workDir: /home/atorres/scripts/metaRT/nano_gui/work/15/ee776bf48ab62e8f0d00ff1da60d0e]
+May-06 14:39:39.264 [Task monitor] DEBUG n.processor.TaskPollingMonitor - Task completed > TaskHandler[id: 17; name: REMOVE_HOST (Removing host from barcode14); status: COMPLETED; exit: 0; error: -; workDir: /home/atorres/scripts/metaRT/nano_gui/work/93/9654eb6b5a57974d1b68012b228444]
+May-06 14:39:39.267 [Task submitter] DEBUG n.executor.local.LocalTaskHandler - Launch cmd line: /bin/bash -ue .command.run
+May-06 14:39:39.267 [Task submitter] INFO  nextflow.Session - [e0/51cf09] Submitted process > REMOVE_HOST (Removing host from barcode15)
+May-06 14:39:44.270 [Task submitter] DEBUG n.processor.TaskPollingMonitor - %% executor local > tasks in the submission queue: 6 -- tasks to be submitted are shown below
+~> TaskHandler[id: 20; name: RUN_QC_FASTPLONG (QC for barcode03); status: NEW; exit: -; error: -; workDir: /home/atorres/scripts/metaRT/nano_gui/work/12/c1dfde9419169c87a9238cf61f049d]
+~> TaskHandler[id: 21; name: RUN_QC_FASTPLONG (QC for barcode01); status: NEW; exit: -; error: -; workDir: /home/atorres/scripts/metaRT/nano_gui/work/39/e1afba19f2f2f6ca60d2741e793e02]
+~> TaskHandler[id: 22; name: RUN_QC_FASTPLONG (QC for barcode02); status: NEW; exit: -; error: -; workDir: /home/atorres/scripts/metaRT/nano_gui/work/d1/c85662fce247f5356a362afb4e1890]
+~> TaskHandler[id: 23; name: RUN_QC_FASTPLONG (QC for barcode04); status: NEW; exit: -; error: -; workDir: /home/atorres/scripts/metaRT/nano_gui/work/e2/44ad7b6c304614ab627ac73afa9d8d]
+~> TaskHandler[id: 24; name: RUN_QC_FASTPLONG (QC for barcode06); status: NEW; exit: -; error: -; workDir: /home/atorres/scripts/metaRT/nano_gui/work/28/bce2ccc49cb18f56f0cea9edc82eb2]
+~> TaskHandler[id: 25; name: RUN_QC_FASTPLONG (QC for barcode14); status: NEW; exit: -; error: -; workDir: /home/atorres/scripts/metaRT/nano_gui/work/17/accb58a5efb79e622cfd35d6d3bd37]

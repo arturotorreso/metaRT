@@ -3,7 +3,7 @@ nextflow.enable.dsl=2
 
 process RUN_KRAKEN2 {
     tag "Kraken2 on ${sample_id}"
-    publishDir "${params.outdir}/3_classification/kraken2/${sample_id}", mode: 'copy'
+    publishDir path: { "${params.outdir}/3_classification/kraken2/${sample_id}" }, mode: 'copy'
 
     input:
     tuple val(sample_id), path(reads)

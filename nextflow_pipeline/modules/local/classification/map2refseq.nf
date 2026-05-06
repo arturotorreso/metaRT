@@ -3,7 +3,7 @@ nextflow.enable.dsl=2
 
 process RUN_MAP2REFSEQ {
     tag "Mapping ${sample_id}"
-    publishDir "${params.outdir}/3_classification/mapping/${sample_id}", mode: 'copy'
+    publishDir path: { "${params.outdir}/3_classification/mapping/${sample_id}" }, mode: 'copy'
 
     input:
     tuple val(sample_id), path(reads)

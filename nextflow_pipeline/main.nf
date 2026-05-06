@@ -1,24 +1,12 @@
 #!/usr/bin/env nextflow
 nextflow.enable.dsl=2
 
-// ====================================================================================
-// == Main Pipeline Entry
-// ====================================================================================
-log.info """
-         N A N O - R T    P I P E L I N E (Modular)
-         ==========================================
-         Input Directory : ${params.input_dir}
-         Output Directory: ${params.outdir}
-         Barcodes        : ${params.barcodes ?: 'All'}
-         Classifier      : ${params.classifier}
-         """
-         .stripIndent()
-
 // --- Parameter Definitions ---
 params.input_files = null // For real-time mode
 params.input_dir   = false // For standard mode
 params.outdir      = './results'
 params.barcodes    = false
+params.classifier  = 'None'
 params.help        = false
 
 // --- Workflow Step Control ---
@@ -29,23 +17,6 @@ params.run_kraken = true
 params.run_mapping = false
 params.run_smart = false
 params.run_amr = false
-
-if (params.help) {
-    log.info """
-    Usage:
-    nextflow run main.nf -profile <wgs,cfdna,16s,docker> --input_dir <path>
-
-    Required Arguments:
-    --input_dir         Path to the top-level Nanopore directory.
-    --input_files       Comma-separated list of .fastq.gz files for a real-time batch run.
-
-    Optional Arguments:
-    --outdir            Directory for pipeline results. (Default: ./results)
-    --barcodes          Comma-separated list of barcodes to process (e.g., 'barcode01,barcode05').
-    """
-    .stripIndent()
-    exit 0
-}
 
 // ====================================================================================
 // == MODULE INCLUSION
@@ -59,10 +30,41 @@ include { RUN_MAP2REFSEQ }      from './modules/local/classification/map2refseq'
 include { RUN_SMART }           from './modules/local/classification/smart'
 include { RUN_AMR }             from './modules/local/amr_rgi'
 
+
 // ====================================================================================
 // == WORKFLOW DEFINITION
 // ====================================================================================
 workflow {
+
+    // ====================================================================================
+    // == Main Pipeline Entry Logging
+    // ====================================================================================
+    if (params.help) {
+        log.info """
+        Usage:
+        nextflow run main.nf -profile <wgs,cfdna,16s,docker> --input_dir <path>
+
+        Required Arguments:
+        --input_dir         Path to the top-level Nanopore directory.
+        --input_files       Comma-separated list of .fastq.gz files for a real-time batch run.
+
+        Optional Arguments:
+        --outdir            Directory for pipeline results. (Default: ./results)
+        --barcodes          Comma-separated list of barcodes to process (e.g., 'barcode01,barcode05').
+        """
+        .stripIndent()
+        exit 0
+    }
+
+    log.info """
+             N A N O - R T    P I P E L I N E (Modular)
+             ==========================================
+             Input Directory : ${params.input_dir}
+             Output Directory: ${params.outdir}
+             Barcodes        : ${params.barcodes ?: 'All'}
+             Classifier      : ${params.classifier ?: 'None'}
+             """
+             .stripIndent()
 
     // --- Validation: Ensure databases are provided if their modules are active ---
     if (params.run_host_depletion && !params.host_reference) {

@@ -310,21 +310,33 @@ def aggregate_and_plot(batch_result_dir: str, config: configparser.ConfigParser)
                         if amr_df_list:
                             master_amr = pd.concat(amr_df_list, ignore_index=True)
                             
-                            if 'AMR Gene Family' in master_amr.columns and 'Mapped Reads' in master_amr.columns:
+                            # Dynamically map RGI column names which vary by version
+                            ref_col = next((c for c in ['Reference', 'Reference Sequence', 'Reference Allele', 'Allele'] if c in master_amr.columns), None)
+                            cov_col = next((c for c in ['Percent Coverage', 'Percentage Length of Reference Sequence', 'Coverage'] if c in master_amr.columns), None)
+                            depth_col = next((c for c in ['Depth', 'Average Depth'] if c in master_amr.columns), None)
+                            reads_col = next((c for c in ['All Mapped Reads', 'Mapped Reads', 'Completely Mapped Reads'] if c in master_amr.columns), None)
+
+                            if not ref_col or not cov_col or not depth_col or not reads_col:
+                                logger.error(f"Missing required AMR columns. Found: {list(master_amr.columns)}")
+                            elif 'AMR Gene Family' in master_amr.columns:
                                 # Ensure Reference Sequence is kept for BAM joining
-                                group_cols = [c for c in ['AMR Gene Family', 'Drug Class', 'Resistance Mechanism', 'Reference Sequence'] if c in master_amr.columns]
+                                group_cols = [c for c in ['AMR Gene Family', 'Drug Class', 'Resistance Mechanism', ref_col] if c in master_amr.columns]
                                 
                                 agg_amr = master_amr.groupby(group_cols).agg({
-                                    'Mapped Reads': 'sum',
-                                    'Percentage Length of Reference Sequence': 'mean',
-                                    'Depth': 'mean'
+                                    reads_col: 'sum',
+                                    cov_col: 'mean',
+                                    depth_col: 'mean'
                                 }).reset_index()
                                 
                                 min_cov = config.getfloat('AmrParams', 'min_coverage', fallback=80.0)
                                 min_depth = config.getfloat('AmrParams', 'min_depth', fallback=2.0)
                                 
-                                filtered_amr = agg_amr[(agg_amr['Percentage Length of Reference Sequence'] >= min_cov) & 
-                                                       (agg_amr['Depth'] >= min_depth)]
+                                # RGI leaves 'Depth' completely blank in some outputs. Cast to numeric and use reads_col instead.
+                                agg_amr[cov_col] = pd.to_numeric(agg_amr[cov_col], errors='coerce').fillna(0)
+                                agg_amr[reads_col] = pd.to_numeric(agg_amr[reads_col], errors='coerce').fillna(0)
+
+                                filtered_amr = agg_amr[(agg_amr[cov_col] >= min_cov) & 
+                                                       (agg_amr[reads_col] >= min_depth)]
                                                        
                                 amr_summary_path = os.path.join(barcode_agg_dir, f"master_{barcode}.amr_summary.csv")
                                 _safe_write_csv(filtered_amr, amr_summary_path)
@@ -335,61 +347,110 @@ def aggregate_and_plot(batch_result_dir: str, config: configparser.ConfigParser)
                                 batch_bam_files = glob.glob(os.path.join(batch_amr_dir, "*.bam"))
                                 master_join_path = os.path.join(barcode_agg_dir, f"master_{barcode}.amr_reads.csv")
                                 
+                                # Ensure absolute path to samtools to bypass PATH drops in non-interactive python shells
+                                samtools_bin = os.path.join(PROJECT_ROOT, "nextflow_pipeline", "bin", "conda-env", "bin", "samtools")
+                                if not os.path.exists(samtools_bin):
+                                    samtools_bin = "samtools"
+
                                 if os.path.exists(batch_kraken_tsv) and batch_bam_files:
                                     try:
                                         k_df = pd.read_csv(batch_kraken_tsv, sep='\t', header=None, usecols=[1, 2], names=['ReadID', 'TaxID'])
+                                        
+                                        # Clean TaxID: Handle Kraken's '--use-names' flag outputs like 'Staphylococcus aureus (taxid 1280)'
+                                        extracted_tax = k_df['TaxID'].astype(str).str.extract(r'taxid (\d+)')
+                                        k_df['TaxID'] = extracted_tax[0].fillna(k_df['TaxID'])
+                                        
                                         bam_records = []
                                         for bam in batch_bam_files:
-                                            # Fast extraction of mapped ReadIDs to Reference Alleles
-                                            res = subprocess.run(f"samtools view -F 4 {bam} | cut -f1,3", shell=True, capture_output=True, text=True)
+                                            # Execute robustly using list arguments instead of shell pipe
+                                            res = subprocess.run([samtools_bin, "view", "-F", "4", bam], capture_output=True, text=True)
                                             for line in res.stdout.strip().split('\n'):
-                                                if '\t' in line:
-                                                    rid, ref = line.split('\t', 1)
-                                                    bam_records.append({'ReadID': rid, 'Allele': ref})
+                                                parts = line.split('\t')
+                                                if len(parts) >= 3:
+                                                    bam_records.append({'ReadID': parts[0], 'Allele': parts[2]})
                                         
                                         if bam_records:
                                             bam_df = pd.DataFrame(bam_records)
                                             joined_df = pd.merge(bam_df, k_df, on='ReadID', how='left')
-                                            joined_df['TaxID'] = joined_df['TaxID'].fillna(0).astype(int)
+                                            # Coerce the safely extracted string back into an integer
+                                            joined_df['TaxID'] = pd.to_numeric(joined_df['TaxID'], errors='coerce').fillna(0).astype(int)
                                             joined_df.to_csv(master_join_path, mode='a', index=False, header=not os.path.exists(master_join_path))
                                     except Exception as e:
                                         logger.warning(f"Failed to join batch reads for Antibiogram: {e}")
 
                                 # --- Generate Antibiogram JSON ---
-                                if os.path.exists(master_join_path) and not filtered_amr.empty:
+                                if not filtered_amr.empty:
                                     try:
                                         import json
-                                        amr_reads_df = pd.read_csv(master_join_path)
-                                        
-                                        # Dict to map TaxID to organism name
+                                        antibiogram = {}
                                         tax_dict = {0: "Unassigned / Mobile Elements"}
                                         if os.path.exists(master_report_tsv):
                                             rep_df = pd.read_csv(master_report_tsv, sep='\t', header=None, names=['pct', 'reads', 'lreads', 'lvl', 'taxid', 'name'])
                                             tax_dict.update(dict(zip(rep_df['taxid'], rep_df['name'].str.strip())))
-                                        
-                                        antibiogram = {}
-                                        hit_counts = amr_reads_df.groupby(['TaxID', 'Allele']).size().reset_index(name='count')
-                                        
-                                        for _, row in hit_counts.iterrows():
-                                            allele_str = str(row['Allele'])
-                                            # Match against filtered genes to enforce coverage/depth thresholds
-                                            matching_amr = filtered_amr[filtered_amr['Reference Sequence'] == allele_str]
-                                            if matching_amr.empty:
-                                                continue 
                                             
-                                            tax_name = tax_dict.get(row['TaxID'], "Unassigned / Mobile Elements")
-                                            dc_str = matching_amr.iloc[0]['Drug Class']
-                                            drug_classes = [c.strip().capitalize() for c in str(dc_str).split(';')]
-                                            gene_name = matching_amr.iloc[0]['AMR Gene Family']
-                                            
-                                            if tax_name not in antibiogram:
-                                                antibiogram[tax_name] = {}
-                                            
-                                            for dc in drug_classes:
-                                                if dc not in antibiogram[tax_name]:
-                                                    antibiogram[tax_name][dc] = set()
-                                                antibiogram[tax_name][dc].add(f"{gene_name} ({row['count']}x)")
+                                        # BRACKEN FILTER: Get validated species names for filtering and strain-rollup
+                                        allowed_species_names = set()
+                                        if final_bracken_output and os.path.exists(final_bracken_output):
+                                            try:
+                                                b_df = pd.read_csv(final_bracken_output, sep='\t')
+                                                if 'name' in b_df.columns and 'new_est_reads' in b_df.columns:
+                                                    allowed_species_names = set(b_df[b_df['new_est_reads'] > 0]['name'].str.strip())
+                                            except Exception as e:
+                                                logger.warning(f"Could not load Bracken for AMR filtering: {e}")
                                         
+                                        if os.path.exists(master_join_path):
+                                            # We have BAM files, link directly to Kraken TaxID
+                                            amr_reads_df = pd.read_csv(master_join_path)
+                                            hit_counts = amr_reads_df.groupby(['TaxID', 'Allele']).size().reset_index(name='count')
+                                            
+                                            for _, row in hit_counts.iterrows():
+                                                allele_str = str(row['Allele'])
+                                                matching_amr = filtered_amr[filtered_amr[ref_col].astype(str) == allele_str]
+                                                if matching_amr.empty:
+                                                    continue 
+                                                
+                                                raw_taxid = int(row['TaxID'])
+                                                tax_name = tax_dict.get(raw_taxid, "Unassigned / Mobile Elements")
+                                                
+                                                # BRACKEN FILTER & ROLLUP
+                                                if raw_taxid != 0 and allowed_species_names:
+                                                    is_validated = False
+                                                    for b_name in allowed_species_names:
+                                                        # Strain string matching: "Klebsiella pneumoniae subsp..." contains "Klebsiella pneumoniae"
+                                                        if b_name in tax_name or tax_name in b_name:
+                                                            is_validated = True
+                                                            tax_name = b_name  # Clean rollup to species level!
+                                                            break
+                                                    if not is_validated:
+                                                        tax_name = "Unassigned / Mobile Elements"
+
+                                                dc_str = matching_amr.iloc[0]['Drug Class']
+                                                drug_classes = [c.strip().capitalize() for c in str(dc_str).split(';')]
+                                                gene_name = matching_amr.iloc[0]['AMR Gene Family']
+                                                
+                                                if tax_name not in antibiogram:
+                                                    antibiogram[tax_name] = {}
+                                                
+                                                for dc in drug_classes:
+                                                    if dc not in antibiogram[tax_name]:
+                                                        antibiogram[tax_name][dc] = set()
+                                                    antibiogram[tax_name][dc].add(f"{gene_name} ({row['count']}x)")
+                                        else:
+                                            # Fallback if no BAM files are found. Assign to Unassigned.
+                                            logger.info(f"Fallback AMR mapping engaged for {barcode} (Read-level join missing).")
+                                            tax_name = "Unassigned / Mobile Elements"
+                                            antibiogram[tax_name] = {}
+                                            for _, row in filtered_amr.iterrows():
+                                                dc_str = row['Drug Class']
+                                                drug_classes = [c.strip().capitalize() for c in str(dc_str).split(';')]
+                                                gene_name = row['AMR Gene Family']
+                                                reads_count = int(row[reads_col])
+                                                
+                                                for dc in drug_classes:
+                                                    if dc not in antibiogram[tax_name]:
+                                                        antibiogram[tax_name][dc] = set()
+                                                    antibiogram[tax_name][dc].add(f"{gene_name} ({reads_count}x)")
+
                                         # Convert sets back to lists for JSON serialization
                                         for org in antibiogram:
                                             for dc in antibiogram[org]:

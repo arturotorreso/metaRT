@@ -4,7 +4,7 @@ nextflow.enable.dsl=2
 
 process RUN_QC_FASTPLONG {
     tag "QC for ${sample_id}"
-    publishDir "${params.outdir}/2_quality_control/${sample_id}", mode: 'copy'
+    publishDir path: { "${params.outdir}/2_quality_control/${sample_id}" }, mode: 'copy'
 
     input:
     tuple val(sample_id), path(reads)
