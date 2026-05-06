@@ -5,3 +5,4 @@ bitbucket_key.txt
 github_token.txt
 github_key.txt
 nano_gui/work
+.nextflow*
