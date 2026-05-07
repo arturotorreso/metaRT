@@ -274,9 +274,13 @@ class RunPreparationWindow(QWidget):
         db_group = QGroupBox("Database Paths")
         db_grid = QGridLayout()
         self.db_widgets = {}
-        db_params = ["host_reference", "kraken_db", "taxonomy_dir", "refseq_db", "smart_db", "card_db"]
+        
+        # Mapped keys to clean UI labels
+        db_params = ["host_reference", "kraken_db", "refseq_db", "smart_db", "card_db"]
+        db_labels = ["Host Genome", "Kraken2 DB", "Mapping DB", "SMART DB", "CARD DB"]
+        
         for i, param in enumerate(db_params):
-            db_grid.addWidget(QLabel(f"{param}:"), i, 0)
+            db_grid.addWidget(QLabel(f"{db_labels[i]}:"), i, 0)
             line_edit = QLineEdit()
             browse_btn = QPushButton("Browse...")
             browse_btn.clicked.connect(lambda _, le=line_edit, p=param: self.browse_path(le, p))
@@ -288,7 +292,7 @@ class RunPreparationWindow(QWidget):
         
         params_layout = QHBoxLayout()
         
-        qc_group = QGroupBox("QC Parameters (qc_opts)")
+        qc_group = QGroupBox("QC Parameters")
         qc_grid = QGridLayout()
         self.qc_widgets = {
             "min_mean_q": QSpinBox(), "min_length": QSpinBox(),
@@ -296,12 +300,10 @@ class RunPreparationWindow(QWidget):
             "window_size": QSpinBox(), "cut_quality": QSpinBox(),
             "perc_low_qual": QSpinBox(), "min_base_q": QSpinBox(),
             "low_complexity": QCheckBox("Low Complexity Filter"),
-            "entropy": QDoubleSpinBox(), "entropy_window": QSpinBox(),
-            "entropy_kmer": QSpinBox(), "disable_adapters": QCheckBox("Disable Adapters")
+            "disable_adapters": QCheckBox("Disable Adapters")
         }
         self.qc_widgets["min_length"].setRange(0, 100000)
         self.qc_widgets["min_length"].setValue(1000)
-        self.qc_widgets["entropy"].setDecimals(1)
         for i, (name, widget) in enumerate(self.qc_widgets.items()):
             label = name.replace('_', ' ').title() if not isinstance(widget, QCheckBox) else ""
             qc_grid.addWidget(QLabel(label), i, 0)
@@ -311,7 +313,7 @@ class RunPreparationWindow(QWidget):
         
         other_params_vbox = QVBoxLayout()
         
-        kraken_group = QGroupBox("Kraken Parameters (kraken_opts)")
+        kraken_group = QGroupBox("Kraken Parameters")
         kraken_grid = QGridLayout()
         self.kraken_widgets = {
             "confidence": QDoubleSpinBox(),
@@ -327,7 +329,7 @@ class RunPreparationWindow(QWidget):
         kraken_group.setLayout(kraken_grid)
         other_params_vbox.addWidget(kraken_group)
 
-        mapping_group = QGroupBox("Mapping Parameters (mapping_opts)")
+        mapping_group = QGroupBox("Mapping Parameters")
         mapping_grid = QGridLayout()
         self.mapping_widgets = {"secondary_aligns": QSpinBox()}
         for i, (name, widget) in enumerate(self.mapping_widgets.items()):
@@ -336,7 +338,7 @@ class RunPreparationWindow(QWidget):
         mapping_group.setLayout(mapping_grid)
         other_params_vbox.addWidget(mapping_group)
 
-        amr_group = QGroupBox("AMR Parameters (amr_opts)")
+        amr_group = QGroupBox("AMR Parameters")
         amr_grid = QGridLayout()
         self.amr_widgets = {
             "min_coverage": QDoubleSpinBox(),
@@ -345,7 +347,7 @@ class RunPreparationWindow(QWidget):
         self.amr_widgets["min_coverage"].setRange(0, 100)
         self.amr_widgets["min_coverage"].setValue(80.0)
         self.amr_widgets["min_depth"].setRange(0, 1000)
-        self.amr_widgets["min_depth"].setValue(2)
+        self.amr_widgets["min_depth"].setValue(10)
         for i, (name, widget) in enumerate(self.amr_widgets.items()):
             amr_grid.addWidget(QLabel(name.replace('_', ' ').title()), i, 0)
             amr_grid.addWidget(widget, i, 1)
@@ -381,23 +383,30 @@ class RunPreparationWindow(QWidget):
             checkbox.stateChanged.connect(self.update_text_from_checkboxes)
 
     def load_default_config(self):
-        """Loads default values from a sample config into the UI."""
+        """Loads default values, overriding with saved config.ini if it exists."""
+        base_config = self.get_sample_config()
         config = self.get_sample_config()
         
-        # Populate Paths
-        self.input_dir_edit.setText(config.get('Paths', 'fastq_directory', fallback=""))
-        self.output_dir_edit.setText(config.get('Paths', 'output_directory', fallback=""))
+        current_dir = os.path.dirname(os.path.realpath(__file__))
+        config_path = os.path.abspath(os.path.join(current_dir, '..', '..', 'config.ini'))
         
-        # Populate Barcodes
-        self.barcode_text_edit.setText(config.get('Settings', 'barcodes', fallback=""))
+        if os.path.exists(config_path):
+            config.read(config_path) # Automatically overlays saved settings over defaults
+        
+        # --- Run Configuration & Barcodes are ALWAYS loaded from base_config (resets on load) ---
+        self.input_dir_edit.setText(base_config.get('Paths', 'fastq_directory', fallback=""))
+        self.output_dir_edit.setText(base_config.get('Paths', 'output_directory', fallback=""))
+        self.barcode_text_edit.setText(base_config.get('Settings', 'barcodes', fallback=""))
+        
+        # --- The rest of the settings are loaded from the saved 'config' (remembers last run) ---
         
         # Populate WorkflowSteps
-        self.host_depletion_cb.setChecked(config.getboolean('WorkflowSteps', 'run_host_depletion'))
-        self.read_qc_cb.setChecked(config.getboolean('WorkflowSteps', 'run_read_qc'))
-        self.classification_cb.setChecked(config.getboolean('WorkflowSteps', 'run_classification'))
-        self.mapping_cb.setChecked(config.getboolean('WorkflowSteps', 'run_mapping'))
-        self.smart_cb.setChecked(config.getboolean('WorkflowSteps', 'run_smart'))
-        self.amr_cb.setChecked(config.getboolean('WorkflowSteps', 'run_amr', fallback=False))
+        self.host_depletion_cb.setChecked(config.getboolean('WorkflowSteps', 'run_host_depletion', fallback=True))
+        self.read_qc_cb.setChecked(config.getboolean('WorkflowSteps', 'run_read_qc', fallback=True))
+        self.classification_cb.setChecked(config.getboolean('WorkflowSteps', 'run_classification', fallback=True))
+        self.mapping_cb.setChecked(config.getboolean('WorkflowSteps', 'run_mapping', fallback=False))
+        self.smart_cb.setChecked(config.getboolean('WorkflowSteps', 'run_smart', fallback=False))
+        self.amr_cb.setChecked(config.getboolean('WorkflowSteps', 'run_amr', fallback=True))
         
         # Populate DatabasePaths
         for name, widget in self.db_widgets.items():
@@ -406,24 +415,24 @@ class RunPreparationWindow(QWidget):
         # Populate QcParams
         for name, widget in self.qc_widgets.items():
             if isinstance(widget, QCheckBox):
-                widget.setChecked(config.getboolean('QcParams', name))
+                widget.setChecked(config.getboolean('QcParams', name, fallback=widget.isChecked()))
             elif isinstance(widget, QDoubleSpinBox):
-                widget.setValue(config.getfloat('QcParams', name))
+                widget.setValue(config.getfloat('QcParams', name, fallback=widget.value()))
             else:
-                widget.setValue(config.getint('QcParams', name))
+                widget.setValue(config.getint('QcParams', name, fallback=widget.value()))
 
         # Populate KrakenParams
         for name, widget in self.kraken_widgets.items():
             if isinstance(widget, QCheckBox):
-                widget.setChecked(config.getboolean('KrakenParams', name))
+                widget.setChecked(config.getboolean('KrakenParams', name, fallback=widget.isChecked()))
             elif isinstance(widget, QDoubleSpinBox):
-                widget.setValue(config.getfloat('KrakenParams', name))
+                widget.setValue(config.getfloat('KrakenParams', name, fallback=widget.value()))
             else:
-                widget.setValue(config.getint('KrakenParams', name))
+                widget.setValue(config.getint('KrakenParams', name, fallback=widget.value()))
 
         # Populate MappingParams
         for name, widget in self.mapping_widgets.items():
-            widget.setValue(config.getint('MappingParams', name))
+            widget.setValue(config.getint('MappingParams', name, fallback=widget.value()))
 
         # Populate AmrParams
         if config.has_section('AmrParams'):
@@ -446,7 +455,6 @@ class RunPreparationWindow(QWidget):
         default_out_dir = os.path.join(user_home, "metaRT_outputs")
         default_host_ref = os.path.join(project_root, "db", "human_genome", "GCF_000001405.40_GRCh38.p14_genomic.fna")
         default_kraken_db = os.path.join(project_root, "db", "kraken2_standard_pluspf")
-        default_tax_dir = os.path.join(project_root, "scripts", "kraken2", "data")
         default_refseq_db = os.path.join(project_root, "db", "refseq", "target.fna.gz.mm2idx")
         default_smart_db = os.path.join(project_root, "smart", "database", "test", "python_wrapped")
         default_card_db = os.path.join(project_root, "db", "card")
@@ -463,18 +471,17 @@ processed_files_log = processed_files.log
 barcodes = 1-6
 
 [WorkflowSteps]
-run_host_depletion = false
+run_host_depletion = true
 run_read_qc = true
 run_classification = true
 run_kraken = true
 run_mapping = false
 run_smart = false
-run_amr = false
+run_amr = true
 
 [DatabasePaths]
 host_reference = {default_host_ref}
 kraken_db = {default_kraken_db}
-taxonomy_dir = {default_tax_dir}
 refseq_db = {default_refseq_db}
 smart_db = {default_smart_db}
 card_db = {default_card_db}
@@ -484,17 +491,14 @@ keep_bam = false
 
 [QcParams]
 min_mean_q = 10
-min_length = 75
-trim5 = false
-trim3 = false
+min_length = 1000
+trim5 = true
+trim3 = true
 window_size = 10
 cut_quality = 10
 perc_low_qual = 40
 min_base_q = 10
 low_complexity = true
-entropy = 0.6
-entropy_window = 50
-entropy_kmer = 5
 disable_adapters = false
 
 [KrakenParams]
@@ -508,7 +512,7 @@ secondary_aligns = 5
 
 [AmrParams]
 min_coverage = 80.0
-min_depth = 2
+min_depth = 10
         """)
         return config
 
@@ -582,7 +586,7 @@ min_depth = 2
 
     def browse_path(self, line_edit, param_name):
         """Generic browser for files or directories."""
-        if "dir" in param_name:
+        if "dir" in param_name or param_name in ["kraken_db", "card_db", "smart_db"]:
             path = QFileDialog.getExistingDirectory(self, f"Select Directory for {param_name}")
         else:
             path, _ = QFileDialog.getOpenFileName(self, f"Select File for {param_name}")

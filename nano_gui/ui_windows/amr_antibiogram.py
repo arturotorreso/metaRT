@@ -62,7 +62,7 @@ class AntibiogramWindow(QWidget):
         self.top_n_spin.valueChanged.connect(self._refresh_all_tabs)
         control_layout.addWidget(self.top_n_spin)
         
-        control_layout.addWidget(QLabel(" Min Clade Reads:"))
+        control_layout.addWidget(QLabel(" Min Species Reads:"))
         self.min_reads_spin = QSpinBox()
         self.min_reads_spin.setRange(0, 1000000)
         self.min_reads_spin.setValue(100) # Default to 100
@@ -74,7 +74,7 @@ class AntibiogramWindow(QWidget):
         self.min_abund_spin.setRange(0.0, 100.0)
         self.min_abund_spin.setDecimals(3) # Allow fine decimals
         self.min_abund_spin.setSingleStep(0.1)
-        self.min_abund_spin.setValue(0.01) # Default to 0.01%
+        self.min_abund_spin.setValue(1.0) # Default to 1.0%
         self.min_abund_spin.valueChanged.connect(self._refresh_all_tabs)
         control_layout.addWidget(self.min_abund_spin)
         
@@ -102,6 +102,7 @@ class AntibiogramWindow(QWidget):
         # Scan for all Antibiogram JSONs and Bracken TSVs
         for barcode in sorted(os.listdir(agg_dir)):
             anti_path = os.path.join(agg_dir, barcode, f"master_{barcode}.antibiogram.json")
+            bracken_path = os.path.join(agg_dir, barcode, f"master_{barcode}.bracken_sp.tsv")
             rep_path = os.path.join(agg_dir, barcode, f"master_{barcode}.report.tsv")
             
             if os.path.exists(anti_path):
@@ -115,11 +116,21 @@ class AntibiogramWindow(QWidget):
                             anti_data = json.load(f)
                     except Exception: continue
                     
-                    # 2. Load the Bracken Abundance Data (for filtering)
+                    # 2. Load the Abundance Data (for filtering)
                     org_stats = {}
-                    if os.path.exists(rep_path):
+                    if os.path.exists(bracken_path):
+                        # Use precise Bracken fraction if available
                         try:
-                            # Bracken format: pct (0), reads (1), name (5)
+                            df = pd.read_csv(bracken_path, sep='\t')
+                            for _, row in df.iterrows():
+                                org_stats[str(row['name']).strip()] = {
+                                    'reads': int(row['new_est_reads']),
+                                    'pct': float(row['fraction_total_reads']) * 100.0 # Convert 0.95 to 95.0%
+                                }
+                        except Exception: pass
+                    elif os.path.exists(rep_path):
+                        # Fallback to Kraken Clade Report if no Bracken
+                        try:
                             df = pd.read_csv(rep_path, sep='\t', header=None, names=['pct', 'reads', 'lreads', 'lvl', 'taxid', 'name'])
                             for _, row in df.iterrows():
                                 org_stats[str(row['name']).strip()] = {

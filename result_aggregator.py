@@ -6,6 +6,7 @@ import logging
 import glob
 import configparser
 import shutil
+import gzip
 import pandas as pd
 from datetime import datetime
 from typing import Optional, Tuple
@@ -163,6 +164,48 @@ def _calculate_trend(species_history: pd.DataFrame) -> Tuple[float, float]:
     )
     return lin_regress.slope, lin_regress.pvalue
 
+def _update_read_stats(batch_dir: str, barcode: str, agg_dir: str, config: configparser.ConfigParser):
+    """Counts reads directly from the pipeline outputs before they are deleted."""
+    raw_pattern = os.path.join(batch_dir, "0_combined_fastq", barcode, "*.fastq.gz")
+    host_pattern = os.path.join(batch_dir, "1_host_depletion", barcode, "*.fastq.gz")
+    qc_pattern = os.path.join(batch_dir, "2_quality_control", barcode, "*.fastq.gz")
+
+    def count_reads_gz(pattern):
+        files = glob.glob(pattern)
+        count = 0
+        for f in files:
+            try:
+                with gzip.open(f, 'rb') as gz:
+                    lines = 0
+                    for block in iter(lambda: gz.read(1024 * 1024), b''):
+                        lines += block.count(b'\n')
+                    count += lines // 4
+            except Exception: pass
+        return count
+
+    batch_raw = count_reads_gz(raw_pattern)
+    batch_host = count_reads_gz(host_pattern)
+    batch_qc = count_reads_gz(qc_pattern)
+
+    # Cascading fallbacks if a step was skipped in the pipeline
+    if not config.getboolean('WorkflowSteps', 'run_host_depletion', fallback=False):
+        batch_host = batch_raw
+    if not config.getboolean('WorkflowSteps', 'run_read_qc', fallback=False):
+        batch_qc = batch_host
+
+    stats_path = os.path.join(agg_dir, "read_stats.csv")
+    df = pd.read_csv(stats_path) if os.path.exists(stats_path) else pd.DataFrame(columns=['barcode', 'raw', 'host_depleted', 'qc'])
+
+    if barcode in df['barcode'].values:
+        df.loc[df['barcode'] == barcode, 'raw'] += batch_raw
+        df.loc[df['barcode'] == barcode, 'host_depleted'] += batch_host
+        df.loc[df['barcode'] == barcode, 'qc'] += batch_qc
+    else:
+        new_row = pd.DataFrame([{'barcode': barcode, 'raw': batch_raw, 'host_depleted': batch_host, 'qc': batch_qc}])
+        df = pd.concat([df, new_row], ignore_index=True)
+
+    _safe_write_csv(df, stats_path)
+
 # --- Main aggregation function ---
 
 def aggregate_and_plot(batch_result_dir: str, config: configparser.ConfigParser):
@@ -206,6 +249,12 @@ def aggregate_and_plot(batch_result_dir: str, config: configparser.ConfigParser)
         new_report_tsv = os.path.join(barcode_batch_dir, f"{barcode}.report.tsv")
         master_report_tsv = os.path.join(barcode_agg_dir, f"master_{barcode}.report.tsv")
         
+        # --- Tally Read Stats Before Cleanup ---
+        try:
+            _update_read_stats(batch_result_dir, barcode, aggregated_output_dir, config)
+        except Exception as e:
+            logger.error(f"Failed to update read stats for {barcode}: {e}")
+
         if _combine_kraken_reports_executable(new_report_tsv, master_report_tsv):
             kraken_db_path = config.get('DatabasePaths', 'kraken_db')
             final_bracken_output = _rerun_bracken(master_report_tsv, kraken_db_path, barcode_agg_dir, barcode, config)
@@ -214,8 +263,25 @@ def aggregate_and_plot(batch_result_dir: str, config: configparser.ConfigParser)
                 try:
                     logger.info(f"--- Generating combined analysis for {barcode} ---")
                     
-                    taxonomy_dir = config.get('DatabasePaths', 'taxonomy_dir')
-                    taxonomy_path = os.path.join(taxonomy_dir, "nodes.dmp")
+                    # --- NEW DYNAMIC TAXONOMY RESOLUTION ---
+                    taxonomy_dir = config.get('DatabasePaths', 'taxonomy_dir', fallback=None)
+                    
+                    # 1. Did the user specify a valid dir in config?
+                    if taxonomy_dir and os.path.exists(os.path.join(taxonomy_dir, "nodes.dmp")):
+                        taxonomy_path = os.path.join(taxonomy_dir, "nodes.dmp")
+                    else:
+                        # 2. Look in standard kraken_db/taxonomy/nodes.dmp
+                        # 3. Look in root kraken_db/nodes.dmp
+                        # 4. Fallback to the project's internal scripts/kraken2/data/nodes.dmp backup
+                        p1 = os.path.join(kraken_db_path, "taxonomy", "nodes.dmp")
+                        p2 = os.path.join(kraken_db_path, "nodes.dmp")
+                        p3 = os.path.join(PROJECT_ROOT, "scripts", "kraken2", "data", "nodes.dmp")
+                        
+                        if os.path.exists(p1): taxonomy_path = p1
+                        elif os.path.exists(p2): taxonomy_path = p2
+                        else: taxonomy_path = p3
+                    # ----------------------------------------
+                        
                     state_file_path = os.path.join(barcode_agg_dir, "minimizer_state.json")
                     raw_minimizer_file = os.path.join(barcode_batch_dir, f"{barcode}.minimizers.tsv")
                     
@@ -461,8 +527,36 @@ def aggregate_and_plot(batch_result_dir: str, config: configparser.ConfigParser)
                                             json.dump(antibiogram, f, indent=2)
                                         os.rename(anti_json_path + '.tmp', anti_json_path)
                                         logger.info(f"Generated Antibiogram JSON for {barcode}")
+                                        
+                                        # --- NEW: Export Antibiogram as CSV for external viewing ---
+                                        all_drug_classes = set()
+                                        for org, dc_dict in antibiogram.items():
+                                            all_drug_classes.update(dc_dict.keys())
+                                        all_drug_classes = sorted(list(all_drug_classes))
+                                        
+                                        csv_rows = []
+                                        # Sort organisms, ensuring Unassigned is at the bottom
+                                        unassigned_key = "Unassigned / Mobile Elements"
+                                        orgs_sorted = [o for o in sorted(antibiogram.keys()) if o != unassigned_key]
+                                        if unassigned_key in antibiogram:
+                                            orgs_sorted.append(unassigned_key)
+                                            
+                                        for org in orgs_sorted:
+                                            row = {'Organism': org}
+                                            for dc in all_drug_classes:
+                                                genes = antibiogram[org].get(dc, [])
+                                                row[dc] = " ; ".join(genes) if genes else "-"
+                                            csv_rows.append(row)
+                                            
+                                        if csv_rows:
+                                            csv_df = pd.DataFrame(csv_rows)
+                                            csv_df = csv_df[['Organism'] + all_drug_classes]
+                                            anti_csv_path = os.path.join(barcode_agg_dir, f"master_{barcode}.antibiogram.csv")
+                                            _safe_write_csv(csv_df, anti_csv_path)
+                                            logger.info(f"Generated Antibiogram CSV for {barcode}")
+
                                     except Exception as e:
-                                        logger.error(f"Failed to generate Antibiogram JSON: {e}")
+                                        logger.error(f"Failed to generate Antibiogram outputs: {e}")
                     except Exception as e:
                         logger.error(f"AMR Aggregation failed for {barcode}: {e}", exc_info=True)
     
