@@ -158,11 +158,18 @@ def _calculate_trend(species_history: pd.DataFrame) -> Tuple[float, float]:
     if len(species_history) < 3:
         return 0.0, 1.0
 
-    lin_regress = stats.linregress(
-        x=species_history['cumulative_bracken_reads'],
-        y=species_history['cumulative_distinct_minimizers']
-    )
-    return lin_regress.slope, lin_regress.pvalue
+    # Prevent ValueError if all X values are identical
+    if species_history['cumulative_bracken_reads'].nunique() <= 1:
+        return 0.0, 1.0
+
+    try:
+        lin_regress = stats.linregress(
+            x=species_history['cumulative_bracken_reads'],
+            y=species_history['cumulative_distinct_minimizers']
+        )
+        return lin_regress.slope, lin_regress.pvalue
+    except Exception:
+        return 0.0, 1.0
 
 def _update_read_stats(batch_dir: str, barcode: str, agg_dir: str, config: configparser.ConfigParser):
     """Counts reads directly from the pipeline outputs before they are deleted."""
@@ -186,6 +193,17 @@ def _update_read_stats(batch_dir: str, barcode: str, agg_dir: str, config: confi
     batch_raw = count_reads_gz(raw_pattern)
     batch_host = count_reads_gz(host_pattern)
     batch_qc = count_reads_gz(qc_pattern)
+
+    # Use Kraken2 TSV to perfectly count post-QC reads (1 line = 1 read)
+    kraken_tsv = os.path.join(batch_dir, "3_classification", "kraken2", barcode, f"{barcode}.kraken2.tsv")
+    if os.path.exists(kraken_tsv):
+        try:
+            with open(kraken_tsv, 'rb') as f:
+                lines = 0
+                for block in iter(lambda: f.read(1024 * 1024), b''):
+                    lines += block.count(b'\n')
+                batch_qc = lines
+        except Exception: pass
 
     # Cascading fallbacks if a step was skipped in the pipeline
     if not config.getboolean('WorkflowSteps', 'run_host_depletion', fallback=False):

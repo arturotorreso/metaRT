@@ -34,6 +34,15 @@ class FastQHandler(FileSystemEventHandler):
                 self.file_queue.put(file_path)
                 self.processed_files.add(file_path) # Add to the set to prevent re-queueing
 
+    def on_moved(self, event):
+        """Called when a file is renamed or moved into the monitored directory."""
+        if not event.is_directory and event.dest_path.endswith(self.pattern):
+            file_path = os.path.abspath(event.dest_path)
+            if file_path not in self.processed_files:
+                logger.info(f"New file detected (moved/renamed): {os.path.basename(file_path)}")
+                self.file_queue.put(file_path)
+                self.processed_files.add(file_path)
+
 def start_monitoring(path_to_watch: str, file_queue: Queue, processed_files: set) -> Observer:
     """Creates and starts the file system watcher in a background thread."""
     event_handler = FastQHandler(file_queue, processed_files)
@@ -114,6 +123,18 @@ def main():
             logger.info(f"Waiting for {batch_interval} seconds to gather next batch...")
             time.sleep(batch_interval)
             
+            # --- START FAILSAFE SWEEP ---
+            # Ensure no files are missed if watchdog drops events (e.g. on network drives)
+            for root, _, files in os.walk(fastq_dir_to_watch):
+                for file in files:
+                    if file.endswith(".fastq.gz"):
+                        file_path = os.path.abspath(os.path.join(root, file))
+                        if file_path not in processed_files_set:
+                            logger.info(f"Failsafe scanner queued file: {file}")
+                            file_queue.put(file_path)
+                            processed_files_set.add(file_path)
+            # --- END FAILSAFE SWEEP ---
+
             current_batch = []
             while not file_queue.empty():
                 current_batch.append(file_queue.get())
