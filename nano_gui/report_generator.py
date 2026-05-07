@@ -53,14 +53,14 @@ class ReportGenerator(QThread):
         df_abund = self._load_csv("abundance_data.csv")
 
         # 2. Prepare Figures
-        div_acc = self._create_accumulation_chart(df_acc)
+        acc_tabs_html = self._create_accumulation_tabs(df_acc)
         div_rare = self._create_rarefaction_chart(df_rare)
         
         # Create BOTH Absolute and Relative charts
         div_abs_abund = self._create_abundance_chart(df_abund, mode='absolute')
         div_rel_abund = self._create_abundance_chart(df_abund, mode='relative')
         
-        div_sunburst = self._create_sunburst_chart(df_abund)
+        div_overview = self._create_overview_pie(df_abund)
         
         # 3. Calculate KPIs (Simple totals)
         total_reads_count = 0
@@ -121,6 +121,17 @@ class ReportGenerator(QThread):
                 }}
                 .kpi-value {{ font-size: 2.2rem; font-weight: bold; color: #3c5457; }}
                 .kpi-label {{ color: #888; font-size: 0.85rem; text-transform: uppercase; font-weight: 600; }}
+
+                /* Custom Tabs */
+                .tab {{ overflow: hidden; border-bottom: 1px solid #ccc; margin-bottom: 10px; }}
+                .tab button {{
+                    background-color: inherit; float: left; border: none; outline: none;
+                    cursor: pointer; padding: 10px 16px; transition: 0.3s; font-size: 14px;
+                    border-bottom: 3px solid transparent; color: #666; font-weight: bold;
+                }}
+                .tab button:hover {{ color: #3c5457; }}
+                .tab button.active {{ border-bottom: 3px solid #3c5457; color: #3c5457; }}
+                .tabcontent {{ display: none; padding: 6px 0; }}
             </style>
         </head>
         <body>
@@ -143,7 +154,7 @@ class ReportGenerator(QThread):
 
                 <div class="card full-width">
                     <h2>Species Accumulation per Barcode</h2>
-                    {div_acc}
+                    {acc_tabs_html}
                 </div>
 
                 <div class="card full-width">
@@ -162,10 +173,32 @@ class ReportGenerator(QThread):
                 </div>
 
                  <div class="card">
-                    <h2>Taxonomy Overview</h2>
-                    {div_sunburst}
+                    <h2>Global Taxonomy Overview</h2>
+                    {div_overview}
                 </div>
             </div>
+            
+            <script>
+                function openTab(evt, tabId) {{
+                    var i, tabcontent, tablinks;
+                    tabcontent = document.getElementsByClassName("tabcontent");
+                    for (i = 0; i < tabcontent.length; i++) {{
+                        tabcontent[i].style.display = "none";
+                    }}
+                    tablinks = document.getElementsByClassName("tablinks");
+                    for (i = 0; i < tablinks.length; i++) {{
+                        tablinks[i].className = tablinks[i].className.replace(" active", "");
+                    }}
+                    document.getElementById(tabId).style.display = "block";
+                    evt.currentTarget.className += " active";
+                }}
+                
+                // Click the first tab by default to show it on load
+                document.addEventListener("DOMContentLoaded", function() {{
+                    var firstTab = document.querySelector('.tablinks');
+                    if(firstTab) firstTab.click();
+                }});
+            </script>
         </body>
         </html>
         """
@@ -178,110 +211,119 @@ class ReportGenerator(QThread):
 
     # --- Chart Generators ---
 
-    def _create_accumulation_chart(self, df):
-        if df is None: return "<div>Waiting for data (cumulative_species_data.csv)...</div>"
+    def _create_accumulation_tabs(self, df):
+        if df is None or df.empty: return "<div>Waiting for data (cumulative_species_data.csv)...</div>"
         
         try:
-            # 1. Ensure Timestamp is proper datetime for Plotly
+            # 1. Clean and sort data
             df['timestamp'] = pd.to_datetime(df['timestamp'])
+            df = df.sort_values(by=['barcode', 'timestamp'])
+            barcodes = sorted(df['barcode'].unique())
             
-            # 2. Filter Top Species PER BARCODE
-            #    Plotting all species will crash the browser. We select top 8 per barcode.
-            filtered_dfs = []
+            # 2. Build HTML Tabs structure
+            tabs_buttons = '<div class="tab">'
+            tabs_content = ''
             
-            # Group by barcode to process each separately
-            for barcode, group in df.groupby('barcode'):
-                # Find top species by max cumulative reads
-                top_species = group.groupby('name')['cumulative_reads'].max().nlargest(8).index
-                filtered_dfs.append(group[group['name'].isin(top_species)])
+            for bc in barcodes:
+                safe_id = f"tab_{bc.replace('-', '_')}"
+                tabs_buttons += f'<button class="tablinks" onclick="openTab(event, \'{safe_id}\')">{bc}</button>'
                 
-            if not filtered_dfs:
-                return "<div>No significant data yet</div>"
+                sub_df = df[df['barcode'] == bc].copy()
                 
-            plot_df = pd.concat(filtered_dfs)
+                # Filter Top 10 Species to prevent visual clutter
+                top_sp = sub_df.groupby('name')['cumulative_reads'].max().nlargest(10).index
+                sub_df = sub_df[sub_df['name'].isin(top_sp)]
+                
+                fig = px.line(sub_df, x='timestamp', y='cumulative_reads', color='name',
+                              template="plotly_white", markers=True)
+                              
+                fig.update_layout(margin=dict(l=0, r=0, t=10, b=0), height=450,
+                                  xaxis_title="Time", yaxis_title="Cumulative Reads",
+                                  legend_title_text="Species")
+                
+                div = fig.to_html(full_html=False, include_plotlyjs=False)
+                tabs_content += f'<div id="{safe_id}" class="tabcontent">{div}</div>'
 
-            # 3. Create Faceted Plot (One subplot per Barcode)
-            #    This replicates the "one tab per barcode" logic of the GUI in a single view
-            fig = px.line(plot_df, x='timestamp', y='cumulative_reads', 
-                          color='name', 
-                          facet_col='barcode', facet_col_wrap=2,
-                          template="plotly_white",
-                          labels={"cumulative_reads": "Reads", "timestamp": "Time"},
-                          height=500)
-            
-            # Clean up axes titles (removes "barcode=" prefix)
-            fig.for_each_annotation(lambda a: a.update(text=a.text.split("=")[-1]))
-            fig.update_layout(margin=dict(l=0, r=0, t=30, b=0), legend_title_text='Species')
-            
-            return fig.to_html(full_html=False, include_plotlyjs=False)
+            tabs_buttons += '</div>'
+            return tabs_buttons + tabs_content
+
         except Exception as e:
             return f"<div>Error plotting accumulation: {e}</div>"
 
     def _create_rarefaction_chart(self, df):
-        if df is None: return "<div>Waiting for data (rarefaction_data.csv)...</div>"
+        if df is None or df.empty: return "<div>Waiting for data (rarefaction_data.csv)...</div>"
         
         try:
             df['timestamp'] = pd.to_datetime(df['timestamp'])
+            # Drop duplicates and sort to prevent overlapping zig-zag lines
+            df = df.drop_duplicates(subset=['barcode', 'timestamp'], keep='last').sort_values(by=['barcode', 'timestamp'])
+            
             fig = px.line(df, x='timestamp', y='unique_species_count', color='barcode',
-                          template="plotly_white")
-            fig.update_traces(line=dict(dash='dot'))
-            fig.update_layout(margin=dict(l=0, r=0, t=0, b=0), height=350)
+                          template="plotly_white", markers=True)
+                          
+            fig.update_layout(margin=dict(l=0, r=0, t=10, b=0), height=350,
+                              xaxis_title="Time", yaxis_title="Unique Species Found")
+                              
             return fig.to_html(full_html=False, include_plotlyjs=False)
-        except:
-            return "<div>Error plotting rarefaction</div>"
+        except Exception as e:
+            return f"<div>Error plotting rarefaction: {e}</div>"
 
     def _create_abundance_chart(self, df, mode='relative'):
         """
         Generates either Absolute or Relative abundance bar chart.
         Ensures correct sorting and normalization.
         """
-        if df is None: return "<div>Waiting for data...</div>"
+        if df is None or df.empty: return "<div>Waiting for data...</div>"
+        try:
+            # 1. Take ONLY the latest read count per species per barcode to prevent "stairs"
+            df = df.groupby(['barcode', 'name'])['absolute_abundance'].max().reset_index()
 
-        # 1. Pre-Calculation: Calculate Relative Percentage on the WHOLE dataset
-        #    This fixes the issue where percentages were calculated AFTER filtering top 20.
-        if mode == 'relative':
-            # Sum all reads per barcode
-            barcode_totals = df.groupby('barcode')['absolute_abundance'].transform('sum')
+            # 2. Calculate percentages properly
+            if mode == 'relative':
+                barcode_totals = df.groupby('barcode')['absolute_abundance'].transform('sum')
+                df['calculated_percent'] = (df['absolute_abundance'] / barcode_totals) * 100
+                y_col = 'calculated_percent'
+                title_y = "Relative Abundance (%)"
+            else:
+                y_col = 'absolute_abundance'
+                title_y = "Read Count"
+
+            # 3. Filter Top Species globally for consistent legend colors
+            top_species = df.groupby('name')['absolute_abundance'].sum().nlargest(20).index
+            filtered = df[df['name'].isin(top_species)].copy()
+            filtered.sort_values('barcode', inplace=True)
+
+            fig = px.bar(filtered, x='barcode', y=y_col, color='name',
+                         template="plotly_white", barmode='stack',
+                         color_discrete_sequence=px.colors.qualitative.Pastel)
             
-            df = df.copy() # Operate on a copy to avoid SettingWithCopy warnings
-            # Avoid division by zero
-            df['calculated_percent'] = (df['absolute_abundance'] / barcode_totals) * 100
-            y_col = 'calculated_percent'
-            title_y = "Relative Abundance (%)"
-        else:
-            y_col = 'absolute_abundance'
-            title_y = "Read Count"
-
-        # 2. Filter Top Species
-        #    Now that % is correct, we can filter for display.
-        #    We select top 20 species by global abundance to keep the legend consistent.
-        top_species = df.groupby('name')['absolute_abundance'].sum().nlargest(20).index
-        filtered = df[df['name'].isin(top_species)].copy()
-
-        # 3. Sort Barcodes Alphabetically
-        filtered.sort_values('barcode', inplace=True)
-
-        fig = px.bar(filtered, x='barcode', y=y_col, color='name',
-                     template="plotly_white", 
-                     color_discrete_sequence=px.colors.qualitative.Pastel)
+            fig.update_layout(
+                margin=dict(l=0, r=0, t=10, b=0), height=450, 
+                xaxis={'categoryorder': 'category ascending'}, 
+                xaxis_title="", yaxis_title=title_y, legend_title_text="Species"
+            )
+            return fig.to_html(full_html=False, include_plotlyjs=False)
+        except Exception as e:
+            return f"<div>Error plotting abundance: {e}</div>"
         
-        fig.update_layout(
-            margin=dict(l=0, r=0, t=0, b=0), 
-            height=450, 
-            barmode='stack',
-            xaxis={'categoryorder': 'category ascending'}, 
-            yaxis_title=title_y
-        )
-        return fig.to_html(full_html=False, include_plotlyjs=False)
-        
-    def _create_sunburst_chart(self, df):
-        if df is None: return "<div>Waiting for data...</div>"
-        
-        # Simple species sunburst for global overview
-        top_species = df.groupby('name')['absolute_abundance'].sum().nlargest(30).reset_index()
-        
-        fig = px.sunburst(top_species, path=['name'], values='absolute_abundance',
-                          color_discrete_sequence=px.colors.qualitative.Pastel)
-        
-        fig.update_layout(margin=dict(l=0, r=0, t=0, b=0), height=300)
-        return fig.to_html(full_html=False, include_plotlyjs=False)
+    def _create_overview_pie(self, df):
+        if df is None or df.empty: return "<div>Waiting for data...</div>"
+        try:
+            # Get latest counts, then aggregate globally across all barcodes
+            df = df.groupby(['barcode', 'name'])['absolute_abundance'].max().reset_index()
+            top_species = df.groupby('name')['absolute_abundance'].sum().nlargest(15).reset_index()
+            
+            # Clean donut chart
+            fig = px.pie(top_species, names='name', values='absolute_abundance',
+                         color_discrete_sequence=px.colors.qualitative.Pastel, hole=0.4)
+            
+            fig.update_layout(margin=dict(l=0, r=0, t=10, b=0), height=350,
+                              annotations=[dict(text='Top Species', x=0.5, y=0.5, font_size=14, showarrow=False)])
+                              
+            # Put text directly inside the pie slices, remove messy legend
+            fig.update_traces(textposition='inside', textinfo='percent+label')
+            fig.update_layout(showlegend=False)
+            
+            return fig.to_html(full_html=False, include_plotlyjs=False)
+        except Exception as e:
+            return f"<div>Error plotting overview: {e}</div>"
