@@ -5,6 +5,7 @@ import logging
 from datetime import datetime
 import configparser
 import json
+import shutil
 
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
@@ -92,15 +93,6 @@ def run_pipeline_for_batch(fastq_files: list, config: configparser.ConfigParser)
     try:
         # The command is now correctly formatted for Nextflow
         logging.info(f"Executing command: {' '.join(command)}")
-        # result = subprocess.run(
-        #     command,
-        #     check=True,
-        #     capture_output=True,
-        #     text=True
-        # )
-        # logging.info("Nextflow pipeline completed successfully for the batch.")
-        # logging.debug(f"Nextflow stdout:\n{result.stdout}")
-
         # Output will now stream directly to the console in real-time.
         subprocess.run(
             command,
@@ -110,6 +102,25 @@ def run_pipeline_for_batch(fastq_files: list, config: configparser.ConfigParser)
 
         logging.info("Nextflow pipeline completed successfully for the batch.")
         log_processed_files(fastq_files, processed_log_path)
+        
+        # --- NEW: Aggressive Nextflow Cleanup ---
+        # We only run this if subprocess succeeds. If it fails, we keep work/ for debugging!
+        try:
+            work_dir = os.path.abspath("work")
+            nf_dir = os.path.abspath(".nextflow")
+            nf_log = os.path.abspath(".nextflow.log")
+            
+            if os.path.exists(work_dir):
+                shutil.rmtree(work_dir, ignore_errors=True)
+            if os.path.exists(nf_dir):
+                shutil.rmtree(nf_dir, ignore_errors=True)
+            if os.path.exists(nf_log):
+                os.remove(nf_log)
+            logging.info("Cleaned up Nextflow temporary artifacts (work/, .nextflow/, .nextflow.log).")
+        except Exception as e:
+            logging.warning(f"Failed to clean up Nextflow artifacts: {e}")
+        # ----------------------------------------
+
         return batch_output_dir
 
     except FileNotFoundError:
@@ -117,7 +128,6 @@ def run_pipeline_for_batch(fastq_files: list, config: configparser.ConfigParser)
         return None
     except subprocess.CalledProcessError as e:
         logging.error(f"Nextflow pipeline failed with exit code {e.returncode}.")
-        # logging.error(f"Nextflow stderr:\n{e.stderr}")
         return None
 
 def log_processed_files(file_list: list, log_file_path: str):
