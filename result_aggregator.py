@@ -244,9 +244,9 @@ def aggregate_and_plot(batch_result_dir: str, config: configparser.ConfigParser)
     barcodes = _get_barcodes_in_batch(batch_result_dir)
     if not barcodes:
         logger.warning("No barcode subdirectories found in classification results for this batch.")
-        return
-        
-    logger.info(f"Found batch results for barcodes: {', '.join(barcodes)}")
+
+    if barcodes:
+        logger.info(f"Found batch results for barcodes: {', '.join(barcodes)}")
 
     cumulative_data_log = os.path.join(aggregated_output_dir, "cumulative_species_data.csv")
     rarefaction_data_log = os.path.join(aggregated_output_dir, "rarefaction_data.csv")
@@ -374,14 +374,18 @@ def aggregate_and_plot(batch_result_dir: str, config: configparser.ConfigParser)
                         agg_amr_dir = os.path.join(barcode_agg_dir, "amr_batches")
                         os.makedirs(agg_amr_dir, exist_ok=True)
                         
-                        # Copy immutable batch text files
+                        # Copy AMR batch text files
                         if os.path.exists(batch_amr_dir):
+                            # Extract the batch folder name for traceability
+                            batch_id = os.path.basename(os.path.normpath(batch_result_dir))
                             for f in os.listdir(batch_amr_dir):
                                 if f.endswith(".txt"):
-                                    shutil.copy2(os.path.join(batch_amr_dir, f), os.path.join(agg_amr_dir, f))
+                                    base, ext = os.path.splitext(f)
+                                    new_f = f"{base}_{batch_id}{ext}"
+                                    shutil.copy2(os.path.join(batch_amr_dir, f), os.path.join(agg_amr_dir, new_f))
                         
                         # Glob all collected amr files
-                        all_amr_files = glob.glob(os.path.join(agg_amr_dir, "*.allele_mapping_data.txt"))
+                        all_amr_files = glob.glob(os.path.join(agg_amr_dir, "*.allele_mapping_data*.txt"))
                         amr_df_list = []
                         for amr_f in all_amr_files:
                             try:
@@ -399,12 +403,15 @@ def aggregate_and_plot(batch_result_dir: str, config: configparser.ConfigParser)
                             cov_col = next((c for c in ['Percent Coverage', 'Percentage Length of Reference Sequence', 'Coverage'] if c in master_amr.columns), None)
                             depth_col = next((c for c in ['Depth', 'Average Depth'] if c in master_amr.columns), None)
                             reads_col = next((c for c in ['All Mapped Reads', 'Mapped Reads', 'Completely Mapped Reads'] if c in master_amr.columns), None)
+                            
+                            # Extract the highly specific ARO Term, falling back to Gene Family if missing
+                            aro_col = next((c for c in ['ARO Term', 'ARO_Term', 'ARO Name', 'Gene'] if c in master_amr.columns), None)
 
                             if not ref_col or not cov_col or not depth_col or not reads_col:
                                 logger.error(f"Missing required AMR columns. Found: {list(master_amr.columns)}")
                             elif 'AMR Gene Family' in master_amr.columns:
-                                # Ensure Reference Sequence is kept for BAM joining
-                                group_cols = [c for c in ['AMR Gene Family', 'Drug Class', 'Resistance Mechanism', ref_col] if c in master_amr.columns]
+                                # Include ARO Term in the groupby so we don't lose the specific allele variants
+                                group_cols = [c for c in [aro_col, 'AMR Gene Family', 'Drug Class', 'Resistance Mechanism', ref_col] if c in master_amr.columns and c is not None]
                                 
                                 agg_amr = master_amr.groupby(group_cols).agg({
                                     reads_col: 'sum',
@@ -472,15 +479,15 @@ def aggregate_and_plot(batch_result_dir: str, config: configparser.ConfigParser)
                                             rep_df = pd.read_csv(master_report_tsv, sep='\t', header=None, names=['pct', 'reads', 'lreads', 'lvl', 'taxid', 'name'])
                                             tax_dict.update(dict(zip(rep_df['taxid'], rep_df['name'].str.strip())))
                                             
-                                        # BRACKEN FILTER: Get validated species names for filtering and strain-rollup
-                                        allowed_species_names = set()
-                                        if final_bracken_output and os.path.exists(final_bracken_output):
-                                            try:
-                                                b_df = pd.read_csv(final_bracken_output, sep='\t')
-                                                if 'name' in b_df.columns and 'new_est_reads' in b_df.columns:
-                                                    allowed_species_names = set(b_df[b_df['new_est_reads'] > 0]['name'].str.strip())
-                                            except Exception as e:
-                                                logger.warning(f"Could not load Bracken for AMR filtering: {e}")
+                                        # # BRACKEN FILTER: Get validated species names for filtering and strain-rollup
+                                        # allowed_species_names = set()
+                                        # if final_bracken_output and os.path.exists(final_bracken_output):
+                                        #     try:
+                                        #         b_df = pd.read_csv(final_bracken_output, sep='\t')
+                                        #         if 'name' in b_df.columns and 'new_est_reads' in b_df.columns:
+                                        #             allowed_species_names = set(b_df[b_df['new_est_reads'] > 0]['name'].str.strip())
+                                        #     except Exception as e:
+                                        #         logger.warning(f"Could not load Bracken for AMR filtering: {e}")
                                         
                                         if os.path.exists(master_join_path):
                                             # We have BAM files, link directly to Kraken TaxID
@@ -496,49 +503,59 @@ def aggregate_and_plot(batch_result_dir: str, config: configparser.ConfigParser)
                                                 raw_taxid = int(row['TaxID'])
                                                 tax_name = tax_dict.get(raw_taxid, "Unassigned / Mobile Elements")
                                                 
-                                                # BRACKEN FILTER & ROLLUP
-                                                if raw_taxid != 0 and allowed_species_names:
-                                                    is_validated = False
-                                                    for b_name in allowed_species_names:
-                                                        # Strain string matching: "Klebsiella pneumoniae subsp..." contains "Klebsiella pneumoniae"
-                                                        if b_name in tax_name or tax_name in b_name:
-                                                            is_validated = True
-                                                            tax_name = b_name  # Clean rollup to species level!
-                                                            break
-                                                    if not is_validated:
-                                                        tax_name = "Unassigned / Mobile Elements"
+                                                # # BRACKEN FILTER & ROLLUP
+                                                # if raw_taxid != 0 and allowed_species_names:
+                                                #     is_validated = False
+                                                #     for b_name in allowed_species_names:
+                                                #         # Strain string matching: "Klebsiella pneumoniae subsp..." contains "Klebsiella pneumoniae"
+                                                #         if b_name in tax_name or tax_name in b_name:
+                                                #             is_validated = True
+                                                #             tax_name = b_name  # Clean rollup to species level!
+                                                #             break
+                                                #     if not is_validated:
+                                                #         tax_name = "Unassigned / Mobile Elements"
 
                                                 dc_str = matching_amr.iloc[0]['Drug Class']
                                                 drug_classes = [c.strip().capitalize() for c in str(dc_str).split(';')]
-                                                gene_name = matching_amr.iloc[0]['AMR Gene Family']
+                                                
+                                                # Extract the highly specific ARO Term, falling back to Gene Family if missing
+                                                gene_name = matching_amr.iloc[0][aro_col] if aro_col else matching_amr.iloc[0].get('AMR Gene Family', 'Unknown')
                                                 
                                                 if tax_name not in antibiogram:
                                                     antibiogram[tax_name] = {}
                                                 
                                                 for dc in drug_classes:
                                                     if dc not in antibiogram[tax_name]:
-                                                        antibiogram[tax_name][dc] = set()
-                                                    antibiogram[tax_name][dc].add(f"{gene_name} ({row['count']}x)")
+                                                        antibiogram[tax_name][dc] = {}
+                                                    if gene_name not in antibiogram[tax_name][dc]:
+                                                        antibiogram[tax_name][dc][gene_name] = 0
+                                                    antibiogram[tax_name][dc][gene_name] += row['count']
                                         else:
                                             # Fallback if no BAM files are found. Assign to Unassigned.
                                             logger.info(f"Fallback AMR mapping engaged for {barcode} (Read-level join missing).")
                                             tax_name = "Unassigned / Mobile Elements"
-                                            antibiogram[tax_name] = {}
+                                            if tax_name not in antibiogram:
+                                                antibiogram[tax_name] = {}
                                             for _, row in filtered_amr.iterrows():
                                                 dc_str = row['Drug Class']
                                                 drug_classes = [c.strip().capitalize() for c in str(dc_str).split(';')]
-                                                gene_name = row['AMR Gene Family']
+                                                
+                                                # Extract the highly specific ARO Term, falling back to Gene Family if missing
+                                                gene_name = row[aro_col] if aro_col else row.get('AMR Gene Family', 'Unknown')
+                                                
                                                 reads_count = int(row[reads_col])
                                                 
                                                 for dc in drug_classes:
                                                     if dc not in antibiogram[tax_name]:
-                                                        antibiogram[tax_name][dc] = set()
-                                                    antibiogram[tax_name][dc].add(f"{gene_name} ({reads_count}x)")
+                                                        antibiogram[tax_name][dc] = {}
+                                                    if gene_name not in antibiogram[tax_name][dc]:
+                                                        antibiogram[tax_name][dc][gene_name] = 0
+                                                    antibiogram[tax_name][dc][gene_name] += reads_count
 
-                                        # Convert sets back to lists for JSON serialization
+                                        # Convert dicts back to formatted lists for JSON serialization
                                         for org in antibiogram:
                                             for dc in antibiogram[org]:
-                                                antibiogram[org][dc] = list(antibiogram[org][dc])
+                                                antibiogram[org][dc] = [f"{g} ({c}x)" for g, c in antibiogram[org][dc].items()]
                                                 
                                         anti_json_path = os.path.join(barcode_agg_dir, f"master_{barcode}.antibiogram.json")
                                         with open(anti_json_path + '.tmp', 'w') as f:
@@ -594,3 +611,13 @@ def aggregate_and_plot(batch_result_dir: str, config: configparser.ConfigParser)
             logger.info(f"Cleaned up batch directory to save space: {batch_result_dir}")
         except Exception as e:
             logger.error(f"Failed to clean up batch directory {batch_result_dir}: {e}")
+    
+    # --- FOR UCLA: TRIGGER CLINICAL REPORTING ---
+    try:
+        report_script = os.path.join(PROJECT_ROOT, "generate_clinical_report.py")
+        if os.path.exists(report_script):
+            # Run the script in the background so it doesn't hold up the aggregator
+            subprocess.Popen([sys.executable, report_script, aggregated_output_dir])
+            logger.info("Triggered clinical report generator check.")
+    except Exception as e:
+        logger.error(f"Failed to trigger clinical report generator: {e}")

@@ -314,3 +314,538 @@ Found bundled Conda environment at: /home/atorres/scripts/metaRT/nano_gui/../nex
 Updated PATH to include Conda binaries.
 Using Python executable: /home/atorres/scripts/metaRT/nano_gui/../nextflow_pipeline/bin/conda-env/bin/python
 Executing python script...
+--- Starting NanoRT GUI at Thu May  7 03:29:53 PM PDT 2026 ---
+ERROR: Bundled Java not found at /home/panacia/metaRT/nano_gui/../nextflow_pipeline/bin/java
+Using Java version:
+openjdk version "11.0.30" 2026-01-20
+OpenJDK Runtime Environment (build 11.0.30+7-post-Ubuntu-1ubuntu122.04)
+OpenJDK 64-Bit Server VM (build 11.0.30+7-post-Ubuntu-1ubuntu122.04, mixed mode, sharing)
+Found bundled Conda environment at: /home/panacia/metaRT/nano_gui/../nextflow_pipeline/bin/conda-env
+Updated PATH to include Conda binaries.
+Using Python executable: /home/panacia/metaRT/nano_gui/../nextflow_pipeline/bin/conda-env/bin/python
+Executing python script...
+qt.qpa.plugin: Could not find the Qt platform plugin "wayland" in ""
+--- Python script finished with exit code: 0 ---
+--- Starting NanoRT GUI at Thu May  7 03:38:14 PM PDT 2026 ---
+ERROR: Bundled Java not found at /home/panacia/metaRT/nano_gui/../nextflow_pipeline/bin/java
+Using Java version:
+openjdk version "11.0.30" 2026-01-20
+OpenJDK Runtime Environment (build 11.0.30+7-post-Ubuntu-1ubuntu122.04)
+OpenJDK 64-Bit Server VM (build 11.0.30+7-post-Ubuntu-1ubuntu122.04, mixed mode, sharing)
+Found bundled Conda environment at: /home/panacia/metaRT/nano_gui/../nextflow_pipeline/bin/conda-env
+Updated PATH to include Conda binaries.
+Using Python executable: /home/panacia/metaRT/nano_gui/../nextflow_pipeline/bin/conda-env/bin/python
+Executing python script...
+qt.qpa.plugin: Could not find the Qt platform plugin "wayland" in ""
+--- Python script finished with exit code: 0 ---
+--- Starting NanoRT GUI at Thu May  7 03:45:57 PM PDT 2026 ---
+ERROR: Bundled Java not found at /home/panacia/metaRT/nano_gui/../nextflow_pipeline/bin/java
+Using Java version:
+openjdk version "11.0.30" 2026-01-20
+OpenJDK Runtime Environment (build 11.0.30+7-post-Ubuntu-1ubuntu122.04)
+OpenJDK 64-Bit Server VM (build 11.0.30+7-post-Ubuntu-1ubuntu122.04, mixed mode, sharing)
+Found bundled Conda environment at: /home/panacia/metaRT/nano_gui/../nextflow_pipeline/bin/conda-env
+Updated PATH to include Conda binaries.
+Using Python executable: /home/panacia/metaRT/nano_gui/../nextflow_pipeline/bin/conda-env/bin/python
+Executing python script...
+qt.qpa.plugin: Could not find the Qt platform plugin "wayland" in ""
+--- Python script finished with exit code: 0 ---
+--- Starting NanoRT GUI at Fri May  8 01:19:02 PM PDT 2026 ---
+ERROR: Bundled Java not found at /home/panacia/metaRT/nano_gui/../nextflow_pipeline/bin/java
+Using Java version:
+openjdk version "11.0.30" 2026-01-20
+OpenJDK Runtime Environment (build 11.0.30+7-post-Ubuntu-1ubuntu122.04)
+OpenJDK 64-Bit Server VM (build 11.0.30+7-post-Ubuntu-1ubuntu122.04, mixed mode, sharing)
+Found bundled Conda environment at: /home/panacia/metaRT/nano_gui/../nextflow_pipeline/bin/conda-env
+Updated PATH to include Conda binaries.
+Using Python executable: /home/panacia/metaRT/nano_gui/../nextflow_pipeline/bin/conda-env/bin/python
+Executing python script...
+qt.qpa.plugin: Could not find the Qt platform plugin "wayland" in ""
+--- Python script finished with exit code: 0 ---
+--- Starting NanoRT GUI at Fri May  8 02:22:21 PM PDT 2026 ---
+ERROR: Bundled Java not found at /home/panacia/metaRT/nano_gui/../nextflow_pipeline/bin/java
+Using Java version:
+openjdk version "11.0.30" 2026-01-20
+OpenJDK Runtime Environment (build 11.0.30+7-post-Ubuntu-1ubuntu122.04)
+OpenJDK 64-Bit Server VM (build 11.0.30+7-post-Ubuntu-1ubuntu122.04, mixed mode, sharing)
+Found bundled Conda environment at: /home/panacia/metaRT/nano_gui/../nextflow_pipeline/bin/conda-env
+Updated PATH to include Conda binaries.
+Using Python executable: /home/panacia/metaRT/nano_gui/../nextflow_pipeline/bin/conda-env/bin/python
+Executing python script...
+qt.qpa.plugin: Could not find the Qt platform plugin "wayland" in ""
+--- Starting NanoRT GUI at Fri May  8 02:32:41 PM PDT 2026 ---
+ERROR: Bundled Java not found at /home/panacia/metaRT/nano_gui/../nextflow_pipeline/bin/java
+Using Java version:
+openjdk version "11.0.30" 2026-01-20
+OpenJDK Runtime Environment (build 11.0.30+7-post-Ubuntu-1ubuntu122.04)
+OpenJDK 64-Bit Server VM (build 11.0.30+7-post-Ubuntu-1ubuntu122.04, mixed mode, sharing)
+Found bundled Conda environment at: /home/panacia/metaRT/nano_gui/../nextflow_pipeline/bin/conda-env
+Updated PATH to include Conda binaries.
+Using Python executable: /home/panacia/metaRT/nano_gui/../nextflow_pipeline/bin/conda-env/bin/python
+Executing python script...
+qt.qpa.plugin: Could not find the Qt platform plugin "wayland" in ""
+--- Python script finished with exit code: 0 ---
+--- Starting NanoRT GUI at Mon May 11 10:35:42 AM PDT 2026 ---
+ERROR: Bundled Java not found at /home/panacia/metaRT/nano_gui/../nextflow_pipeline/bin/java
+Using Java version:
+openjdk version "11.0.30" 2026-01-20
+OpenJDK Runtime Environment (build 11.0.30+7-post-Ubuntu-1ubuntu122.04)
+OpenJDK 64-Bit Server VM (build 11.0.30+7-post-Ubuntu-1ubuntu122.04, mixed mode, sharing)
+Found bundled Conda environment at: /home/panacia/metaRT/nano_gui/../nextflow_pipeline/bin/conda-env
+Updated PATH to include Conda binaries.
+Using Python executable: /home/panacia/metaRT/nano_gui/../nextflow_pipeline/bin/conda-env/bin/python
+Executing python script...
+--- Starting NanoRT GUI at Mon May 11 11:31:54 AM PDT 2026 ---
+ERROR: Bundled Java not found at /home/panacia/metaRT/nano_gui/../nextflow_pipeline/bin/java
+Using Java version:
+openjdk version "11.0.30" 2026-01-20
+OpenJDK Runtime Environment (build 11.0.30+7-post-Ubuntu-1ubuntu122.04)
+OpenJDK 64-Bit Server VM (build 11.0.30+7-post-Ubuntu-1ubuntu122.04, mixed mode, sharing)
+Found bundled Conda environment at: /home/panacia/metaRT/nano_gui/../nextflow_pipeline/bin/conda-env
+Updated PATH to include Conda binaries.
+Using Python executable: /home/panacia/metaRT/nano_gui/../nextflow_pipeline/bin/conda-env/bin/python
+Executing python script...
+QProcess: Destroyed while process ("/home/panacia/metaRT/nano_gui/../nextflow_pipeline/bin/conda-env/bin/python") is still running.
+--- Python script finished with exit code: 0 ---
+--- Starting NanoRT GUI at Tue May 12 02:26:54 PM PDT 2026 ---
+ERROR: Bundled Java not found at /home/panacia/metaRT/nano_gui/../nextflow_pipeline/bin/java
+Using Java version:
+openjdk version "11.0.30" 2026-01-20
+OpenJDK Runtime Environment (build 11.0.30+7-post-Ubuntu-1ubuntu122.04)
+OpenJDK 64-Bit Server VM (build 11.0.30+7-post-Ubuntu-1ubuntu122.04, mixed mode, sharing)
+Found bundled Conda environment at: /home/panacia/metaRT/nano_gui/../nextflow_pipeline/bin/conda-env
+Updated PATH to include Conda binaries.
+Using Python executable: /home/panacia/metaRT/nano_gui/../nextflow_pipeline/bin/conda-env/bin/python
+Executing python script...
+--- Python script finished with exit code: 0 ---
+--- Starting NanoRT GUI at Fri May 15 10:35:19 AM PDT 2026 ---
+ERROR: Bundled Java not found at /home/panacia/metaRT/nano_gui/../nextflow_pipeline/bin/java
+Using Java version:
+openjdk version "11.0.30" 2026-01-20
+OpenJDK Runtime Environment (build 11.0.30+7-post-Ubuntu-1ubuntu122.04)
+OpenJDK 64-Bit Server VM (build 11.0.30+7-post-Ubuntu-1ubuntu122.04, mixed mode, sharing)
+Found bundled Conda environment at: /home/panacia/metaRT/nano_gui/../nextflow_pipeline/bin/conda-env
+Updated PATH to include Conda binaries.
+Using Python executable: /home/panacia/metaRT/nano_gui/../nextflow_pipeline/bin/conda-env/bin/python
+Executing python script...
+Rarefaction update error: [Errno 2] No such file or directory: '/home/panacia/metaRT_outputs/20260515_Zymo_ctrl_Bactec_Blood/aggregated_results/rarefaction_data.csv'
+Rarefaction update error: [Errno 2] No such file or directory: '/home/panacia/metaRT_outputs/20260515_Zymo_ctrl_Bactec_Blood/aggregated_results/rarefaction_data.csv'
+Rarefaction update error: [Errno 2] No such file or directory: '/home/panacia/metaRT_outputs/20260515_Zymo_ctrl_Bactec_Blood/aggregated_results/rarefaction_data.csv'
+Rarefaction update error: [Errno 2] No such file or directory: '/home/panacia/metaRT_outputs/20260515_Zymo_ctrl_Bactec_Blood/aggregated_results/rarefaction_data.csv'
+Rarefaction update error: [Errno 2] No such file or directory: '/home/panacia/metaRT_outputs/20260515_Zymo_ctrl_Bactec_Blood/aggregated_results/rarefaction_data.csv'
+Rarefaction update error: [Errno 2] No such file or directory: '/home/panacia/metaRT_outputs/20260515_Zymo_ctrl_Bactec_Blood/aggregated_results/rarefaction_data.csv'
+Rarefaction update error: [Errno 2] No such file or directory: '/home/panacia/metaRT_outputs/20260515_Zymo_ctrl_Bactec_Blood/aggregated_results/rarefaction_data.csv'
+Rarefaction update error: [Errno 2] No such file or directory: '/home/panacia/metaRT_outputs/20260515_Zymo_ctrl_Bactec_Blood/aggregated_results/rarefaction_data.csv'
+Rarefaction update error: [Errno 2] No such file or directory: '/home/panacia/metaRT_outputs/20260515_Zymo_ctrl_Bactec_Blood/aggregated_results/rarefaction_data.csv'
+Rarefaction update error: [Errno 2] No such file or directory: '/home/panacia/metaRT_outputs/20260515_Zymo_ctrl_Bactec_Blood/aggregated_results/rarefaction_data.csv'
+Rarefaction update error: [Errno 2] No such file or directory: '/home/panacia/metaRT_outputs/20260515_Zymo_ctrl_Bactec_Blood/aggregated_results/rarefaction_data.csv'
+Rarefaction update error: [Errno 2] No such file or directory: '/home/panacia/metaRT_outputs/20260515_Zymo_ctrl_Bactec_Blood/aggregated_results/rarefaction_data.csv'
+Rarefaction update error: [Errno 2] No such file or directory: '/home/panacia/metaRT_outputs/20260515_Zymo_ctrl_Bactec_Blood/aggregated_results/rarefaction_data.csv'
+Rarefaction update error: [Errno 2] No such file or directory: '/home/panacia/metaRT_outputs/20260515_Zymo_ctrl_Bactec_Blood/aggregated_results/rarefaction_data.csv'
+Rarefaction update error: [Errno 2] No such file or directory: '/home/panacia/metaRT_outputs/20260515_Zymo_ctrl_Bactec_Blood/aggregated_results/rarefaction_data.csv'
+Rarefaction update error: [Errno 2] No such file or directory: '/home/panacia/metaRT_outputs/20260515_Zymo_ctrl_Bactec_Blood/aggregated_results/rarefaction_data.csv'
+Rarefaction update error: [Errno 2] No such file or directory: '/home/panacia/metaRT_outputs/20260515_Zymo_ctrl_Bactec_Blood/aggregated_results/rarefaction_data.csv'
+Rarefaction update error: [Errno 2] No such file or directory: '/home/panacia/metaRT_outputs/20260515_Zymo_ctrl_Bactec_Blood/aggregated_results/rarefaction_data.csv'
+Rarefaction update error: [Errno 2] No such file or directory: '/home/panacia/metaRT_outputs/20260515_Zymo_ctrl_Bactec_Blood/aggregated_results/rarefaction_data.csv'
+Rarefaction update error: [Errno 2] No such file or directory: '/home/panacia/metaRT_outputs/20260515_Zymo_ctrl_Bactec_Blood/aggregated_results/rarefaction_data.csv'
+Rarefaction update error: [Errno 2] No such file or directory: '/home/panacia/metaRT_outputs/20260515_Zymo_ctrl_Bactec_Blood/aggregated_results/rarefaction_data.csv'
+Rarefaction update error: [Errno 2] No such file or directory: '/home/panacia/metaRT_outputs/20260515_Zymo_ctrl_Bactec_Blood/aggregated_results/rarefaction_data.csv'
+Rarefaction update error: [Errno 2] No such file or directory: '/home/panacia/metaRT_outputs/20260515_Zymo_ctrl_Bactec_Blood/aggregated_results/rarefaction_data.csv'
+Rarefaction update error: [Errno 2] No such file or directory: '/home/panacia/metaRT_outputs/20260515_Zymo_ctrl_Bactec_Blood/aggregated_results/rarefaction_data.csv'
+Rarefaction update error: [Errno 2] No such file or directory: '/home/panacia/metaRT_outputs/20260515_Zymo_ctrl_Bactec_Blood/aggregated_results/rarefaction_data.csv'
+Rarefaction update error: [Errno 2] No such file or directory: '/home/panacia/metaRT_outputs/20260515_Zymo_ctrl_Bactec_Blood/aggregated_results/rarefaction_data.csv'
+Rarefaction update error: [Errno 2] No such file or directory: '/home/panacia/metaRT_outputs/20260515_Zymo_ctrl_Bactec_Blood/aggregated_results/rarefaction_data.csv'
+Rarefaction update error: [Errno 2] No such file or directory: '/home/panacia/metaRT_outputs/20260515_Zymo_ctrl_Bactec_Blood/aggregated_results/rarefaction_data.csv'
+Rarefaction update error: [Errno 2] No such file or directory: '/home/panacia/metaRT_outputs/20260515_Zymo_ctrl_Bactec_Blood/aggregated_results/rarefaction_data.csv'
+Rarefaction update error: [Errno 2] No such file or directory: '/home/panacia/metaRT_outputs/20260515_Zymo_ctrl_Bactec_Blood/aggregated_results/rarefaction_data.csv'
+Rarefaction update error: [Errno 2] No such file or directory: '/home/panacia/metaRT_outputs/20260515_Zymo_ctrl_Bactec_Blood/aggregated_results/rarefaction_data.csv'
+Rarefaction update error: [Errno 2] No such file or directory: '/home/panacia/metaRT_outputs/20260515_Zymo_ctrl_Bactec_Blood/aggregated_results/rarefaction_data.csv'
+Rarefaction update error: [Errno 2] No such file or directory: '/home/panacia/metaRT_outputs/20260515_Zymo_ctrl_Bactec_Blood/aggregated_results/rarefaction_data.csv'
+Rarefaction update error: [Errno 2] No such file or directory: '/home/panacia/metaRT_outputs/20260515_Zymo_ctrl_Bactec_Blood/aggregated_results/rarefaction_data.csv'
+Rarefaction update error: [Errno 2] No such file or directory: '/home/panacia/metaRT_outputs/20260515_Zymo_ctrl_Bactec_Blood/aggregated_results/rarefaction_data.csv'
+Rarefaction update error: [Errno 2] No such file or directory: '/home/panacia/metaRT_outputs/20260515_Zymo_ctrl_Bactec_Blood/aggregated_results/rarefaction_data.csv'
+Rarefaction update error: [Errno 2] No such file or directory: '/home/panacia/metaRT_outputs/20260515_Zymo_ctrl_Bactec_Blood/aggregated_results/rarefaction_data.csv'
+Rarefaction update error: [Errno 2] No such file or directory: '/home/panacia/metaRT_outputs/20260515_Zymo_ctrl_Bactec_Blood/aggregated_results/rarefaction_data.csv'
+Rarefaction update error: [Errno 2] No such file or directory: '/home/panacia/metaRT_outputs/20260515_Zymo_ctrl_Bactec_Blood/aggregated_results/rarefaction_data.csv'
+Rarefaction update error: [Errno 2] No such file or directory: '/home/panacia/metaRT_outputs/20260515_Zymo_ctrl_Bactec_Blood/aggregated_results/rarefaction_data.csv'
+Rarefaction update error: [Errno 2] No such file or directory: '/home/panacia/metaRT_outputs/20260515_Zymo_ctrl_Bactec_Blood/aggregated_results/rarefaction_data.csv'
+Rarefaction update error: [Errno 2] No such file or directory: '/home/panacia/metaRT_outputs/20260515_Zymo_ctrl_Bactec_Blood/aggregated_results/rarefaction_data.csv'
+Rarefaction update error: [Errno 2] No such file or directory: '/home/panacia/metaRT_outputs/20260515_Zymo_ctrl_Bactec_Blood/aggregated_results/rarefaction_data.csv'
+Rarefaction update error: [Errno 2] No such file or directory: '/home/panacia/metaRT_outputs/20260515_Zymo_ctrl_Bactec_Blood/aggregated_results/rarefaction_data.csv'
+Rarefaction update error: [Errno 2] No such file or directory: '/home/panacia/metaRT_outputs/20260515_Zymo_ctrl_Bactec_Blood/aggregated_results/rarefaction_data.csv'
+Rarefaction update error: [Errno 2] No such file or directory: '/home/panacia/metaRT_outputs/20260515_Zymo_ctrl_Bactec_Blood/aggregated_results/rarefaction_data.csv'
+Rarefaction update error: [Errno 2] No such file or directory: '/home/panacia/metaRT_outputs/20260515_Zymo_ctrl_Bactec_Blood/aggregated_results/rarefaction_data.csv'
+Rarefaction update error: [Errno 2] No such file or directory: '/home/panacia/metaRT_outputs/20260515_Zymo_ctrl_Bactec_Blood/aggregated_results/rarefaction_data.csv'
+Rarefaction update error: [Errno 2] No such file or directory: '/home/panacia/metaRT_outputs/20260515_Zymo_ctrl_Bactec_Blood/aggregated_results/rarefaction_data.csv'
+Rarefaction update error: [Errno 2] No such file or directory: '/home/panacia/metaRT_outputs/20260515_Zymo_ctrl_Bactec_Blood/aggregated_results/rarefaction_data.csv'
+Rarefaction update error: [Errno 2] No such file or directory: '/home/panacia/metaRT_outputs/20260515_Zymo_ctrl_Bactec_Blood/aggregated_results/rarefaction_data.csv'
+Rarefaction update error: [Errno 2] No such file or directory: '/home/panacia/metaRT_outputs/20260515_Zymo_ctrl_Bactec_Blood/aggregated_results/rarefaction_data.csv'
+Rarefaction update error: [Errno 2] No such file or directory: '/home/panacia/metaRT_outputs/20260515_Zymo_ctrl_Bactec_Blood/aggregated_results/rarefaction_data.csv'
+Rarefaction update error: [Errno 2] No such file or directory: '/home/panacia/metaRT_outputs/20260515_Zymo_ctrl_Bactec_Blood/aggregated_results/rarefaction_data.csv'
+Rarefaction update error: [Errno 2] No such file or directory: '/home/panacia/metaRT_outputs/20260515_Zymo_ctrl_Bactec_Blood/aggregated_results/rarefaction_data.csv'
+Rarefaction update error: [Errno 2] No such file or directory: '/home/panacia/metaRT_outputs/20260515_Zymo_ctrl_Bactec_Blood/aggregated_results/rarefaction_data.csv'
+Rarefaction update error: [Errno 2] No such file or directory: '/home/panacia/metaRT_outputs/20260515_Zymo_ctrl_Bactec_Blood/aggregated_results/rarefaction_data.csv'
+Rarefaction update error: [Errno 2] No such file or directory: '/home/panacia/metaRT_outputs/20260515_Zymo_ctrl_Bactec_Blood/aggregated_results/rarefaction_data.csv'
+Rarefaction update error: [Errno 2] No such file or directory: '/home/panacia/metaRT_outputs/20260515_Zymo_ctrl_Bactec_Blood/aggregated_results/rarefaction_data.csv'
+Rarefaction update error: [Errno 2] No such file or directory: '/home/panacia/metaRT_outputs/20260515_Zymo_ctrl_Bactec_Blood/aggregated_results/rarefaction_data.csv'
+Rarefaction update error: [Errno 2] No such file or directory: '/home/panacia/metaRT_outputs/20260515_Zymo_ctrl_Bactec_Blood/aggregated_results/rarefaction_data.csv'
+Rarefaction update error: [Errno 2] No such file or directory: '/home/panacia/metaRT_outputs/20260515_Zymo_ctrl_Bactec_Blood/aggregated_results/rarefaction_data.csv'
+Rarefaction update error: [Errno 2] No such file or directory: '/home/panacia/metaRT_outputs/20260515_Zymo_ctrl_Bactec_Blood/aggregated_results/rarefaction_data.csv'
+Rarefaction update error: [Errno 2] No such file or directory: '/home/panacia/metaRT_outputs/20260515_Zymo_ctrl_Bactec_Blood/aggregated_results/rarefaction_data.csv'
+Rarefaction update error: [Errno 2] No such file or directory: '/home/panacia/metaRT_outputs/20260515_Zymo_ctrl_Bactec_Blood/aggregated_results/rarefaction_data.csv'
+Rarefaction update error: [Errno 2] No such file or directory: '/home/panacia/metaRT_outputs/20260515_Zymo_ctrl_Bactec_Blood/aggregated_results/rarefaction_data.csv'
+Rarefaction update error: [Errno 2] No such file or directory: '/home/panacia/metaRT_outputs/20260515_Zymo_ctrl_Bactec_Blood/aggregated_results/rarefaction_data.csv'
+--- Python script finished with exit code: 0 ---
+--- Starting NanoRT GUI at Mon May 18 12:07:06 PM PDT 2026 ---
+ERROR: Bundled Java not found at /home/panacia/metaRT/nano_gui/../nextflow_pipeline/bin/java
+Using Java version:
+openjdk version "11.0.30" 2026-01-20
+OpenJDK Runtime Environment (build 11.0.30+7-post-Ubuntu-1ubuntu122.04)
+OpenJDK 64-Bit Server VM (build 11.0.30+7-post-Ubuntu-1ubuntu122.04, mixed mode, sharing)
+Found bundled Conda environment at: /home/panacia/metaRT/nano_gui/../nextflow_pipeline/bin/conda-env
+Updated PATH to include Conda binaries.
+Using Python executable: /home/panacia/metaRT/nano_gui/../nextflow_pipeline/bin/conda-env/bin/python
+Executing python script...
+--- Python script finished with exit code: 0 ---
+--- Starting NanoRT GUI at Mon May 18 12:07:27 PM PDT 2026 ---
+ERROR: Bundled Java not found at /home/panacia/metaRT/nano_gui/../nextflow_pipeline/bin/java
+Using Java version:
+openjdk version "11.0.30" 2026-01-20
+OpenJDK Runtime Environment (build 11.0.30+7-post-Ubuntu-1ubuntu122.04)
+OpenJDK 64-Bit Server VM (build 11.0.30+7-post-Ubuntu-1ubuntu122.04, mixed mode, sharing)
+Found bundled Conda environment at: /home/panacia/metaRT/nano_gui/../nextflow_pipeline/bin/conda-env
+Updated PATH to include Conda binaries.
+Using Python executable: /home/panacia/metaRT/nano_gui/../nextflow_pipeline/bin/conda-env/bin/python
+Executing python script...
+--- Python script finished with exit code: 0 ---
+--- Starting NanoRT GUI at Mon May 18 12:07:51 PM PDT 2026 ---
+ERROR: Bundled Java not found at /home/panacia/metaRT/nano_gui/../nextflow_pipeline/bin/java
+Using Java version:
+openjdk version "11.0.30" 2026-01-20
+OpenJDK Runtime Environment (build 11.0.30+7-post-Ubuntu-1ubuntu122.04)
+OpenJDK 64-Bit Server VM (build 11.0.30+7-post-Ubuntu-1ubuntu122.04, mixed mode, sharing)
+Found bundled Conda environment at: /home/panacia/metaRT/nano_gui/../nextflow_pipeline/bin/conda-env
+Updated PATH to include Conda binaries.
+Using Python executable: /home/panacia/metaRT/nano_gui/../nextflow_pipeline/bin/conda-env/bin/python
+Executing python script...
+--- Starting NanoRT GUI at Mon May 18 12:07:53 PM PDT 2026 ---
+ERROR: Bundled Java not found at /home/panacia/metaRT/nano_gui/../nextflow_pipeline/bin/java
+Using Java version:
+openjdk version "11.0.30" 2026-01-20
+OpenJDK Runtime Environment (build 11.0.30+7-post-Ubuntu-1ubuntu122.04)
+OpenJDK 64-Bit Server VM (build 11.0.30+7-post-Ubuntu-1ubuntu122.04, mixed mode, sharing)
+Found bundled Conda environment at: /home/panacia/metaRT/nano_gui/../nextflow_pipeline/bin/conda-env
+Updated PATH to include Conda binaries.
+Using Python executable: /home/panacia/metaRT/nano_gui/../nextflow_pipeline/bin/conda-env/bin/python
+Executing python script...
+--- Python script finished with exit code: 0 ---
+--- Python script finished with exit code: 0 ---
+--- Starting NanoRT GUI at Mon May 18 04:04:58 PM PDT 2026 ---
+ERROR: Bundled Java not found at /home/panacia/metaRT/nano_gui/../nextflow_pipeline/bin/java
+Using Java version:
+openjdk version "11.0.30" 2026-01-20
+OpenJDK Runtime Environment (build 11.0.30+7-post-Ubuntu-1ubuntu122.04)
+OpenJDK 64-Bit Server VM (build 11.0.30+7-post-Ubuntu-1ubuntu122.04, mixed mode, sharing)
+Found bundled Conda environment at: /home/panacia/metaRT/nano_gui/../nextflow_pipeline/bin/conda-env
+Updated PATH to include Conda binaries.
+Using Python executable: /home/panacia/metaRT/nano_gui/../nextflow_pipeline/bin/conda-env/bin/python
+Executing python script...
+--- Python script finished with exit code: 0 ---
+--- Starting NanoRT GUI at Mon May 18 04:06:59 PM PDT 2026 ---
+ERROR: Bundled Java not found at /home/panacia/metaRT/nano_gui/../nextflow_pipeline/bin/java
+Using Java version:
+openjdk version "11.0.30" 2026-01-20
+OpenJDK Runtime Environment (build 11.0.30+7-post-Ubuntu-1ubuntu122.04)
+OpenJDK 64-Bit Server VM (build 11.0.30+7-post-Ubuntu-1ubuntu122.04, mixed mode, sharing)
+Found bundled Conda environment at: /home/panacia/metaRT/nano_gui/../nextflow_pipeline/bin/conda-env
+Updated PATH to include Conda binaries.
+Using Python executable: /home/panacia/metaRT/nano_gui/../nextflow_pipeline/bin/conda-env/bin/python
+Executing python script...
+--- Starting NanoRT GUI at Mon May 18 04:09:08 PM PDT 2026 ---
+ERROR: Bundled Java not found at /home/panacia/metaRT/nano_gui/../nextflow_pipeline/bin/java
+Using Java version:
+openjdk version "11.0.30" 2026-01-20
+OpenJDK Runtime Environment (build 11.0.30+7-post-Ubuntu-1ubuntu122.04)
+OpenJDK 64-Bit Server VM (build 11.0.30+7-post-Ubuntu-1ubuntu122.04, mixed mode, sharing)
+Found bundled Conda environment at: /home/panacia/metaRT/nano_gui/../nextflow_pipeline/bin/conda-env
+Updated PATH to include Conda binaries.
+Using Python executable: /home/panacia/metaRT/nano_gui/../nextflow_pipeline/bin/conda-env/bin/python
+Executing python script...
+--- Starting NanoRT GUI at Mon May 18 04:09:28 PM PDT 2026 ---
+ERROR: Bundled Java not found at /home/panacia/metaRT/nano_gui/../nextflow_pipeline/bin/java
+Using Java version:
+openjdk version "11.0.30" 2026-01-20
+OpenJDK Runtime Environment (build 11.0.30+7-post-Ubuntu-1ubuntu122.04)
+OpenJDK 64-Bit Server VM (build 11.0.30+7-post-Ubuntu-1ubuntu122.04, mixed mode, sharing)
+Found bundled Conda environment at: /home/panacia/metaRT/nano_gui/../nextflow_pipeline/bin/conda-env
+Updated PATH to include Conda binaries.
+Using Python executable: /home/panacia/metaRT/nano_gui/../nextflow_pipeline/bin/conda-env/bin/python
+Executing python script...
+--- Python script finished with exit code: 0 ---
+--- Python script finished with exit code: 0 ---
+--- Python script finished with exit code: 0 ---
+--- Starting NanoRT GUI at Tue May 19 03:30:15 PM PDT 2026 ---
+ERROR: Bundled Java not found at /home/panacia/metaRT/nano_gui/../nextflow_pipeline/bin/java
+Using Java version:
+openjdk version "11.0.30" 2026-01-20
+OpenJDK Runtime Environment (build 11.0.30+7-post-Ubuntu-1ubuntu122.04)
+OpenJDK 64-Bit Server VM (build 11.0.30+7-post-Ubuntu-1ubuntu122.04, mixed mode, sharing)
+Found bundled Conda environment at: /home/panacia/metaRT/nano_gui/../nextflow_pipeline/bin/conda-env
+Updated PATH to include Conda binaries.
+Using Python executable: /home/panacia/metaRT/nano_gui/../nextflow_pipeline/bin/conda-env/bin/python
+Executing python script...
+--- Python script finished with exit code: 0 ---
+--- Starting NanoRT GUI at Tue May 19 04:46:39 PM PDT 2026 ---
+ERROR: Bundled Java not found at /home/panacia/metaRT/nano_gui/../nextflow_pipeline/bin/java
+Using Java version:
+openjdk version "11.0.30" 2026-01-20
+OpenJDK Runtime Environment (build 11.0.30+7-post-Ubuntu-1ubuntu122.04)
+OpenJDK 64-Bit Server VM (build 11.0.30+7-post-Ubuntu-1ubuntu122.04, mixed mode, sharing)
+Found bundled Conda environment at: /home/panacia/metaRT/nano_gui/../nextflow_pipeline/bin/conda-env
+Updated PATH to include Conda binaries.
+Using Python executable: /home/panacia/metaRT/nano_gui/../nextflow_pipeline/bin/conda-env/bin/python
+Executing python script...
+--- Python script finished with exit code: 0 ---
+--- Starting NanoRT GUI at Tue May 19 07:53:05 PM PDT 2026 ---
+ERROR: Bundled Java not found at /home/panacia/metaRT/nano_gui/../nextflow_pipeline/bin/java
+Using Java version:
+openjdk version "11.0.30" 2026-01-20
+OpenJDK Runtime Environment (build 11.0.30+7-post-Ubuntu-1ubuntu122.04)
+OpenJDK 64-Bit Server VM (build 11.0.30+7-post-Ubuntu-1ubuntu122.04, mixed mode, sharing)
+Found bundled Conda environment at: /home/panacia/metaRT/nano_gui/../nextflow_pipeline/bin/conda-env
+Updated PATH to include Conda binaries.
+Using Python executable: /home/panacia/metaRT/nano_gui/../nextflow_pipeline/bin/conda-env/bin/python
+Executing python script...
+--- Starting NanoRT GUI at Tue May 19 08:02:56 PM PDT 2026 ---
+ERROR: Bundled Java not found at /home/panacia/metaRT/nano_gui/../nextflow_pipeline/bin/java
+Using Java version:
+openjdk version "11.0.30" 2026-01-20
+OpenJDK Runtime Environment (build 11.0.30+7-post-Ubuntu-1ubuntu122.04)
+OpenJDK 64-Bit Server VM (build 11.0.30+7-post-Ubuntu-1ubuntu122.04, mixed mode, sharing)
+Found bundled Conda environment at: /home/panacia/metaRT/nano_gui/../nextflow_pipeline/bin/conda-env
+Updated PATH to include Conda binaries.
+Using Python executable: /home/panacia/metaRT/nano_gui/../nextflow_pipeline/bin/conda-env/bin/python
+Executing python script...
+--- Python script finished with exit code: 0 ---
+--- Python script finished with exit code: 0 ---
+--- Starting NanoRT GUI at Wed May 20 08:48:55 AM PDT 2026 ---
+ERROR: Bundled Java not found at /home/panacia/metaRT/nano_gui/../nextflow_pipeline/bin/java
+Using Java version:
+openjdk version "11.0.30" 2026-01-20
+OpenJDK Runtime Environment (build 11.0.30+7-post-Ubuntu-1ubuntu122.04)
+OpenJDK 64-Bit Server VM (build 11.0.30+7-post-Ubuntu-1ubuntu122.04, mixed mode, sharing)
+Found bundled Conda environment at: /home/panacia/metaRT/nano_gui/../nextflow_pipeline/bin/conda-env
+Updated PATH to include Conda binaries.
+Using Python executable: /home/panacia/metaRT/nano_gui/../nextflow_pipeline/bin/conda-env/bin/python
+Executing python script...
+--- Starting NanoRT GUI at Wed May 20 08:49:58 AM PDT 2026 ---
+ERROR: Bundled Java not found at /home/panacia/metaRT/nano_gui/../nextflow_pipeline/bin/java
+Using Java version:
+openjdk version "11.0.30" 2026-01-20
+OpenJDK Runtime Environment (build 11.0.30+7-post-Ubuntu-1ubuntu122.04)
+OpenJDK 64-Bit Server VM (build 11.0.30+7-post-Ubuntu-1ubuntu122.04, mixed mode, sharing)
+Found bundled Conda environment at: /home/panacia/metaRT/nano_gui/../nextflow_pipeline/bin/conda-env
+Updated PATH to include Conda binaries.
+Using Python executable: /home/panacia/metaRT/nano_gui/../nextflow_pipeline/bin/conda-env/bin/python
+Executing python script...
+--- Python script finished with exit code: 0 ---
+--- Python script finished with exit code: 0 ---
+--- Starting NanoRT GUI at Thu May 21 01:03:40 PM PDT 2026 ---
+ERROR: Bundled Java not found at /home/panacia/metaRT/nano_gui/../nextflow_pipeline/bin/java
+Using Java version:
+openjdk version "11.0.30" 2026-01-20
+OpenJDK Runtime Environment (build 11.0.30+7-post-Ubuntu-1ubuntu122.04)
+OpenJDK 64-Bit Server VM (build 11.0.30+7-post-Ubuntu-1ubuntu122.04, mixed mode, sharing)
+Found bundled Conda environment at: /home/panacia/metaRT/nano_gui/../nextflow_pipeline/bin/conda-env
+Updated PATH to include Conda binaries.
+Using Python executable: /home/panacia/metaRT/nano_gui/../nextflow_pipeline/bin/conda-env/bin/python
+Executing python script...
+QProcess: Destroyed while process ("/home/panacia/metaRT/nano_gui/../nextflow_pipeline/bin/conda-env/bin/python") is still running.
+--- Python script finished with exit code: 0 ---
+--- Starting NanoRT GUI at Thu May 21 03:08:23 PM PDT 2026 ---
+ERROR: Bundled Java not found at /home/panacia/metaRT/nano_gui/../nextflow_pipeline/bin/java
+Using Java version:
+openjdk version "11.0.30" 2026-01-20
+OpenJDK Runtime Environment (build 11.0.30+7-post-Ubuntu-1ubuntu122.04)
+OpenJDK 64-Bit Server VM (build 11.0.30+7-post-Ubuntu-1ubuntu122.04, mixed mode, sharing)
+Found bundled Conda environment at: /home/panacia/metaRT/nano_gui/../nextflow_pipeline/bin/conda-env
+Updated PATH to include Conda binaries.
+Using Python executable: /home/panacia/metaRT/nano_gui/../nextflow_pipeline/bin/conda-env/bin/python
+Executing python script...
+--- Starting NanoRT GUI at Fri May 22 09:26:36 AM PDT 2026 ---
+ERROR: Bundled Java not found at /home/panacia/metaRT/nano_gui/../nextflow_pipeline/bin/java
+Using Java version:
+openjdk version "11.0.30" 2026-01-20
+OpenJDK Runtime Environment (build 11.0.30+7-post-Ubuntu-1ubuntu122.04)
+OpenJDK 64-Bit Server VM (build 11.0.30+7-post-Ubuntu-1ubuntu122.04, mixed mode, sharing)
+Found bundled Conda environment at: /home/panacia/metaRT/nano_gui/../nextflow_pipeline/bin/conda-env
+Updated PATH to include Conda binaries.
+Using Python executable: /home/panacia/metaRT/nano_gui/../nextflow_pipeline/bin/conda-env/bin/python
+Executing python script...
+--- Python script finished with exit code: 0 ---
+QProcess: Destroyed while process ("/home/panacia/metaRT/nano_gui/../nextflow_pipeline/bin/conda-env/bin/python") is still running.
+--- Python script finished with exit code: 0 ---
+--- Starting NanoRT GUI at Tue May 26 11:49:54 AM PDT 2026 ---
+ERROR: Bundled Java not found at /home/panacia/metaRT/nano_gui/../nextflow_pipeline/bin/java
+Using Java version:
+openjdk version "11.0.30" 2026-01-20
+OpenJDK Runtime Environment (build 11.0.30+7-post-Ubuntu-1ubuntu122.04)
+OpenJDK 64-Bit Server VM (build 11.0.30+7-post-Ubuntu-1ubuntu122.04, mixed mode, sharing)
+Found bundled Conda environment at: /home/panacia/metaRT/nano_gui/../nextflow_pipeline/bin/conda-env
+Updated PATH to include Conda binaries.
+Using Python executable: /home/panacia/metaRT/nano_gui/../nextflow_pipeline/bin/conda-env/bin/python
+Executing python script...
+--- Starting NanoRT GUI at Tue May 26 11:50:32 AM PDT 2026 ---
+ERROR: Bundled Java not found at /home/panacia/metaRT/nano_gui/../nextflow_pipeline/bin/java
+Using Java version:
+openjdk version "11.0.30" 2026-01-20
+OpenJDK Runtime Environment (build 11.0.30+7-post-Ubuntu-1ubuntu122.04)
+OpenJDK 64-Bit Server VM (build 11.0.30+7-post-Ubuntu-1ubuntu122.04, mixed mode, sharing)
+Found bundled Conda environment at: /home/panacia/metaRT/nano_gui/../nextflow_pipeline/bin/conda-env
+Updated PATH to include Conda binaries.
+Using Python executable: /home/panacia/metaRT/nano_gui/../nextflow_pipeline/bin/conda-env/bin/python
+Executing python script...
+--- Python script finished with exit code: 0 ---
+QProcess: Destroyed while process ("/home/panacia/metaRT/nano_gui/../nextflow_pipeline/bin/conda-env/bin/python") is still running.
+--- Python script finished with exit code: 0 ---
+--- Starting NanoRT GUI at Wed May 27 03:30:52 PM PDT 2026 ---
+ERROR: Bundled Java not found at /home/panacia/metaRT/nano_gui/../nextflow_pipeline/bin/java
+Using Java version:
+openjdk version "11.0.30" 2026-01-20
+OpenJDK Runtime Environment (build 11.0.30+7-post-Ubuntu-1ubuntu122.04)
+OpenJDK 64-Bit Server VM (build 11.0.30+7-post-Ubuntu-1ubuntu122.04, mixed mode, sharing)
+Found bundled Conda environment at: /home/panacia/metaRT/nano_gui/../nextflow_pipeline/bin/conda-env
+Updated PATH to include Conda binaries.
+Using Python executable: /home/panacia/metaRT/nano_gui/../nextflow_pipeline/bin/conda-env/bin/python
+Executing python script...
+--- Python script finished with exit code: 0 ---
+--- Starting NanoRT GUI at Fri May 29 09:07:21 AM PDT 2026 ---
+ERROR: Bundled Java not found at /home/panacia/metaRT/nano_gui/../nextflow_pipeline/bin/java
+Using Java version:
+openjdk version "11.0.31" 2026-04-21
+OpenJDK Runtime Environment (build 11.0.31+11-post-1ubuntu1-22.04.2-Ubuntu)
+OpenJDK 64-Bit Server VM (build 11.0.31+11-post-1ubuntu1-22.04.2-Ubuntu, mixed mode, sharing)
+Found bundled Conda environment at: /home/panacia/metaRT/nano_gui/../nextflow_pipeline/bin/conda-env
+Updated PATH to include Conda binaries.
+Using Python executable: /home/panacia/metaRT/nano_gui/../nextflow_pipeline/bin/conda-env/bin/python
+Executing python script...
+--- Python script finished with exit code: 0 ---
+--- Starting NanoRT GUI at Wed Jun  3 06:55:36 PM PDT 2026 ---
+ERROR: Bundled Java not found at /home/panacia/metaRT/nano_gui/../nextflow_pipeline/bin/java
+Using Java version:
+openjdk version "11.0.31" 2026-04-21
+OpenJDK Runtime Environment (build 11.0.31+11-post-1ubuntu1-22.04.2-Ubuntu)
+OpenJDK 64-Bit Server VM (build 11.0.31+11-post-1ubuntu1-22.04.2-Ubuntu, mixed mode, sharing)
+Found bundled Conda environment at: /home/panacia/metaRT/nano_gui/../nextflow_pipeline/bin/conda-env
+Updated PATH to include Conda binaries.
+Using Python executable: /home/panacia/metaRT/nano_gui/../nextflow_pipeline/bin/conda-env/bin/python
+Executing python script...
+--- Starting NanoRT GUI at Thu Jun  4 10:00:16 AM PDT 2026 ---
+ERROR: Bundled Java not found at /home/panacia/metaRT/nano_gui/../nextflow_pipeline/bin/java
+Using Java version:
+openjdk version "11.0.31" 2026-04-21
+OpenJDK Runtime Environment (build 11.0.31+11-post-1ubuntu1-22.04.2-Ubuntu)
+OpenJDK 64-Bit Server VM (build 11.0.31+11-post-1ubuntu1-22.04.2-Ubuntu, mixed mode, sharing)
+Found bundled Conda environment at: /home/panacia/metaRT/nano_gui/../nextflow_pipeline/bin/conda-env
+Updated PATH to include Conda binaries.
+Using Python executable: /home/panacia/metaRT/nano_gui/../nextflow_pipeline/bin/conda-env/bin/python
+Executing python script...
+--- Python script finished with exit code: 0 ---
+QProcess: Destroyed while process ("/home/panacia/metaRT/nano_gui/../nextflow_pipeline/bin/conda-env/bin/python") is still running.
+--- Python script finished with exit code: 0 ---
+--- Starting NanoRT GUI at Wed Jun 10 10:48:53 AM PDT 2026 ---
+ERROR: Bundled Java not found at /home/panacia/metaRT/nano_gui/../nextflow_pipeline/bin/java
+Using Java version:
+openjdk version "11.0.31" 2026-04-21
+OpenJDK Runtime Environment (build 11.0.31+11-post-1ubuntu1-22.04.2-Ubuntu)
+OpenJDK 64-Bit Server VM (build 11.0.31+11-post-1ubuntu1-22.04.2-Ubuntu, mixed mode, sharing)
+Found bundled Conda environment at: /home/panacia/metaRT/nano_gui/../nextflow_pipeline/bin/conda-env
+Updated PATH to include Conda binaries.
+Using Python executable: /home/panacia/metaRT/nano_gui/../nextflow_pipeline/bin/conda-env/bin/python
+Executing python script...
+--- Python script finished with exit code: 0 ---
+--- Starting NanoRT GUI at Wed Jun 17 04:17:54 PM PDT 2026 ---
+ERROR: Bundled Java not found at /home/panacia/metaRT/nano_gui/../nextflow_pipeline/bin/java
+Using Java version:
+openjdk version "11.0.31" 2026-04-21
+OpenJDK Runtime Environment (build 11.0.31+11-post-1ubuntu1-22.04.2-Ubuntu)
+OpenJDK 64-Bit Server VM (build 11.0.31+11-post-1ubuntu1-22.04.2-Ubuntu, mixed mode, sharing)
+Found bundled Conda environment at: /home/panacia/metaRT/nano_gui/../nextflow_pipeline/bin/conda-env
+Updated PATH to include Conda binaries.
+Using Python executable: /home/panacia/metaRT/nano_gui/../nextflow_pipeline/bin/conda-env/bin/python
+Executing python script...
+--- Starting NanoRT GUI at Wed Jun 17 04:18:00 PM PDT 2026 ---
+ERROR: Bundled Java not found at /home/panacia/metaRT/nano_gui/../nextflow_pipeline/bin/java
+Using Java version:
+openjdk version "11.0.31" 2026-04-21
+OpenJDK Runtime Environment (build 11.0.31+11-post-1ubuntu1-22.04.2-Ubuntu)
+OpenJDK 64-Bit Server VM (build 11.0.31+11-post-1ubuntu1-22.04.2-Ubuntu, mixed mode, sharing)
+Found bundled Conda environment at: /home/panacia/metaRT/nano_gui/../nextflow_pipeline/bin/conda-env
+Updated PATH to include Conda binaries.
+Using Python executable: /home/panacia/metaRT/nano_gui/../nextflow_pipeline/bin/conda-env/bin/python
+Executing python script...
+--- Python script finished with exit code: 0 ---
+--- Starting NanoRT GUI at Thu Jun 18 11:34:22 AM PDT 2026 ---
+ERROR: Bundled Java not found at /home/panacia/metaRT/nano_gui/../nextflow_pipeline/bin/java
+Using Java version:
+openjdk version "11.0.31" 2026-04-21
+OpenJDK Runtime Environment (build 11.0.31+11-post-1ubuntu1-22.04.2-Ubuntu)
+OpenJDK 64-Bit Server VM (build 11.0.31+11-post-1ubuntu1-22.04.2-Ubuntu, mixed mode, sharing)
+Found bundled Conda environment at: /home/panacia/metaRT/nano_gui/../nextflow_pipeline/bin/conda-env
+Updated PATH to include Conda binaries.
+Using Python executable: /home/panacia/metaRT/nano_gui/../nextflow_pipeline/bin/conda-env/bin/python
+Executing python script...
+--- Python script finished with exit code: 0 ---
+QProcess: Destroyed while process ("/home/panacia/metaRT/nano_gui/../nextflow_pipeline/bin/conda-env/bin/python") is still running.
+--- Python script finished with exit code: 0 ---
+--- Starting NanoRT GUI at Fri Jun 19 03:12:34 PM PDT 2026 ---
+ERROR: Bundled Java not found at /home/panacia/metaRT/nano_gui/../nextflow_pipeline/bin/java
+Using Java version:
+openjdk version "11.0.31" 2026-04-21
+OpenJDK Runtime Environment (build 11.0.31+11-post-1ubuntu1-22.04.2-Ubuntu)
+OpenJDK 64-Bit Server VM (build 11.0.31+11-post-1ubuntu1-22.04.2-Ubuntu, mixed mode, sharing)
+Found bundled Conda environment at: /home/panacia/metaRT/nano_gui/../nextflow_pipeline/bin/conda-env
+Updated PATH to include Conda binaries.
+Using Python executable: /home/panacia/metaRT/nano_gui/../nextflow_pipeline/bin/conda-env/bin/python
+Executing python script...
+--- Starting NanoRT GUI at Fri Jun 19 03:16:25 PM PDT 2026 ---
+ERROR: Bundled Java not found at /home/panacia/metaRT/nano_gui/../nextflow_pipeline/bin/java
+Using Java version:
+openjdk version "11.0.31" 2026-04-21
+OpenJDK Runtime Environment (build 11.0.31+11-post-1ubuntu1-22.04.2-Ubuntu)
+OpenJDK 64-Bit Server VM (build 11.0.31+11-post-1ubuntu1-22.04.2-Ubuntu, mixed mode, sharing)
+Found bundled Conda environment at: /home/panacia/metaRT/nano_gui/../nextflow_pipeline/bin/conda-env
+Updated PATH to include Conda binaries.
+Using Python executable: /home/panacia/metaRT/nano_gui/../nextflow_pipeline/bin/conda-env/bin/python
+Executing python script...
+--- Starting NanoRT GUI at Tue Jun 23 03:16:48 PM PDT 2026 ---
+ERROR: Bundled Java not found at /home/panacia/metaRT/nano_gui/../nextflow_pipeline/bin/java
+Using Java version:
+openjdk version "11.0.31" 2026-04-21
+OpenJDK Runtime Environment (build 11.0.31+11-post-1ubuntu1-22.04.2-Ubuntu)
+OpenJDK 64-Bit Server VM (build 11.0.31+11-post-1ubuntu1-22.04.2-Ubuntu, mixed mode, sharing)
+Found bundled Conda environment at: /home/panacia/metaRT/nano_gui/../nextflow_pipeline/bin/conda-env
+Updated PATH to include Conda binaries.
+Using Python executable: /home/panacia/metaRT/nano_gui/../nextflow_pipeline/bin/conda-env/bin/python
+Executing python script...
+--- Starting NanoRT GUI at Tue Jun 23 05:24:38 PM PDT 2026 ---
+ERROR: Bundled Java not found at /home/panacia/metaRT/nano_gui/../nextflow_pipeline/bin/java
+Using Java version:
+openjdk version "11.0.31" 2026-04-21
+OpenJDK Runtime Environment (build 11.0.31+11-post-1ubuntu1-22.04.2-Ubuntu)
+OpenJDK 64-Bit Server VM (build 11.0.31+11-post-1ubuntu1-22.04.2-Ubuntu, mixed mode, sharing)
+Found bundled Conda environment at: /home/panacia/metaRT/nano_gui/../nextflow_pipeline/bin/conda-env
+Updated PATH to include Conda binaries.
+Using Python executable: /home/panacia/metaRT/nano_gui/../nextflow_pipeline/bin/conda-env/bin/python
+Executing python script...
+--- Python script finished with exit code: 0 ---
+--- Starting NanoRT GUI at Tue Jun 23 05:25:13 PM PDT 2026 ---
+ERROR: Bundled Java not found at /home/panacia/metaRT/nano_gui/../nextflow_pipeline/bin/java
+Using Java version:
+openjdk version "11.0.31" 2026-04-21
+OpenJDK Runtime Environment (build 11.0.31+11-post-1ubuntu1-22.04.2-Ubuntu)
+OpenJDK 64-Bit Server VM (build 11.0.31+11-post-1ubuntu1-22.04.2-Ubuntu, mixed mode, sharing)
+Found bundled Conda environment at: /home/panacia/metaRT/nano_gui/../nextflow_pipeline/bin/conda-env
+Updated PATH to include Conda binaries.
+Using Python executable: /home/panacia/metaRT/nano_gui/../nextflow_pipeline/bin/conda-env/bin/python
+Executing python script...

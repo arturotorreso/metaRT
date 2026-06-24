@@ -16,17 +16,17 @@ process REMOVE_HOST {
     script:
     if (host_opts.keep_bam) {
         """
-        minimap2 -t ${task.cpus} -a -x map-ont "${params.host_reference}" "${reads}" | \\
-            tee >(samtools view -@ ${task.cpus} -bS - | samtools sort -@ ${task.cpus} -n -O bam -o "${sample_id}.hostReads.bam") | \\
+        minimap2 -K 50M -t ${task.cpus} -a -x map-ont "${params.host_reference}" "${reads}" | \\
+            tee >(samtools view -@ ${task.cpus} -bS - > "${sample_id}.hostReads.bam") | \\
             samtools view -@ ${task.cpus} -f4 -F256 - | \\
             samtools fastq - | gzip > "${sample_id}.noHost.fastq.gz"
         """
     } else {
         """
-        minimap2 -t ${task.cpus} -a -x map-ont "${params.host_reference}" "${reads}" | \\
+        minimap2 -K 50M -t ${task.cpus} -a -x map-ont "${params.host_reference}" "${reads}" | \\
             samtools view -@ ${task.cpus} -f4 -F256 - | \\
-            samtools sort -@ ${task.cpus} -n | \\
-            samtools fastq - | gzip > "${sample_id}.noHost.fastq.gz"
+            samtools fastq - | \\
+            gzip > "${sample_id}.noHost.fastq.gz"
         """
     }
 }

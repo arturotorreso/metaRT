@@ -5,6 +5,7 @@ import logging
 from datetime import datetime
 import configparser
 import json
+import shutil
 
 logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(levelname)s - %(message)s')
 
@@ -24,15 +25,19 @@ def run_pipeline_for_batch(fastq_files: list, config: configparser.ConfigParser)
     nextflow_script = config.get('Paths', 'nextflow_script')
     processed_log_path = config.get('Settings', 'processed_files_log')
 
+    # NEW: Get custom work directory, safely defaulting to a 'work' folder INSIDE the output_directory
+    work_dir = config.get('Paths', 'work_directory', fallback=os.path.join(output_dir, "work"))
+    work_dir_path = os.path.abspath(work_dir)
+
     timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
     batch_output_dir = os.path.join(output_dir, f"batch_{timestamp}")
     os.makedirs(batch_output_dir, exist_ok=True)
     input_files_str = ",".join(fastq_files)
 
-    # --- DYNAMIC COMMAND BUILDING (Corrected Logic) ---
+    # --- DYNAMIC COMMAND BUILDING ---
     nextflow_exe = config.get('Paths', 'nextflow_executable', fallback='nextflow')
 
-    # === FIX: ARG_MAX limit solution ===
+    # === ARG_MAX limit ===
     # Write the long comma-separated string of files to a JSON file.
     # This bypasses the OS "argument list too long" error by feeding 
     # the parameter directly into Nextflow's internal parser.
@@ -42,23 +47,19 @@ def run_pipeline_for_batch(fastq_files: list, config: configparser.ConfigParser)
 
     command = [
         nextflow_exe, "run", nextflow_script,
-        "-params-file", params_file_path,  # <--- Replaced --input_files with -params-file
-        "--outdir", batch_output_dir
-        # "-profile", "conda" 
+        "-params-file", params_file_path,  
+        "--outdir", batch_output_dir,
+        "-work-dir", work_dir_path
     ]
 
-    # ==================== ADD THIS BLOCK ====================
     # 0. Add optional barcodes parameter
-    # Check if the 'barcodes' option exists in the [Settings] section and has a value.
     if config.has_option('Settings', 'barcodes'):
         barcodes_value = config.get('Settings', 'barcodes')
-        if barcodes_value:  # Only add the flag if the string is not empty
+        if barcodes_value:  
             command.extend(['--barcodes', barcodes_value])
             logging.info(f"Filtering for barcodes: {barcodes_value}")
-    # ========================================================
 
-
-    # 1. Add simple key-value parameters (e.g., database paths)
+    # 1. Add simple key-value parameters
     if config.has_section('DatabasePaths'):
         for param, value in config.items('DatabasePaths'):
             if value:
@@ -90,18 +91,9 @@ def run_pipeline_for_batch(fastq_files: list, config: configparser.ConfigParser)
     # --- END DYNAMIC COMMAND BUILDING ---
 
     try:
-        # The command is now correctly formatted for Nextflow
+        # The command is correctly formatted for Nextflow
         logging.info(f"Executing command: {' '.join(command)}")
-        # result = subprocess.run(
-        #     command,
-        #     check=True,
-        #     capture_output=True,
-        #     text=True
-        # )
-        # logging.info("Nextflow pipeline completed successfully for the batch.")
-        # logging.debug(f"Nextflow stdout:\n{result.stdout}")
-
-        # Output will now stream directly to the console in real-time.
+        # Output will stream directly to the console in real-time.
         subprocess.run(
             command,
             check=True,
@@ -110,6 +102,7 @@ def run_pipeline_for_batch(fastq_files: list, config: configparser.ConfigParser)
 
         logging.info("Nextflow pipeline completed successfully for the batch.")
         log_processed_files(fastq_files, processed_log_path)
+        
         return batch_output_dir
 
     except FileNotFoundError:
@@ -117,8 +110,28 @@ def run_pipeline_for_batch(fastq_files: list, config: configparser.ConfigParser)
         return None
     except subprocess.CalledProcessError as e:
         logging.error(f"Nextflow pipeline failed with exit code {e.returncode}.")
-        # logging.error(f"Nextflow stderr:\n{e.stderr}")
         return None
+    finally:
+        # --- Nextflow Cleanup ---
+        # This block now runs whether the pipeline succeeds or crashes
+        try:
+            # 1. Finds the hidden Nextflow cache files in the current execution directory
+            nf_dir = os.path.abspath(".nextflow")
+            nf_log = os.path.abspath(".nextflow.log")
+            
+            # 2. Delete only the specific work subfolder
+            if os.path.exists(work_dir_path):
+                shutil.rmtree(work_dir_path, ignore_errors=True)
+
+            # 3. Deletes the hidden Nextflow cache files from the execution directory
+            if os.path.exists(nf_dir):
+                shutil.rmtree(nf_dir, ignore_errors=True)
+            if os.path.exists(nf_log):
+                os.remove(nf_log)
+            logging.info(f"Cleaned up Nextflow temporary artifacts ({work_dir_path}, .nextflow/, .nextflow.log).")
+        except Exception as e:
+            logging.warning(f"Failed to clean up Nextflow artifacts: {e}")
+        # ----------------------------------------
 
 def log_processed_files(file_list: list, log_file_path: str):
     """Appends a list of successfully processed files to the log."""
